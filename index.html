@@ -144,49 +144,7 @@
         .accordion.active .accordion-header {
             background-color: var(--secondary-color);
         }
-        .menu-toggle {
-    display: none !important; /* Tambahkan !important */
-    background-color: var(--dark-color);
-    color: white;
-    padding: 0.7rem 1.5rem;
-    cursor: pointer;
-    text-align: center;
-}
-
-/* Gaya Mobile */
-@media (max-width: 768px) {
-    nav ul {
-        display: none;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        background-color: var(--dark-color);
-        z-index: 1000;
-    }
-
-    nav ul.mobile-active {
-        display: flex;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    nav li {
-        margin: 0;
-        width: 100%;
-    }
-
-    nav a {
-        padding: 1rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        text-align: left;
-    }
-
-
+        
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
@@ -369,7 +327,7 @@
             .equation-input input {
                 margin: 0.5rem 0;
             }
-            nav ul.nav-list {
+            nav ul {
     display: flex; /* Horizontal di desktop */
     list-style: none;
     padding: 0;
@@ -377,25 +335,16 @@
     justify-content: center; /* Tengahkan menu */
 }
 
-nav ul.nav-list li {
+nav li {
     margin: 0 1.5rem;
 }
 
-nav ul.nav-list a {
+nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
     display: block;
     padding: 0.5rem 1rem;
-}
-
-nav ul.nav-list a i {
-    display: none; /* Sembunyikan ikon di desktop */
-    margin-right: 0.5em;
-}
-
-nav ul.nav-list a span {
-    display: inline; /* Tampilkan teks di desktop */
 }
 
 .menu-toggle {
@@ -409,7 +358,7 @@ nav ul.nav-list a span {
 
 /* Gaya Mobile */
 @media (max-width: 768px) {
-    nav ul.nav-list {
+    nav ul {
         display: none; /* Sembunyikan default di mobile */
         flex-direction: column; /* Vertikal di mobile */
         align-items: flex-start;
@@ -421,7 +370,7 @@ nav ul.nav-list a span {
         z-index: 1000; /* Pastikan di atas konten lain */
     }
 
-    nav ul.nav-list.mobile-active {
+    nav ul.mobile-active {
         display: flex; /* Tampilkan saat class 'mobile-active' */
     }
 
@@ -429,28 +378,17 @@ nav ul.nav-list a span {
         display: block; /* Tampilkan di mobile */
     }
 
-    nav ul.nav-list a i {
-        display: inline-block; /* Tampilkan ikon di mobile */
-    }
-
-    nav ul.nav-list a span {
-        display: inline;
-        color: black;
-        font-weight: normal; /* Atau 'bold' sesuai keinginan Anda */
-        margin-left: 0.5em; /* Spasi antara ikon dan teks */
-    }
-
-    nav ul.nav-list li {
+    nav li {
         margin: 0;
         width: 100%;
     }
 
-    nav ul.nav-list a {
+    nav a {
         padding: 1rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         text-align: left;
     }
-        }
+}
       
     </style>
 </head>
@@ -465,12 +403,12 @@ nav ul.nav-list a span {
         <i class="fas fa-bars"></i> Menu
     </div>
     <ul class="nav-list">
-        <li><a href="#tujuan"><i class="fas fa-bullseye"></i> <span>Tujuan</span></a></li>
-        <li><a href="#materi"><i class="fas fa-book"></i> <span>Materi</span></a></li>
-        <li><a href="#simulasi"><i class="fas fa-laptop-code"></i> <span>Simulasi</span></a></li>
-        <li><a href="#contoh"><i class="fas fa-chalkboard-teacher"></i> <span>Contoh</span></a></li>
-        <li><a href="#latihan"><i class="fas fa-pencil-alt"></i> <span>Latihan</span></a></li>
-        <li><a href="#quiz"><i class="fas fa-question-circle"></i> <span>Kuis</span></a></li>
+        <li><a href="#tujuan"><i class="fas fa-bullseye"></i> Tujuan</a></li>
+        <li><a href="#materi"><i class="fas fa-book"></i> Materi</a></li>
+        <li><a href="#simulasi"><i class="fas fa-laptop-code"></i> Simulasi</a></li>
+        <li><a href="#contoh"><i class="fas fa-chalkboard-teacher"></i> Contoh</a></li>
+        <li><a href="#latihan"><i class="fas fa-pencil-alt"></i> Latihan</a></li>
+        <li><a href="#quiz"><i class="fas fa-question-circle"></i> Kuis</a></li>
     </ul>
 </nav>
     <div class="container">
@@ -1056,7 +994,6 @@ const navList = document.querySelector('.nav-list');
 menuToggle.addEventListener('click', () => {
     navList.classList.toggle('mobile-active');
 });
-
         //Accordion Functionality
         document.addEventListener('DOMContentLoaded', function() {
             const accordionHeaders = document.querySelectorAll('.accordion-header');
@@ -1261,4 +1198,4 @@ menuToggle.addEventListener('click', () => {
         });
     </script>
 </body>
-    </html>
+                        </html>
