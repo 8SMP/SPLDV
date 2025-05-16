@@ -144,7 +144,49 @@
         .accordion.active .accordion-header {
             background-color: var(--secondary-color);
         }
-        
+        .menu-toggle {
+    display: none !important; /* Tambahkan !important */
+    background-color: var(--dark-color);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Gaya Mobile */
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: var(--dark-color);
+        z-index: 1000;
+    }
+
+    nav ul.mobile-active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav li {
+        margin: 0;
+        width: 100%;
+    }
+
+    nav a {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: left;
+    }
+
+
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
