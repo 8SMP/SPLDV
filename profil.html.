@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Tim Pengembang</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .profile-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .profile-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 5px solid #ddd;
+        }
+        .profile-card h2 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        .profile-card p {
+            margin-bottom: 10px;
+        }
+        .motto {
+            font-style: italic;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <img src="images/foto_profil_anggota1.jpg" alt="Foto Anggota 1">
+        <h2>[Nama Anggota 1]</h2>
+        <p>NIM: [NIM Anggota 1]</p>
+        <p>[Biodata singkat Anggota 1]</p>
+        <p class="motto">"[Motto Anggota 1]"</p>
+    </div>
+
+    <div class="profile-card">
+        <img src="images/foto_profil_anggota2.jpg" alt="Foto Anggota 2">
+        <h2>[Nama Anggota 2]</h2>
+        <p>NIM: [NIM Anggota 2]</p>
+        <p>[Biodata singkat Anggota 2]</p>
+        <p class="motto">"[Motto Anggota 2]"</p>
+    </div>
+
+    <div class="profile-card">
+        <img src="images/foto_dosen1.jpg" alt="Foto Dosen 1">
+        <h2>[Nama Dosen Pengampu 1]</h2>
+        <p>NIP/NIK: [NIP/NIK Dosen 1]</p>
+        <p>[Biodata singkat Dosen 1]</p>
+        <p class="motto">"[Motto Dosen 1]"</p>
+    </div>
+
+    </body>
+</html>
