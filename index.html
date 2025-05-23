@@ -1400,5 +1400,26 @@ function openTab(tabName) {
 }
         });
     </script>
+    <script>
+// Fungsi untuk tab profil
+function openTab(tabName) {
+    // Sembunyikan semua tab
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => tab.style.display = 'none');
+    
+    // Nonaktifkan semua tombol
+    const buttons = document.querySelectorAll('.profile-tabs button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    // Aktifkan tab yang dipilih
+    document.getElementById(tabName).style.display = 'block';
+    event.currentTarget.classList.add('active');
+}
+
+// Aktifkan tab pertama saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.profile-tabs button').click();
+});
+</script>
 </body>
                         </html>
