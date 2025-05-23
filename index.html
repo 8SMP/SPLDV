@@ -1378,19 +1378,19 @@ menuToggle.addEventListener('click', () => {
                 
                 stepsDiv.style.display = 'block';
             });
-            // Fungsi buka tab profil
-function bukaTab(tabName) {
-    // Sembunyikan semua tab
+            // Fungsi untuk tab profil
+function openTab(tabName) {
+    // Sembunyikan semua tab konten
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.style.display = 'none';
     });
     
-    // Nonaktifkan semua tombol
-    document.querySelectorAll('.profile-tabs .btn').forEach(btn => {
-        btn.classList.remove('active');
+    // Hapus class active dari semua tombol
+    document.querySelectorAll('.profile-tabs button').forEach(button => {
+        button.classList.remove('active');
     });
     
-    // Tampilkan tab yang dipilih
+    // Tampilkan tab yang dipilih dan aktifkan tombolnya
     document.getElementById(tabName).style.display = 'block';
     event.currentTarget.classList.add('active');
 }
