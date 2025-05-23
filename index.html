@@ -1041,14 +1041,18 @@ nav a {
             <button class="btn" id="check-quiz">Periksa Kuis</button>
             <div id="quiz-result" class="result"></div>
         </section>
-        <!-- PROFIL TIM -->
-<section id="profil">
-    <h2><i class="fas fa-users"></i> Profil Tim</h2>
-    
-    <div class="profile-tabs">
-        <button class="btn active" onclick="bukaTab('dosen')">Dosen</button>
-        <button class="btn" onclick="bukaTab('mahasiswa')">Mahasiswa</button>
-    </div>
+       <div class="profile-tabs">
+    <button class="btn active" onclick="openTab('dosen-tab')">Dosen</button>
+    <button class="btn" onclick="openTab('mahasiswa-tab')">Mahasiswa</button>
+</div>
+
+<div id="dosen-tab" class="tab-content" style="display: block;">
+    <!-- Konten dosen -->
+</div>
+
+<div id="mahasiswa-tab" class="tab-content" style="display: none;">
+    <!-- Konten mahasiswa -->
+</div>
     
     <!-- DOSEN -->
     <div id="dosen" class="tab-content" style="display: block;">
