@@ -580,7 +580,13 @@ persamaan.</li>
                 </div>
                 
                 <button class="btn" id="draw-graph">Gambar Grafik</button>
-                <canvas id="graphCanvas" height="400"></canvas>
+                <canvas id="graphCanvas" height="400"
+                    #graphCanvas {
+    border: 1px solid #ddd;
+    background: white;
+    margin-top: 15px;
+}></canvas>
+
                 
                 <div id="graph-result" class="result">
                     <h4>Hasil Analisis:</h4>
@@ -1272,110 +1278,105 @@ menuToggle.addEventListener('click', () => {
             
             // Graph Simulation
             let chart = null;
+
             
             document.getElementById('draw-graph').addEventListener('click', function() {
-                const a1 = parseFloat(document.getElementById('a1').value) || 0;
-    const b1 = parseFloat(document.getElementById('b1').value) || 0;
+    const a1 = parseFloat(document.getElementById('a1').value) || 0;
+    const b1 = parseFloat(document.getElementById('b1').value) || 1; // default 1 agar tidak division by zero
     const c1 = parseFloat(document.getElementById('c1').value) || 0;
     const a2 = parseFloat(document.getElementById('a2').value) || 0;
-    const b2 = parseFloat(document.getElementById('b2').value) || 0;
+    const b2 = parseFloat(document.getElementById('b2').value) || 1;
     const c2 = parseFloat(document.getElementById('c2').value) || 0;
 
-                // Validasi input
-    if (b1 === 0 || b2 === 0) {
-        alert("Koefisien y tidak boleh nol!");
-        return;
+    const ctx = document.getElementById('graphCanvas').getContext('2d');
+    
+    // Hancurkan chart sebelumnya jika ada
+    if (window.myChart) {
+        window.myChart.destroy();
     }
-                
-                const ctx = document.getElementById('graphCanvas').getContext('2d');
-                
-                // Destroy previous chart if exists
-                 if (window.chart) {
-        window.chart.destroy();
-    }
-                
-                // Create data for equations
-                const labels = Array.from({length: 21}, (_, i) => i - 10); // x values from -10 to 10
-                const data1 = labels.map(x => (c1 - a1 * x) / b1); // y values for equation 1
-                const data2 = labels.map(x => (c2 - a2 * x) / b2); // y values for equation 2
-                
-                  window.chart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [
-                            {
-                                label: `${a1}x + ${b1}y = ${c1}`,
-                                data: data1,
-                                borderColor: 'rgb(75, 192, 192)',
-                                backgroundColor: 'rgba(75, 192, 192, 0.1)',
-                                borderWidth: 2,
-                                tension: 0.1,
-                                fill: false
-                            },
-                            {
-                                label: `${a2}x + ${b2}y = ${c2}`,
-                                data: data2,
-                                borderColor: 'rgb(255, 99, 132)',
-                                backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                                borderWidth: 2,
-                                tension: 0.1,
-                                fill: false
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            x: {
-                                type: 'linear',
-                                position: 'center'
-                                grid: {
-                    lineWidth: 2,
-                    color: 'rgba(0, 0, 0, 0.2)'
+
+    // Data untuk grafik
+    const labels = Array.from({length: 21}, (_, i) => i - 10);
+    const data1 = labels.map(x => (c1 - a1 * x) / b1);
+    const data2 = labels.map(x => (c2 - a2 * x) / b2);
+
+    // Buat grafik dengan sumbu tebal
+    window.myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: `${a1}x + ${b1}y = ${c1}`,
+                    data: data1,
+                    borderColor: '#3498db',
+                    borderWidth: 2,
+                    tension: 0.1
                 },
-                ticks: {
-                    font: {
-                        weight: 'bold'
-                    }
-                },
-                border: {
-                    width: 3,
-                    color: 'rgba(0, 0, 0, 1)'
-                            },
-                            y: {
-                                type: 'linear',
-                                position: 'center'
-                                grid: {
-                    lineWidth: 2,
-                    color: 'rgba(0, 0, 0, 0.2)'
-                },
-                ticks: {
-                    font: {
-                        weight: 'bold'
-                    }
-                },
-                border: {
-                    width: 3,
-                    color: 'rgba(0, 0, 0, 1)'
+                {
+                    label: `${a2}x + ${b2}y = ${c2}`,
+                    data: data2,
+                    borderColor: '#e74c3c',
+                    borderWidth: 2,
+                    tension: 0.1
                 }
-            }
+            ]
         },
-        plugins: {
-            legend: {
-                labels: {
-                    font: {
-                        weight: 'bold'
-                    }
-                       }
-            }
-        }
-    }
-});
-                            }
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Sumbu X',
+                        font: {
+                            weight: 'bold'
+                        }
+                    },
+                    grid: {
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        font: {
+                            weight: 'bold'
                         }
                     }
-                });
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Sumbu Y',
+                        font: {
+                            weight: 'bold'
+                        }
+                    },
+                    grid: {
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Hitung solusi (tetap sama dengan sebelumnya)
+    // ... [kode perhitungan solusi]
+});
                 
                 // Show solution
                 const det = a1 * b2 - a2 * b1;
