@@ -569,36 +569,103 @@ persamaan.</li>
             <h2><i class="fas fa-laptop-code"></i> Simulasi SPLDV</h2>
 
             
-            <div class="simulation-container">
-    <h3>Simulator Grafik SPLDV</h3>
-    <div class="equation-input">
-        <span>Persamaan 1:</span>
-        <input type="number" id="a1" value="2">
-        <span>x +</span>
-        <input type="number" id="b1" value="3">
-        <span>y =</span>
-        <input type="number" id="c1" value="7">
+           <div class="simulation-container">
+    <h3>Simulator Grafik SPLDV (Sederhana)</h3>
+    
+    <div>
+        <label>Persamaan 1: </label>
+        <input type="number" id="a1" value="2" style="width:50px"> x +
+        <input type="number" id="b1" value="3" style="width:50px"> y =
+        <input type="number" id="c1" value="7" style="width:50px">
     </div>
     
-    <div class="equation-input">
-        <span>Persamaan 2:</span>
-        <input type="number" id="a2" value="1">
-        <span>x +</span>
-        <input type="number" id="b2" value="-1">
-        <span>y =</span>
-        <input type="number" id="c2" value="1">
+    <div style="margin:10px 0">
+        <label>Persamaan 2: </label>
+        <input type="number" id="a2" value="1" style="width:50px"> x +
+        <input type="number" id="b2" value="-1" style="width:50px"> y =
+        <input type="number" id="c2" value="1" style="width:50px">
     </div>
     
-    <button class="btn" id="draw-graph">Gambar Grafik</button>
-    <canvas id="graphCanvas" height="400" width="600"></canvas>
+    <button onclick="drawGraph()" style="padding:8px 15px;background:#3498db;color:white;border:none;border-radius:4px">
+        Gambar Grafik
+    </button>
     
-    <div id="graph-result" class="result">
-        <h4>Hasil Analisis:</h4>
-        <p id="solution-type"></p>
-        <p id="solution-point"></p>
+    <div style="margin-top:20px">
+        <canvas id="myChart" width="500" height="400" style="border:1px solid #ddd"></canvas>
+    </div>
+    
+    <div id="result" style="margin-top:20px;padding:10px;background:#f0f0f0;border-radius:5px">
+        <p id="solution"></p>
     </div>
 </div>
-            
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+let myChart;
+
+function drawGraph() {
+    // Ambil nilai input
+    const a1 = parseFloat(document.getElementById('a1').value) || 0;
+    const b1 = parseFloat(document.getElementById('b1').value) || 1;
+    const c1 = parseFloat(document.getElementById('c1').value) || 0;
+    const a2 = parseFloat(document.getElementById('a2').value) || 0;
+    const b2 = parseFloat(document.getElementById('b2').value) || 1;
+    const c2 = parseFloat(document.getElementById('c2').value) || 0;
+
+    // Hapus grafik sebelumnya
+    if (myChart) {
+        myChart.destroy();
+    }
+
+    // Buat data
+    const labels = [-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10];
+    const ctx = document.getElementById('myChart').getContext('2d');
+    
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: `${a1}x + ${b1}y = ${c1}`,
+                    data: labels.map(x => (c1 - a1*x)/b1),
+                    borderColor: 'blue',
+                    borderWidth: 2
+                },
+                {
+                    label: `${a2}x + ${b2}y = ${c2}`,
+                    data: labels.map(x => (c2 - a2*x)/b2),
+                    borderColor: 'red',
+                    borderWidth: 2
+                }
+            ]
+        },
+        options: {
+            responsive: false,
+            scales: {
+                x: { ticks: { font: { weight: 'bold' } } },
+                y: { ticks: { font: { weight: 'bold' } } }
+            }
+        }
+    });
+
+    // Hitung solusi
+    const det = a1*b2 - a2*b1;
+    let solutionText;
+    
+    if (det === 0) {
+        solutionText = a1/a2 === c1/c2 ? 
+            "Sistem memiliki tak hingga solusi" : 
+            "Sistem tidak memiliki solusi";
+    } else {
+        const x = (b2*c1 - b1*c2)/det;
+        const y = (a1*c2 - a2*c1)/det;
+        solutionText = `Solusi: x = ${x.toFixed(2)}, y = ${y.toFixed(2)}`;
+    }
+    
+    document.getElementById('solution').textContent = solutionText;
+}
+</script> 
             <div class="simulation-container">
                 <h3>Kalkulator SPLDV</h3>
                 <select id="method" class="btn">
