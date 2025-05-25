@@ -777,7 +777,7 @@ window.addEventListener('resize', () => {
 setTimeout(drawKartesiusGraph, 100);
 </script>
 
-            <div class="simulation-container" style="max-width:100%; padding:15px;">
+<div class="simulation-container" style="max-width:100%; padding:15px;">
     <h3 style="text-align:center; margin-bottom:20px;">Kalkulator SPLDV</h3>
     
     <div style="text-align:center; margin-bottom:20px;">
@@ -804,12 +804,12 @@ setTimeout(drawKartesiusGraph, 100);
     </div>
     
     <div style="text-align:center; margin:20px 0;">
-        <button id="solve-btn" style="padding:12px 25px; background:#27ae60; color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer; touch-action:manipulation;">
+        <button id="solve-btn" style="padding:12px 25px; background:#2196F3; color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer; touch-action:manipulation;">
             🧮 Hitung Solusi
         </button>
     </div>
     
-    <div id="calculation-steps" style="margin-top:20px; padding:20px; background:#f8f9fa; border-radius:10px; border-left:4px solid #27ae60; display:none; line-height:1.6;"></div>
+    <div id="calculation-steps" style="margin-top:20px; padding:20px; background:#f8f9fa; border-radius:10px; border-left:4px solid #2196F3; display:none; line-height:1.6;"></div>
 </div>
 
 <script>
@@ -932,19 +932,19 @@ document.getElementById('solve-btn').addEventListener('click', function() {
                 <p style="margin-left:20px;">Kalikan persamaan 2 dengan ${a1}: ${a1 * a2}x + ${a1 * b2}y = ${a1 * c2}</p>
                 <p style="margin-left:20px;">Kurangkan: (${a2 * b1} - ${a1 * b2})y = ${a2 * c1} - ${a1 * c2}</p>
                 <p style="margin-left:20px;">${a2 * b1 - a1 * b2}y = ${a2 * c1 - a1 * c2}</p>
-                <p style="margin-left:20px; color:#27ae60;"><strong>y = ${formatNumber(y)}</strong></p>
+                <p style="margin-left:20px; color:#2196F3;"><strong>y = ${formatNumber(y)}</strong></p>
                 
                 <p><strong>Langkah 2:</strong> Eliminasi variabel y</p>
                 <p style="margin-left:20px;">Kalikan persamaan 1 dengan ${b2}: ${b2 * a1}x + ${b2 * b1}y = ${b2 * c1}</p>
                 <p style="margin-left:20px;">Kalikan persamaan 2 dengan ${b1}: ${b1 * a2}x + ${b1 * b2}y = ${b1 * c2}</p>
                 <p style="margin-left:20px;">Kurangkan: (${b2 * a1} - ${b1 * a2})x = ${b2 * c1} - ${b1 * c2}</p>
                 <p style="margin-left:20px;">${b2 * a1 - b1 * a2}x = ${b2 * c1 - b1 * c2}</p>
-                <p style="margin-left:20px; color:#27ae60;"><strong>x = ${formatNumber(x)}</strong></p>
+                <p style="margin-left:20px; color:#2196F3;"><strong>x = ${formatNumber(x)}</strong></p>
             `;
         }
         
         steps += `
-            <div style="background:#27ae60; color:white; padding:15px; border-radius:8px; margin-top:20px; text-align:center;">
+            <div style="background:#2196F3; color:white; padding:15px; border-radius:8px; margin-top:20px; text-align:center;">
                 <h4 style="margin:0;">✅ Solusi Akhir</h4>
                 <p style="margin:10px 0; font-size:18px;"><strong>x = ${formatNumber(x)}, y = ${formatNumber(y)}</strong></p>
             </div>
@@ -964,6 +964,7 @@ document.getElementById('solve-btn').addEventListener('click', function() {
 });
 </script>
 
+    
 <style>
 .simulation-container {
     border: 1px solid #ddd;
