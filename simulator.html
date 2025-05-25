@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulator SPLDV</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input { width: 50px; text-align: center; padding: 5px; }
+        button { 
+            padding: 8px 15px; 
+            background: #3498db; 
+            color: white; 
+            border: none; 
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        canvas { 
+            border: 1px solid #ddd; 
+            margin-top: 20px;
+            background: white;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Simulator Grafik SPLDV</h2>
+    
+    <div>
+        <label>Persamaan 1: </label>
+        <input type="number" id="a1" value="2"> x +
+        <input type="number" id="b1" value="3"> y =
+        <input type="number" id="c1" value="7">
+    </div>
+    
+    <div style="margin: 10px 0;">
+        <label>Persamaan 2: </label>
+        <input type="number" id="a2" value="1"> x +
+        <input type="number" id="b2" value="-1"> y =
+        <input type="number" id="c2" value="1">
+    </div>
+    
+    <button onclick="drawGraph()">Gambar Grafik</button>
+    
+    <div>
+        <canvas id="myChart" width="500" height="400"></canvas>
+    </div>
+    
+    <div id="result" class="result">
+        <p id="solution"></p>
+    </div>
+
+    <script>
+        function drawGraph() {
+            // Ambil nilai input
+            const a1 = parseFloat(document.getElementById('a1').value) || 0;
+            const b1 = parseFloat(document.getElementById('b1').value) || 1; // Hindari pembagian nol
+            const c1 = parseFloat(document.getElementById('c1').value) || 0;
+            const a2 = parseFloat(document.getElementById('a2').value) || 0;
+            const b2 = parseFloat(document.getElementById('b2').value) || 1;
+            const c2 = parseFloat(document.getElementById('c2').value) || 0;
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            
+            // Hapus grafik lama
+            if (window.myChart) {
+                window.myChart.destroy();
+            }
+
+            // Buat titik-titik untuk grafik
+            const labels = [-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10];
+            
+            window.myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: `${a1}x + ${b1}y = ${c1}`,
+                            data: labels.map(x => (c1 - a1*x)/b1),
+                            borderColor: '#3498db',
+                            borderWidth: 2,
+                            fill: false
+                        },
+                        {
+                            label: `${a2}x + ${b2}y = ${c2}`,
+                            data: labels.map(x => (c2 - a2*x)/b2),
+                            borderColor: '#e74c3c',
+                            borderWidth: 2,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        x: { ticks: { font: { weight: 'bold' } } },
+                        y: { ticks: { font: { weight: 'bold' } } }
+                    }
+                }
+            });
+
+            // Tampilkan solusi
+            const det = a1*b2 - a2*b1;
+            const solutionElement = document.getElementById('solution');
+            
+            if (det === 0) {
+                solutionElement.textContent = (a1/a2 === c1/c2) 
+                    ? "🔵 Sistem memiliki tak hingga solusi (garis berhimpit)" 
+                    : "🔴 Sistem tidak memiliki solusi (garis sejajar)";
+            } else {
+                const x = (b2*c1 - b1*c2)/det;
+                const y = (a1*c2 - a2*c1)/det;
+                solutionElement.innerHTML = `
+                    <strong>Solusi:</strong> 
+                    <br>• x = ${x.toFixed(2)}
+                    <br>• y = ${y.toFixed(2)}
+                    <br>👉 <em>Titik potong: (${x.toFixed(2)}, ${y.toFixed(2)})</em>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
