@@ -568,7 +568,7 @@ persamaan.</li>
         <section id="simulasi">
 
         <div class="simulation-container" style="max-width:100%; padding:10px;">
-    <h3 style="text-align:center; margin-bottom:20px;">Simulator SPLDV dengan Koordinat Kartesius</h3>
+    <h3 style="text-align:center; margin-bottom:20px;">Simulator SPLDV</h3>
     
     <div style="margin: 15px 0; display:flex; flex-wrap:wrap; align-items:center; gap:5px; font-size:clamp(14px, 3vw, 16px);">
         <span style="white-space:nowrap;">Persamaan 1:</span>
@@ -778,33 +778,124 @@ setTimeout(drawKartesiusGraph, 100);
 </script>
 
             
-            <div class="simulation-container">
-                <h3>Kalkulator SPLDV</h3>
-                <select id="method" class="btn">
-                    <option value="substitution">Substitusi</option>
-                    <option value="elimination">Eliminasi</option>
-                </select>
-                
-                <div class="equation-input">
-                    <input type="number" id="calc-a1" value="2" placeholder="a₁">
-                    <span>x +</span>
-                    <input type="number" id="calc-b1" value="3" placeholder="b₁">
-                    <span>y =</span>
-                    <input type="number" id="calc-c1" value="7" placeholder="c₁">
-                </div>
-                
-                <div class="equation-input">
-                    <input type="number" id="calc-a2" value="4" placeholder="a₂">
-                    <span>x +</span>
-                    <input type="number" id="calc-b2" value="-1" placeholder="b₂">
-                    <span>y =</span>
-                    <input type="number" id="calc-c2" value="5" placeholder="c₂">
-                </div>
-                
-                <button class="btn" id="solve-btn">Hitung Solusi</button>
-                <div id="calculation-steps" class="result"></div>
-            </div>
-        </section>
+<div class="simulation-container">
+    <h3>Kalkulator SPLDV</h3>
+    <select id="method" class="btn">
+        <option value="substitution">Substitusi</option>
+        <option value="elimination">Eliminasi</option>
+    </select>
+    
+    <div class="equation-input">
+        <input type="number" id="calc-a1" value="2" placeholder="a₁">
+        <span>x +</span>
+        <input type="number" id="calc-b1" value="3" placeholder="b₁">
+        <span>y =</span>
+        <input type="number" id="calc-c1" value="7" placeholder="c₁">
+    </div>
+    
+    <div class="equation-input">
+        <input type="number" id="calc-a2" value="1" placeholder="a₂">
+        <span>x +</span>
+        <input type="number" id="calc-b2" value="-1" placeholder="b₂">
+        <span>y =</span>
+        <input type="number" id="calc-c2" value="1" placeholder="c₂">
+    </div>
+    
+    <button class="btn" id="solve-btn">Hitung Solusi</button>
+    <div id="calculation-steps" class="result"></div>
+</div>
+
+<script>
+document.getElementById('solve-btn').addEventListener('click', function() {
+    // Ambil nilai input
+    const method = document.getElementById('method').value;
+    const a1 = parseFloat(document.getElementById('calc-a1').value) || 0;
+    const b1 = parseFloat(document.getElementById('calc-b1').value) || 0;
+    const c1 = parseFloat(document.getElementById('calc-c1').value) || 0;
+    const a2 = parseFloat(document.getElementById('calc-a2').value) || 0;
+    const b2 = parseFloat(document.getElementById('calc-b2').value) || 0;
+    const c2 = parseFloat(document.getElementById('calc-c2').value) || 0;
+    
+    const stepsDiv = document.getElementById('calculation-steps');
+    stepsDiv.innerHTML = '';
+    
+    // Hitung determinan
+    const det = a1 * b2 - a2 * b1;
+    
+    if (det === 0) {
+        if (a1/a2 === b1/b2 && a1/a2 === c1/c2) {
+            stepsDiv.innerHTML = "<p>Sistem memiliki tak hingga solusi</p>";
+        } else {
+            stepsDiv.innerHTML = "<p>Sistem tidak memiliki solusi</p>";
+        }
+    } else {
+        const x = (b2 * c1 - b1 * c2) / det;
+        const y = (a1 * c2 - a2 * c1) / det;
+        
+        let steps = `<h4>Penyelesaian dengan Metode ${method === 'substitution' ? 'Substitusi' : 'Eliminasi'}</h4>`;
+        
+        if (method === 'substitution') {
+            steps += `
+                <p>1. Dari persamaan 2: x = (${c2} - (${b2})y)/${a2}</p>
+                <p>2. Substitusi ke persamaan 1: ${a1}((${c2} - ${b2}y)/${a2}) + ${b1}y = ${c1}</p>
+                <p>3. Selesaikan untuk y: y = ${y.toFixed(2)}</p>
+                <p>4. Substitusi y ke persamaan 2: x = ${x.toFixed(2)}</p>
+            `;
+        } else {
+            steps += `
+                <p>1. Kalikan persamaan 1 dengan ${b2} dan persamaan 2 dengan ${b1}</p>
+                <p>2. Eliminasi y: ${a1*b2}x + ${b1*b2}y = ${c1*b2}</p>
+                <p>3. Hasil eliminasi: x = ${x.toFixed(2)}</p>
+                <p>4. Substitusi x ke salah satu persamaan: y = ${y.toFixed(2)}</p>
+            `;
+        }
+        
+        steps += `<p><strong>Solusi: x = ${x.toFixed(2)}, y = ${y.toFixed(2)}</strong></p>`;
+        stepsDiv.innerHTML = steps;
+    }
+    
+    stepsDiv.style.display = 'block';
+});
+</script>
+
+<style>
+.simulation-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    background: #f9f9f9;
+}
+.equation-input {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.equation-input input {
+    width: 60px;
+    padding: 8px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e8f4fc;
+    border-radius: 5px;
+    display: none;
+}
+.btn {
+    padding: 8px 16px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+</style>
         
         <section id="contoh">
             <h2><i class="fas fa-chalkboard-teacher"></i> Contoh Soal</h2>
