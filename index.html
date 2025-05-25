@@ -182,12 +182,20 @@
             background-color: #f9f9f9;
         }
         
-        .equation-input {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
+        #graphCanvas {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    margin-top: 15px;
+    max-width: 100%;
+}
+
+.equation-input {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
         
         .equation-input input {
             width: 60px;
@@ -460,6 +468,7 @@ nav a {
     
 <nav>
     <div class="menu-toggle">
+
         <i class="fas fa-bars"></i> Menu
     </div>
     <ul class="nav-list">
@@ -558,42 +567,37 @@ persamaan.</li>
         
         <section id="simulasi">
             <h2><i class="fas fa-laptop-code"></i> Simulasi SPLDV</h2>
+
             
             <div class="simulation-container">
-                <h3>Simulator Grafik SPLDV</h3>
-                <div class="equation-input">
-                    <span>Persamaan 1:</span>
-                    <input type="number" id="a1" value="1">
-                    <span>x +</span>
-                    <input type="number" id="b1" value="1">
-                    <span>y =</span>
-                    <input type="number" id="c1" value="5">
-                </div>
-                
-                <div class="equation-input">
-                    <span>Persamaan 2:</span>
-                    <input type="number" id="a2" value="1">
-                    <span>x +</span>
-                    <input type="number" id="b2" value="-1">
-                    <span>y =</span>
-                    <input type="number" id="c2" value="1">
-                </div>
-                
-                <button class="btn" id="draw-graph">Gambar Grafik</button>
-                <canvas id="graphCanvas" height="400"
-                    #graphCanvas {
-    border: 1px solid #ddd;
-    background: white;
-    margin-top: 15px;
-}></canvas>
-
-                
-                <div id="graph-result" class="result">
-                    <h4>Hasil Analisis:</h4>
-                    <p id="solution-type"></p>
-                    <p id="solution-point"></p>
-                </div>
-            </div>
+    <h3>Simulator Grafik SPLDV</h3>
+    <div class="equation-input">
+        <span>Persamaan 1:</span>
+        <input type="number" id="a1" value="2">
+        <span>x +</span>
+        <input type="number" id="b1" value="3">
+        <span>y =</span>
+        <input type="number" id="c1" value="7">
+    </div>
+    
+    <div class="equation-input">
+        <span>Persamaan 2:</span>
+        <input type="number" id="a2" value="1">
+        <span>x +</span>
+        <input type="number" id="b2" value="-1">
+        <span>y =</span>
+        <input type="number" id="c2" value="1">
+    </div>
+    
+    <button class="btn" id="draw-graph">Gambar Grafik</button>
+    <canvas id="graphCanvas" height="400" width="600"></canvas>
+    
+    <div id="graph-result" class="result">
+        <h4>Hasil Analisis:</h4>
+        <p id="solution-type"></p>
+        <p id="solution-point"></p>
+    </div>
+</div>
             
             <div class="simulation-container">
                 <h3>Kalkulator SPLDV</h3>
@@ -1279,38 +1283,26 @@ menuToggle.addEventListener('click', () => {
             // Graph Simulation
             let chart = null;
 
-            
             document.getElementById('draw-graph').addEventListener('click', function() {
+    // Ambil nilai input dengan default value
     const a1 = parseFloat(document.getElementById('a1').value) || 0;
-    const b1 = parseFloat(document.getElementById('b1').value) || 1; // default 1 agar tidak division by zero
+    const b1 = parseFloat(document.getElementById('b1').value) || 1; // Default 1 agar tidak division by zero
     const c1 = parseFloat(document.getElementById('c1').value) || 0;
     const a2 = parseFloat(document.getElementById('a2').value) || 0;
     const b2 = parseFloat(document.getElementById('b2').value) || 1;
     const c2 = parseFloat(document.getElementById('c2').value) || 0;
 
-    const ctx = document.getElementById('graphCanvas').getContext('2d');
-    const myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Contoh'],
-        datasets: [{
-            label: 'Test',
-            data: [1]
-        }]
-    }
-});
-                
+    const canvas = document.getElementById('graphCanvas');
+    const ctx = canvas.getContext('2d');
+    
     // Hancurkan chart sebelumnya jika ada
     if (window.myChart) {
         window.myChart.destroy();
     }
 
-    // Data untuk grafik
-    const labels = Array.from({length: 21}, (_, i) => i - 10);
-    const data1 = labels.map(x => (c1 - a1 * x) / b1);
-    const data2 = labels.map(x => (c2 - a2 * x) / b2);
-
-    // Buat grafik dengan sumbu tebal
+    // Buat data untuk grafik
+    const labels = Array.from({length: 21}, (_, i) => i - 10); // x dari -10 sampai 10
+    
     window.myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -1318,15 +1310,17 @@ menuToggle.addEventListener('click', () => {
             datasets: [
                 {
                     label: `${a1}x + ${b1}y = ${c1}`,
-                    data: data1,
+                    data: labels.map(x => (c1 - a1*x)/b1),
                     borderColor: '#3498db',
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
                     borderWidth: 2,
                     tension: 0.1
                 },
                 {
                     label: `${a2}x + ${b2}y = ${c2}`,
-                    data: data2,
+                    data: labels.map(x => (c2 - a2*x)/b2),
                     borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
                     borderWidth: 2,
                     tension: 0.1
                 }
@@ -1334,17 +1328,13 @@ menuToggle.addEventListener('click', () => {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 x: {
-                    display: true,
-                    title: {
-                        display: true,
-                        text: 'Sumbu X',
-                        font: {
-                            weight: 'bold'
-                        }
-                    },
+                    type: 'linear',
+                    position: 'center',
                     grid: {
+                        color: '#ddd',
                         lineWidth: 1
                     },
                     ticks: {
@@ -1354,15 +1344,10 @@ menuToggle.addEventListener('click', () => {
                     }
                 },
                 y: {
-                    display: true,
-                    title: {
-                        display: true,
-                        text: 'Sumbu Y',
-                        font: {
-                            weight: 'bold'
-                        }
-                    },
+                    type: 'linear',
+                    position: 'center',
                     grid: {
+                        color: '#ddd',
                         lineWidth: 1
                     },
                     ticks: {
@@ -1384,33 +1369,25 @@ menuToggle.addEventListener('click', () => {
         }
     });
 
-    // Hitung solusi (tetap sama dengan sebelumnya)
-    // ... [kode perhitungan solusi]
+    // Hitung solusi
+    const det = a1*b2 - a2*b1;
+    const solutionType = document.getElementById('solution-type');
+    const solutionPoint = document.getElementById('solution-point');
+    
+    if (det === 0) {
+        solutionType.textContent = a1/a2 === b1/b2 && a1/a2 === c1/c2 ? 
+            "Sistem memiliki tak hingga solusi (garis berhimpit)" : 
+            "Sistem tidak memiliki solusi (garis sejajar)";
+        solutionPoint.textContent = "";
+    } else {
+        const x = (b2*c1 - b1*c2)/det;
+        const y = (a1*c2 - a2*c1)/det;
+        solutionType.textContent = "Sistem memiliki satu solusi";
+        solutionPoint.textContent = `Titik potong: (${x.toFixed(2)}, ${y.toFixed(2)})`;
+    }
+    
+    document.getElementById('graph-result').style.display = 'block';
 });
-                
-                // Show solution
-                const det = a1 * b2 - a2 * b1;
-                const resultDiv = document.getElementById('graph-result');
-                const solutionType = document.getElementById('solution-type');
-                const solutionPoint = document.getElementById('solution-point');
-                
-                if (det === 0) {
-                    if (a1/a2 === b1/b2 && a1/a2 === c1/c2) {
-                        solutionType.textContent = "Sistem memiliki tak hingga solusi (garis berhimpit)";
-                        solutionPoint.textContent = "";
-                    } else {
-                        solutionType.textContent = "Sistem tidak memiliki solusi (garis sejajar)";
-                        solutionPoint.textContent = "";
-                    }
-                } else {
-                    const x = (b2 * c1 - b1 * c2) / det;
-                    const y = (a1 * c2 - a2 * c1) / det;
-                    solutionType.textContent = "Sistem memiliki satu solusi";
-                    solutionPoint.textContent = `Titik potong: (${x.toFixed(2)}, ${y.toFixed(2)})`;
-                }
-                
-                resultDiv.style.display = 'block';
-            });
             
             // Equation Solver
             document.getElementById('solve-btn').addEventListener('click', function() {
