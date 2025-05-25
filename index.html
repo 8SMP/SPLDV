@@ -567,34 +567,42 @@ persamaan.</li>
         
         <section id="simulasi">
 
-         <div class="simulation-container">
-    <h3>Simulator SPLDV</h3>
+        <div class="simulation-container" style="max-width:100%; padding:10px;">
+    <h3 style="text-align:center; margin-bottom:20px;">Simulator SPLDV dengan Koordinat Kartesius</h3>
     
-    <div style="margin: 10px 0;">
-        <span>Persamaan 1: </span>
-        <input type="number" id="a1" value="2" style="width:50px"> x +
-        <input type="number" id="b1" value="3" style="width:50px"> y =
-        <input type="number" id="c1" value="7" style="width:50px">
+    <div style="margin: 15px 0; display:flex; flex-wrap:wrap; align-items:center; gap:5px; font-size:clamp(14px, 3vw, 16px);">
+        <span style="white-space:nowrap;">Persamaan 1:</span>
+        <input type="number" id="a1" value="2" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;"> 
+        <span>x +</span>
+        <input type="number" id="b1" value="3" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;"> 
+        <span>y =</span>
+        <input type="number" id="c1" value="7" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;">
     </div>
     
-    <div style="margin: 10px 0;">
-        <span>Persamaan 2: </span>
-        <input type="number" id="a2" value="1" style="width:50px"> x +
-        <input type="number" id="b2" value="-1" style="width:50px"> y =
-        <input type="number" id="c2" value="1" style="width:50px">
+    <div style="margin: 15px 0; display:flex; flex-wrap:wrap; align-items:center; gap:5px; font-size:clamp(14px, 3vw, 16px);">
+        <span style="white-space:nowrap;">Persamaan 2:</span>
+        <input type="number" id="a2" value="1" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;"> 
+        <span>x +</span>
+        <input type="number" id="b2" value="-1" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;"> 
+        <span>y =</span>
+        <input type="number" id="c2" value="1" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;">
     </div>
     
-    <button 
-        onclick="drawKartesiusGraph()" 
-        style="padding:8px 15px; background:#3498db; color:white; border:none; cursor:pointer; border-radius:5px;"
-    >
-        <span>Gambar Grafik </span>
-    </button>
+    <div style="text-align:center; margin:20px 0;">
+        <button 
+            onclick="drawKartesiusGraph()" 
+            style="padding:12px 20px; background:#3498db; color:white; border:none; cursor:pointer; border-radius:8px; font-size:16px; touch-action:manipulation;"
+        >
+            📊 Gambar Grafik
+        </button>
+    </div>
     
-    <canvas id="kartesiusChart" width="500" height="500" style="border:1px solid #ddd; margin-top:20px;"></canvas>
+    <div style="text-align:center; margin:15px 0;">
+        <canvas id="kartesiusChart" style="border:2px solid #ddd; border-radius:8px; max-width:100%; height:auto; display:block; margin:0 auto;"></canvas>
+    </div>
     
-    <div id="kartesiusResult" style="margin-top:15px; padding:10px; background:#f0f0f0; border-radius:5px;">
-        <p id="kartesiusSolution">Klik tombol untuk melihat grafik</p>
+    <div id="kartesiusResult" style="margin-top:15px; padding:15px; background:#f8f9fa; border-radius:8px; border-left:4px solid #3498db;">
+        <p id="kartesiusSolution" style="margin:0; font-size:clamp(14px, 3.5vw, 16px); line-height:1.4;">Klik tombol untuk melihat grafik</p>
     </div>
 </div>
 
@@ -602,6 +610,14 @@ persamaan.</li>
 function drawKartesiusGraph() {
     const canvas = document.getElementById('kartesiusChart');
     const ctx = canvas.getContext('2d');
+    
+    // Responsive canvas size
+    const containerWidth = canvas.parentElement.clientWidth;
+    const canvasSize = Math.min(containerWidth - 20, 500, window.innerHeight * 0.6);
+    
+    canvas.width = canvasSize;
+    canvas.height = canvasSize;
+    
     const width = canvas.width;
     const height = canvas.height;
     
@@ -616,8 +632,8 @@ function drawKartesiusGraph() {
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
     
-    // Setup koordinat
-    const scale = 20; // pixels per unit
+    // Setup koordinat - responsive scale
+    const scale = Math.max(canvasSize / 25, 15); // Minimal 15px per unit
     const centerX = width / 2;
     const centerY = height / 2;
     
@@ -654,9 +670,9 @@ function drawKartesiusGraph() {
     ctx.lineTo(centerX, height);
     ctx.stroke();
     
-    // Label angka
+    // Label angka - responsive font size
     ctx.fillStyle = '#555';
-    ctx.font = '11px Arial';
+    ctx.font = `${Math.max(canvasSize / 45, 10)}px Arial`;
     ctx.textAlign = 'center';
     
     for (let i = -10; i <= 10; i++) {
@@ -709,48 +725,58 @@ function drawKartesiusGraph() {
         const x = (b2 * c1 - b1 * c2) / det;
         const y = (a1 * c2 - a2 * c1) / det;
         
-        // Gambar titik potong
+        // Gambar titik potong - responsive size
         const pointX = centerX + x * scale;
         const pointY = centerY - y * scale;
         
         if (pointX >= 0 && pointX <= width && pointY >= 0 && pointY <= height) {
+            const pointSize = Math.max(canvasSize / 80, 4);
             ctx.fillStyle = '#27ae60';
             ctx.beginPath();
-            ctx.arc(pointX, pointY, 6, 0, 2 * Math.PI);
+            ctx.arc(pointX, pointY, pointSize, 0, 2 * Math.PI);
             ctx.fill();
             
             ctx.strokeStyle = '#fff';
-            ctx.lineWidth = 2;
+            ctx.lineWidth = Math.max(canvasSize / 250, 1);
             ctx.stroke();
         }
         
         solutionText = `✅ Titik potong: x = ${x.toFixed(2)}, y = ${y.toFixed(2)}`;
     }
     
-    // Tampilkan legend
+    // Tampilkan legend - responsive
+    const legendFontSize = Math.max(canvasSize / 40, 10);
+    const legendY = Math.max(canvasSize / 25, 15);
+    
     ctx.fillStyle = '#e74c3c';
-    ctx.fillRect(10, 10, 15, 3);
+    ctx.fillRect(10, legendY, Math.max(canvasSize / 33, 12), 3);
     ctx.fillStyle = '#333';
-    ctx.font = '12px Arial';
+    ctx.font = `${legendFontSize}px Arial`;
     ctx.textAlign = 'left';
-    ctx.fillText(`${a1}x + ${b1}y = ${c1}`, 30, 18);
+    ctx.fillText(`${a1}x + ${b1}y = ${c1}`, 10 + Math.max(canvasSize / 25, 20), legendY + legendFontSize);
     
     ctx.fillStyle = '#3498db';
-    ctx.fillRect(10, 25, 15, 3);
+    ctx.fillRect(10, legendY + legendFontSize + 8, Math.max(canvasSize / 33, 12), 3);
     ctx.fillStyle = '#333';
-    ctx.fillText(`${a2}x + ${b2}y = ${c2}`, 30, 33);
+    ctx.fillText(`${a2}x + ${b2}y = ${c2}`, 10 + Math.max(canvasSize / 25, 20), legendY + (legendFontSize * 2) + 8);
     
     document.getElementById('kartesiusSolution').textContent = solutionText;
 }
 
-// Auto-update
+// Auto-update dan resize handler
 ['a1', 'b1', 'c1', 'a2', 'b2', 'c2'].forEach(id => {
     document.getElementById(id).addEventListener('input', drawKartesiusGraph);
 });
 
+// Handle window resize
+window.addEventListener('resize', () => {
+    setTimeout(drawKartesiusGraph, 100);
+});
+
 // Gambar pertama kali
-drawKartesiusGraph();
+setTimeout(drawKartesiusGraph, 100);
 </script>
+
             
             <div class="simulation-container">
                 <h3>Kalkulator SPLDV</h3>
