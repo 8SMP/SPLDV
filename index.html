@@ -1050,13 +1050,13 @@ nav a {
     <button class="btn" onclick="openTab('mahasiswa-tab')">Mahasiswa</button>
 </div>
 
-<div id="dosen-tab" class="tab-content" style="display: block;">
-    <!-- Konten dosen -->
-</div>
-
-<div id="mahasiswa-tab" class="tab-content" style="display: none;">
-    <!-- Konten mahasiswa -->
-</div>
+<section id="profil">
+    <h2><i class="fas fa-users"></i> Profil Tim</h2>
+    
+    <div class="profile-tabs">
+        <button class="btn active" onclick="openTab('dosen')">Dosen</button>
+        <button class="btn" onclick="openTab('mahasiswa')">Mahasiswa</button>
+    </div>
     
     <!-- DOSEN -->
     <div id="dosen" class="tab-content" style="display: block;">
@@ -1114,7 +1114,7 @@ nav a {
             <!-- Mahasiswa 3-->
             <div class="profile-card mhs">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mahasiswa 2">
-                <h3>Najwa Fidela Norine Pujiningtyas </h3>
+                <h3>Najwa Fidela Norine Pujiningtyas</h3>
                 <p>NIM: 240210101115</p>
                 <p><i class="fas fa-birthday-cake"></i> 21 Agustus 2006</p>
                 <p class="bio">I Can Do It</p>
@@ -1123,31 +1123,31 @@ nav a {
             <!-- Mahasiswa 4-->
             <div class="profile-card mhs">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mahasiswa 2">
-                <h3>Rahayu Intan Anggraini </h3>
+                <h3>Rahayu Intan Anggraini</h3>
                 <p>NIM: 240210101111</p>
-                <p><i class="fas fa-birthday-cake"></i> 09 April 2006 </p>
-                <p class="bio">Opportunity comes, try it!</p>
+                <p><i class="fas fa-birthday-cake"></i> 09 April 2006</p>
+                <p class="bio">Opportunity comes, try it!</p>
             </div>
 
-             <!-- Mahasiswa 5-->
+            <!-- Mahasiswa 5-->
             <div class="profile-card mhs">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mahasiswa 2">
-                <h3>Riska Adeliya Ramadhani </h3>
+                <h3>Riska Adeliya Ramadhani</h3>
                 <p>NIM: 240210101116</p>
                 <p><i class="fas fa-birthday-cake"></i> 04 November 2004</p>
                 <p class="bio">keep spirit</p>
             </div>
 
-             <!-- Mahasiswa 6-->
+            <!-- Mahasiswa 6-->
             <div class="profile-card mhs">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mahasiswa 2">
-                <h3>Novita Wahyuni </h3>
+                <h3>Novita Wahyuni</h3>
                 <p>NIM: 240210101123</p>
                 <p><i class="fas fa-birthday-cake"></i> 15 November 2005</p>
                 <p class="bio">Jangan menyerah pada impianmu, karena setiap langkah kecil menuju kesuksesan</p>
             </div>
 
-             <!-- Mahasiswa 7-->
+            <!-- Mahasiswa 7-->
             <div class="profile-card mhs">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mahasiswa 2">
                 <h3>Anissatus Sholekha</h3>
@@ -1156,19 +1156,18 @@ nav a {
                 <p class="bio">Kegagalan adalah pelajaran, bukan akhir dari segalanya.</p>
             </div>
 
-             <!-- Mahasiswa 8-->
+            <!-- Mahasiswa 8-->
             <div class="profile-card mhs">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mahasiswa 2">
                 <h3>Silvia Putri Abdillah</h3>
                 <p>NIM: 240210101108</p>
-                <p><i class="fas fa-birthday-cake"></i> 12 Juni 2005</p>
+                <p><i class="fas fa-birthday-cake"></i> 12 Juni 2005</p>
                 <p class="bio">Percayalah pada kemampuanmu, karena kamu lebih kuat dari yang kamu bayangkan.</p>
             </div>
-            
         </div>
     </div>
 </section>
-    </section>
+    
     </div>
     
     <footer>
@@ -1403,25 +1402,39 @@ function openTab(tabName) {
         });
     </script>
     <script>
+
 // Fungsi untuk tab profil
 function openTab(tabName) {
-    // Sembunyikan semua tab
+    // Sembunyikan semua tab content
     const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => tab.style.display = 'none');
+    tabs.forEach(tab => {
+        tab.style.display = 'none';
+    });
     
-    // Nonaktifkan semua tombol
+    // Hapus class active dari semua tombol
     const buttons = document.querySelectorAll('.profile-tabs button');
-    buttons.forEach(btn => btn.classList.remove('active'));
+    buttons.forEach(button => {
+        button.classList.remove('active');
+    });
     
-    // Aktifkan tab yang dipilih
+    // Tampilkan tab yang dipilih dan aktifkan tombolnya
     document.getElementById(tabName).style.display = 'block';
     event.currentTarget.classList.add('active');
 }
 
-// Aktifkan tab pertama saat halaman dimuat
+// Aktifkan tab dosen secara default saat halaman dimuat
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.profile-tabs button').click();
+    // Sembunyikan semua tab kecuali dosen
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        if (tab.id !== 'dosen') {
+            tab.style.display = 'none';
+        }
+    });
+    
+    // Aktifkan tombol dosen
+    document.querySelector('.profile-tabs button:first-child').classList.add('active');
 });
+        
 </script>
     </script>
 </body>
