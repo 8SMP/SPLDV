@@ -568,60 +568,61 @@ persamaan.</li>
         <section id="simulasi"> 
             <h2><i class="fas fa-laptop-code"></i> Simulasi SPLDV</h2>
 
-            
-           <div class="simulation-container">
-    <h3>Simulator Grafik SPLDV (Sederhana)</h3>
-
-    <div>
-        <label>Persamaan 1: </label>
+            <!-- PASTE INI DI DALAM <section id="simulasi"> -->
+<div class="simulation-container">
+    <h3>Simulator SPLDV (Minimal)</h3>
+    
+    <div style="margin: 10px 0;">
+        <span>Persamaan 1: </span>
         <input type="number" id="a1" value="2" style="width:50px"> x +
         <input type="number" id="b1" value="3" style="width:50px"> y =
         <input type="number" id="c1" value="7" style="width:50px">
     </div>
     
-    <div style="margin:10px 0">
-        <label>Persamaan 2: </label>
+    <div style="margin: 10px 0;">
+        <span>Persamaan 2: </span>
         <input type="number" id="a2" value="1" style="width:50px"> x +
         <input type="number" id="b2" value="-1" style="width:50px"> y =
         <input type="number" id="c2" value="1" style="width:50px">
     </div>
     
-    <button onclick="drawGraph()" style="padding:8px 15px;background:#3498db;color:white;border:none;border-radius:4px">
+    <button 
+        onclick="drawSimpleGraph()" 
+        style="padding:8px 15px; background:#3498db; color:white; border:none; cursor:pointer;"
+    >
         Gambar Grafik
     </button>
     
-    <div style="margin-top:20px">
-        <canvas id="myChart" width="500" height="400" style="border:1px solid #ddd"></canvas>
-    </div>
+    <canvas id="simpleChart" width="500" height="400" style="border:1px solid #ddd; margin-top:20px;"></canvas>
     
-    <div id="result" style="margin-top:20px;padding:10px;background:#f0f0f0;border-radius:5px">
-        <p id="solution"></p>
+    <div id="simpleResult" style="margin-top:15px; padding:10px; background:#f0f0f0;">
+        <p id="simpleSolution"></p>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-let myChart;
-
-function drawGraph() {
+// Fungsi paling sederhana yang pasti work
+function drawSimpleGraph() {
     // Ambil nilai input
     const a1 = parseFloat(document.getElementById('a1').value) || 0;
-    const b1 = parseFloat(document.getElementById('b1').value) || 1;
+    const b1 = parseFloat(document.getElementById('b1').value) || 1; // Hindari pembagian nol
     const c1 = parseFloat(document.getElementById('c1').value) || 0;
     const a2 = parseFloat(document.getElementById('a2').value) || 0;
     const b2 = parseFloat(document.getElementById('b2').value) || 1;
     const c2 = parseFloat(document.getElementById('c2').value) || 0;
 
-    // Hapus grafik sebelumnya
-    if (myChart) {
-        myChart.destroy();
+    const ctx = document.getElementById('simpleChart').getContext('2d');
+    
+    // Hapus grafik lama
+    if (window.simpleChart) {
+        window.simpleChart.destroy();
     }
 
-    // Buat data
-    const labels = [-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10];
-    const ctx = document.getElementById('myChart').getContext('2d');
+    // Buat titik-titik (range -10 sampai 10)
+    const labels = [-10,-8,-6,-4,-2,0,2,4,6,8,10];
     
-    myChart = new Chart(ctx, {
+    // Buat grafik
+    window.simpleChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
@@ -647,25 +648,26 @@ function drawGraph() {
                 y: { ticks: { font: { weight: 'bold' } } }
             }
         }
-    });
+    );
 
     // Hitung solusi
     const det = a1*b2 - a2*b1;
     let solutionText;
     
     if (det === 0) {
-        solutionText = a1/a2 === c1/c2 ? 
-            "Sistem memiliki tak hingga solusi" : 
-            "Sistem tidak memiliki solusi";
+        solutionText = (a1/a2 === c1/c2) 
+            ? "🔵 Sistem memiliki tak hingga solusi" 
+            : "🔴 Sistem tidak memiliki solusi";
     } else {
         const x = (b2*c1 - b1*c2)/det;
         const y = (a1*c2 - a2*c1)/det;
-        solutionText = `Solusi: x = ${x.toFixed(2)}, y = ${y.toFixed(2)}`;
+        solutionText = `✅ Solusi: x = ${x.toFixed(2)}, y = ${y.toFixed(2)}`;
     }
     
-    document.getElementById('solution').textContent = solutionText;
+    document.getElementById('simpleSolution').textContent = solutionText;
 }
-</script> 
+</script>
+            
             <div class="simulation-container">
                 <h3>Kalkulator SPLDV</h3>
                 <select id="method" class="btn">
