@@ -1289,7 +1289,17 @@ menuToggle.addEventListener('click', () => {
     const c2 = parseFloat(document.getElementById('c2').value) || 0;
 
     const ctx = document.getElementById('graphCanvas').getContext('2d');
-    
+    const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Contoh'],
+        datasets: [{
+            label: 'Test',
+            data: [1]
+        }]
+    }
+});
+                
     // Hancurkan chart sebelumnya jika ada
     if (window.myChart) {
         window.myChart.destroy();
