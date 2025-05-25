@@ -568,9 +568,8 @@ persamaan.</li>
         <section id="simulasi"> 
             <h2><i class="fas fa-laptop-code"></i> Simulasi SPLDV</h2>
 
-            <!-- PASTE INI DI DALAM <section id="simulasi"> -->
-<div class="simulation-container">
-    <h3>Simulator SPLDV (Minimal)</h3>
+         <div class="simulation-container">
+    <h3>Simulator SPLDV</h3>
     
     <div style="margin: 10px 0;">
         <span>Persamaan 1: </span>
@@ -587,85 +586,171 @@ persamaan.</li>
     </div>
     
     <button 
-        onclick="drawSimpleGraph()" 
-        style="padding:8px 15px; background:#3498db; color:white; border:none; cursor:pointer;"
+        onclick="drawKartesiusGraph()" 
+        style="padding:8px 15px; background:#3498db; color:white; border:none; cursor:pointer; border-radius:5px;"
     >
         Gambar Grafik
     </button>
     
-    <canvas id="simpleChart" width="500" height="400" style="border:1px solid #ddd; margin-top:20px;"></canvas>
+    <canvas id="kartesiusChart" width="500" height="500" style="border:1px solid #ddd; margin-top:20px;"></canvas>
     
-    <div id="simpleResult" style="margin-top:15px; padding:10px; background:#f0f0f0;">
-        <p id="simpleSolution"></p>
+    <div id="kartesiusResult" style="margin-top:15px; padding:10px; background:#f0f0f0; border-radius:5px;">
+        <p id="kartesiusSolution">Klik tombol untuk melihat grafik</p>
     </div>
 </div>
 
 <script>
-// Fungsi paling sederhana yang pasti work
-function drawSimpleGraph() {
+function drawKartesiusGraph() {
+    const canvas = document.getElementById('kartesiusChart');
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+    
     // Ambil nilai input
     const a1 = parseFloat(document.getElementById('a1').value) || 0;
-    const b1 = parseFloat(document.getElementById('b1').value) || 1; // Hindari pembagian nol
+    const b1 = parseFloat(document.getElementById('b1').value) || 1;
     const c1 = parseFloat(document.getElementById('c1').value) || 0;
     const a2 = parseFloat(document.getElementById('a2').value) || 0;
     const b2 = parseFloat(document.getElementById('b2').value) || 1;
     const c2 = parseFloat(document.getElementById('c2').value) || 0;
-
-    const ctx = document.getElementById('simpleChart').getContext('2d');
     
-    // Hapus grafik lama
-    if (window.simpleChart) {
-        window.simpleChart.destroy();
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+    
+    // Setup koordinat
+    const scale = 20; // pixels per unit
+    const centerX = width / 2;
+    const centerY = height / 2;
+    
+    // Gambar grid kecil
+    ctx.strokeStyle = '#e8e8e8';
+    ctx.lineWidth = 0.5;
+    for (let i = -12; i <= 12; i++) {
+        // Vertical lines
+        ctx.beginPath();
+        ctx.moveTo(centerX + i * scale, 0);
+        ctx.lineTo(centerX + i * scale, height);
+        ctx.stroke();
+        
+        // Horizontal lines
+        ctx.beginPath();
+        ctx.moveTo(0, centerY + i * scale);
+        ctx.lineTo(width, centerY + i * scale);
+        ctx.stroke();
     }
-
-    // Buat titik-titik (range -10 sampai 10)
-    const labels = [-10,-8,-6,-4,-2,0,2,4,6,8,10];
     
-    // Buat grafik
-    window.simpleChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: `${a1}x + ${b1}y = ${c1}`,
-                    data: labels.map(x => (c1 - a1*x)/b1),
-                    borderColor: 'blue',
-                    borderWidth: 2
-                },
-                {
-                    label: `${a2}x + ${b2}y = ${c2}`,
-                    data: labels.map(x => (c2 - a2*x)/b2),
-                    borderColor: 'red',
-                    borderWidth: 2
-                }
-            ]
-        },
-        options: {
-            responsive: false,
-            scales: {
-                x: { ticks: { font: { weight: 'bold' } } },
-                y: { ticks: { font: { weight: 'bold' } } }
-            }
+    // Gambar sumbu X dan Y (TEBAL)
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 3;
+    
+    // Sumbu X
+    ctx.beginPath();
+    ctx.moveTo(0, centerY);
+    ctx.lineTo(width, centerY);
+    ctx.stroke();
+    
+    // Sumbu Y
+    ctx.beginPath();
+    ctx.moveTo(centerX, 0);
+    ctx.lineTo(centerX, height);
+    ctx.stroke();
+    
+    // Label angka
+    ctx.fillStyle = '#555';
+    ctx.font = '11px Arial';
+    ctx.textAlign = 'center';
+    
+    for (let i = -10; i <= 10; i++) {
+        if (i !== 0) {
+            // Label X
+            ctx.fillText(i.toString(), centerX + i * scale, centerY + 15);
+            // Label Y  
+            ctx.save();
+            ctx.textAlign = 'right';
+            ctx.fillText(i.toString(), centerX - 5, centerY - i * scale + 3);
+            ctx.restore();
         }
-    );
-
-    // Hitung solusi
-    const det = a1*b2 - a2*b1;
+    }
+    
+    // Fungsi untuk menggambar garis
+    function drawLine(a, b, c, color, width = 2) {
+        if (b === 0) return; // Hindari pembagian nol
+        
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.beginPath();
+        
+        // Hitung titik start dan end
+        const x1 = -12;
+        const y1 = (c - a * x1) / b;
+        const x2 = 12;
+        const y2 = (c - a * x2) / b;
+        
+        const canvasX1 = centerX + x1 * scale;
+        const canvasY1 = centerY - y1 * scale;
+        const canvasX2 = centerX + x2 * scale;
+        const canvasY2 = centerY - y2 * scale;
+        
+        ctx.moveTo(canvasX1, canvasY1);
+        ctx.lineTo(canvasX2, canvasY2);
+        ctx.stroke();
+    }
+    
+    // Gambar kedua garis
+    drawLine(a1, b1, c1, '#e74c3c', 2.5); // Merah
+    drawLine(a2, b2, c2, '#3498db', 2.5); // Biru
+    
+    // Hitung titik potong
+    const det = a1 * b2 - a2 * b1;
     let solutionText;
     
-    if (det === 0) {
-        solutionText = (a1/a2 === c1/c2) 
-            ? "🔵 Sistem memiliki tak hingga solusi" 
-            : "🔴 Sistem tidak memiliki solusi";
+    if (Math.abs(det) < 0.0001) {
+        solutionText = "🔴 Garis sejajar atau berimpit";
     } else {
-        const x = (b2*c1 - b1*c2)/det;
-        const y = (a1*c2 - a2*c1)/det;
-        solutionText = `✅ Solusi: x = ${x.toFixed(2)}, y = ${y.toFixed(2)}`;
+        const x = (b2 * c1 - b1 * c2) / det;
+        const y = (a1 * c2 - a2 * c1) / det;
+        
+        // Gambar titik potong
+        const pointX = centerX + x * scale;
+        const pointY = centerY - y * scale;
+        
+        if (pointX >= 0 && pointX <= width && pointY >= 0 && pointY <= height) {
+            ctx.fillStyle = '#27ae60';
+            ctx.beginPath();
+            ctx.arc(pointX, pointY, 6, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+        
+        solutionText = `✅ Titik potong: x = ${x.toFixed(2)}, y = ${y.toFixed(2)}`;
     }
     
-    document.getElementById('simpleSolution').textContent = solutionText;
+    // Tampilkan legend
+    ctx.fillStyle = '#e74c3c';
+    ctx.fillRect(10, 10, 15, 3);
+    ctx.fillStyle = '#333';
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'left';
+    ctx.fillText(`${a1}x + ${b1}y = ${c1}`, 30, 18);
+    
+    ctx.fillStyle = '#3498db';
+    ctx.fillRect(10, 25, 15, 3);
+    ctx.fillStyle = '#333';
+    ctx.fillText(`${a2}x + ${b2}y = ${c2}`, 30, 33);
+    
+    document.getElementById('kartesiusSolution').textContent = solutionText;
 }
+
+// Auto-update
+['a1', 'b1', 'c1', 'a2', 'b2', 'c2'].forEach(id => {
+    document.getElementById(id).addEventListener('input', drawKartesiusGraph);
+});
+
+// Gambar pertama kali
+drawKartesiusGraph();
 </script>
             
             <div class="simulation-container">
