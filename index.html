@@ -475,8 +475,8 @@ nav a {
         <li><a href="#profil"><i class="fas fa-users"></i> Profil</a></li>
         <li><a href="#tujuan"><i class="fas fa-bullseye"></i> Tujuan</a></li>
         <li><a href="#materi"><i class="fas fa-book"></i> Materi</a></li>
+	<li><a href="#contoh"><i class="fas fa-chalkboard-teacher"></i> Contoh</a></li>
         <li><a href="#simulasi"><i class="fas fa-laptop-code"></i> Simulasi</a></li>
-        <li><a href="#contoh"><i class="fas fa-chalkboard-teacher"></i> Contoh</a></li>
         <li><a href="#latihan"><i class="fas fa-pencil-alt"></i> Latihan</a></li>
         <li><a href="#quiz"><i class="fas fa-question-circle"></i> Kuis</a></li>
     </ul>
@@ -613,7 +613,7 @@ persamaan.</li>
                         <li>Selesaikan SPLDV</li>
                         <li>Interpretasikan solusi</li>
                     </ol>
-                    
+		
                     <h3>Contoh Soal</h3>
                     <p> Harga total tiket masuk sebuah museum seni di Jepang adalah 1.550 yen untuk 1 dewasa dan 3 peserta didik SMP, serta 2.750 yen untuk 2 dewasa dan 5 peserta didik SMP. Carilah harga tiket masuk untuk masing-masing 1 dewasa dan 1 peserta didik SMP?
                         Jika harga tiket masuk 1 orang dewasa adalah x yen, dan tiket masuk 1 orang peserta didik SMP adalah y yen, maka</p>
@@ -633,6 +633,82 @@ persamaan.</li>
                 </div>
             </div>
         </section>
+
+	    <section id="contoh">
+            <h2><i class="fas fa-chalkboard-teacher"></i> Contoh Soal</h2>
+            
+          <div class="example">
+    <h4>Contoh 1: Metode Substitusi</h4>
+    <p>Di suatu koperasi, terdapat dua siswa Bernama Andi dan Budi. Mereka membeli peralatan sekolah yang akan diperlukan untuk esok hari.  Andi membeli 2 buku tulis dan 1 pensil seharga Rp14.000. Budi membeli 1 buku tulis dan 2 pensil seharga Rp10.000. Berapakah harga satu buku tulis dan satu pensil?</p>
+    <button class="btn btn-outline show-solution">Tampilkan Pembahasan</button>
+    <div class="explanation">
+        <p><strong>Penyelesaian:</strong></p>
+        <p><strong>Langkah 1: Misalkan:</strong></p>
+        <p>x = harga satu buku tulis (dalam rupiah)</p>
+        <p>y = harga satu pensil (dalam rupiah)</p>
+	<p>Maka sistem persamaannya adalah:</p>
+	<p>2x + y = 14000	(1)</p>
+	<p>x+2y=10000		(2)</p>
+	<p><strong>Langkah 2: Nyatakan salah satu variabel dari salah satu persamaan.</strong></p>
+	<p>Dari persamaan (2):</p>
+	<p>x+2y=10000</p>
+	<p>  x=10000-2y 	(3)</p>
+	<p><strong>Langkah 3: Substitusi persamaan (3) ke persamaan (1):</strong></p>
+     	<p>2x+y=14000</p>
+	<p>2(10000-2y)+y=14000</p>
+	<p>20000-4y+y=14000</p>
+	<p>20000-3y=14000</p>
+	<p>-3y=14000-20000</p>
+	<p>-3y=-6000</p>
+	<p>y=6000/3</p>
+	<p>y=2000</p>
+	<p><strong>Langkah 4: Substitusi nilai y = 2000 ke persamaan (3):</strong></p>
+	<p>x=10000-2×2000</p>
+	<p>x=10000-4000</p>
+	<p>x=6000</p>
+        <p><strong>Solusi: </strong></p>
+	<p>•	Harga satu buku tulis = Rp 6.000</p>
+	<p>•	Harga satu pensil = Rp 2.000</p>
+    </div>
+</div>
+
+<div class="example">
+    <h4>Contoh 2: Metode Eliminasi</h4>
+    <p>Selesaikan: 2x-3y=-7 dan 3x+2y=-4</p>
+    <button class="btn btn-outline show-solution">Tampilkan Pembahasan</button>
+    <div class="explanation">
+        <p><strong>Penyelesaian:</strong></p>
+	<p><strong>Eliminasi 1:</strong></p>
+        <p>1. Kalikan persamaan 1 dengan 3: 6x-9y=-7</p>
+	<p>2. Kalikan persamaan 2 dengan 2: 6x+4y=-8</p>
+	<p>Kedua persamaan itu dikurangi, sehingga</p>
+	<p>-13y=-13</p>
+	<p>y=1</p>
+	<p><strong>Eliminasi 2</strong></p>
+        <p><strong>Solusi: x = , y = </strong></p>
+    </div>
+</div>
+
+<div class="example">
+    <h4>Contoh 3: Metode Campuran Substitusi dan Eliminasi</h4>
+    <p>Selesaikan: 2x+y=13 dan x-y=5 </p>
+    <button class="btn btn-outline show-solution">Tampilkan Pembahasan</button>
+    <div class="explanation">
+        <p><strong>Penyelesaian:</strong></p>
+        <p>Tambahkan persamaan 1 dan persammaan 2</p>
+        <p>(2x+y)+(y-x)=13+5</p>
+        <p>3x=18</p>
+	<p>x=6</p>
+	<p>Nilai x substitusikan pada persamaan 1</p>
+	<p>2x+y=13</p>
+	<p>2(6)+y=13</p>
+	<p>12+y=13</p>
+	<p>y=1</p>
+        <p><strong>Solusi: x = 6, y = 1</strong></p>
+    </div>
+</div>
+        </section>
+        
         
         <section id="simulasi">
 
@@ -1073,80 +1149,6 @@ document.getElementById('solve-btn').addEventListener('click', function() {
 }
 </style>
         
-        <section id="contoh">
-            <h2><i class="fas fa-chalkboard-teacher"></i> Contoh Soal</h2>
-            
-          <div class="example">
-    <h4>Contoh 1: Metode Substitusi</h4>
-    <p>Di suatu koperasi, terdapat dua siswa Bernama Andi dan Budi. Mereka membeli peralatan sekolah yang akan diperlukan untuk esok hari.  Andi membeli 2 buku tulis dan 1 pensil seharga Rp14.000. Budi membeli 1 buku tulis dan 2 pensil seharga Rp10.000. Berapakah harga satu buku tulis dan satu pensil?</p>
-    <button class="btn btn-outline show-solution">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p><strong>Penyelesaian:</strong></p>
-        <p><strong>Langkah 1: Misalkan:</strong></p>
-        <p>x = harga satu buku tulis (dalam rupiah)</p>
-        <p>y = harga satu pensil (dalam rupiah)</p>
-	<p>Maka sistem persamaannya adalah:</p>
-	<p>2x + y = 14000	(1)</p>
-	<p>x+2y=10000		(2)</p>
-	<p><strong>Langkah 2: Nyatakan salah satu variabel dari salah satu persamaan.</strong></p>
-	<p>Dari persamaan (2):</p>
-	<p>x+2y=10000</p>
-	<p>  x=10000-2y 	(3)</p>
-	<p><strong>Langkah 3: Substitusi persamaan (3) ke persamaan (1):</strong></p>
-     	<p>2x+y=14000</p>
-	<p>2(10000-2y)+y=14000</p>
-	<p>20000-4y+y=14000</p>
-	<p>20000-3y=14000</p>
-	<p>-3y=14000-20000</p>
-	<p>-3y=-6000</p>
-	<p>y=6000/3</p>
-	<p>y=2000</p>
-	<p><strong>Langkah 4: Substitusi nilai y = 2000 ke persamaan (3):</strong></p>
-	<p>x=10000-2×2000</p>
-	<p>x=10000-4000</p>
-	<p>x=6000</p>
-        <p><strong>Solusi: </strong></p>
-	<p>•	Harga satu buku tulis = Rp 6.000</p>
-	<p>•	Harga satu pensil = Rp 2.000</p>
-    </div>
-</div>
-
-<div class="example">
-    <h4>Contoh 2: Metode Eliminasi</h4>
-    <p>Selesaikan: 2x-3y=-7 dan 3x+2y=-4</p>
-    <button class="btn btn-outline show-solution">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p><strong>Penyelesaian:</strong></p>
-	<p><strong>Eliminasi 1:</strong></p>
-        <p>1. Kalikan persamaan 1 dengan 3: 6x-9y=-7</p>
-	<p>2. Kalikan persamaan 2 dengan 2: 6x+4y=-8</p>
-	<p>Kedua persamaan itu dikurangi, sehingga</p>
-	<p>-13y=-13</p>
-	<p>y=1</p>
-	<p><strong>Eliminasi 2</strong></p>
-        <p><strong>Solusi: x = , y = </strong></p>
-    </div>
-</div>
-
-<div class="example">
-    <h4>Contoh 3: Metode Campuran Substitusi dan Eliminasi</h4>
-    <p>Selesaikan: 2x+y=13 dan x-y=5 </p>
-    <button class="btn btn-outline show-solution">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p><strong>Penyelesaian:</strong></p>
-        <p>Tambahkan persamaan 1 dan persammaan 2</p>
-        <p>(2x+y)+(y-x)=13+5</p>
-        <p>3x=18</p>
-	<p>x=6</p>
-	<p>Nilai x substitusikan pada persamaan 1</p>
-	<p>2x+y=13</p>
-	<p>2(6)+y=13</p>
-	<p>12+y=13</p>
-	<p>y=1</p>
-        <p><strong>Solusi: x = 6, y = 1</strong></p>
-    </div>
-</div>
-        </section>
         
         <section id="latihan">
             <h2><i class="fas fa-pencil-alt"></i> Latihan Soal</h2>
