@@ -2235,10 +2235,14 @@ menuToggle.addEventListener('click', () => {
             });
             
             // Check answers
+		
             document.querySelectorAll('.check-answer').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const feedback = this.nextElementSibling;
                     feedback.style.display = feedback.style.display === 'block' ? 'none' : 'block';
+			// Tampilkan pembahasan (solution-steps)
+const pembahasan = feedback.querySelector('.solution-steps');
+if (pembahasan) pembahasan.style.display = 'block';
                 });
             });
             
