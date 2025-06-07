@@ -1300,241 +1300,143 @@ document.getElementById('solve-btn').addEventListener('click', function() {
     cursor: pointer;
 }
 </style>
+		
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    /* Gaya untuk bagian Latihan Soal */
+    #latihan {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
+    #latihan h2 {
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--light-color);
+    }
 
-        #latihan {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
+    .score-display {
+        background-color: var(--light-color);
+        padding: 1rem;
+        border-radius: 4px;
+        text-align: center;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        color: var(--dark-color);
+    }
 
-        #latihan h2 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            font-size: 2.2em;
-            margin-bottom: 0;
-        }
+    .progress-bar {
+        height: 8px;
+        background-color: #f0f0f0;
+        border-radius: 4px;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+    }
 
-        .score-display {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.4em;
-            font-weight: bold;
-        }
+    .progress-fill {
+        height: 100%;
+        background-color: var(--success-color);
+        width: 0%;
+        transition: width 0.5s ease;
+    }
 
-        .progress-bar {
-            height: 8px;
-            background: #f0f0f0;
-            position: relative;
-            overflow: hidden;
-        }
+    .quiz-question {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid var(--primary-color);
+    }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4CAF50, #45a049);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
+    .equation-box {
+        background-color: #e8f4fc;
+        padding: 1rem;
+        border-radius: 4px;
+        margin: 1rem 0;
+    }
 
-        .quiz-question {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px;
-            border-left: 5px solid #667eea;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
+    .multiple-choice {
+        margin: 1rem 0;
+    }
 
-        .quiz-question:hover {
-            transform: translateY(-2px);
-        }
+    .option {
+        padding: 0.8rem;
+        margin: 0.5rem 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
 
-        .quiz-question p {
-            font-size: 1.1em;
-            margin: 15px 0;
-            color: #333;
-        }
+    .option:hover {
+        background-color: #f0f0f0;
+    }
 
-        .equation-box {
-            margin: 20px 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
-            border-radius: 12px;
-            border: 2px solid #e1bee7;
-        }
+    .option.selected {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
 
-        .equation-box p {
-            margin: 8px 0;
-            font-size: 1.1em;
-            color: #333;
-            font-weight: 500;
-        }
+    .option.correct {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
 
-        .multiple-choice {
-            margin: 20px 0;
-        }
+    .option.incorrect {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
 
-        .multiple-choice label {
-            display: block;
-            margin: 12px 0;
-            padding: 12px 15px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1em;
-        }
+    .essay-answer {
+        width: 100%;
+        min-height: 100px;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin: 1rem 0;
+        font-family: inherit;
+    }
 
-        .multiple-choice label:hover {
-            background: #f5f5f5;
-            border-color: #667eea;
-            transform: translateX(5px);
-        }
+    .feedback {
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        display: none;
+    }
 
-        .multiple-choice input[type="radio"] {
-            margin-right: 12px;
-            transform: scale(1.2);
-        }
+    .feedback.correct {
+        background-color: #e8f5e9;
+        border-left: 4px solid var(--success-color);
+    }
 
-        .essay-answer {
-            width: 100%;
-            min-height: 80px;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-family: inherit;
-            resize: vertical;
-            transition: border-color 0.3s ease;
-        }
+    .feedback.incorrect {
+        background-color: #ffebee;
+        border-left: 4px solid var(--accent-color);
+    }
 
-        .essay-answer:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
-        }
+    .solution-steps {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px dashed #ddd;
+    }
 
-        .btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
+    .completed {
+        text-align: center;
+        padding: 2rem;
+        background-color: #e8f5e9;
+        border-radius: 8px;
+        margin-top: 1.5rem;
+        display: none;
+    }
+</style>
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .feedback {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 12px;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .feedback.correct {
-            background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            border: 2px solid #28a745;
-        }
-
-        .feedback.incorrect {
-            background: linear-gradient(135deg, #f8d7da, #f1b0b7);
-            border: 2px solid #dc3545;
-        }
-
-        .feedback h3 {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .feedback.correct h3 {
-            color: #155724;
-        }
-
-        .feedback.incorrect h3 {
-            color: #721c24;
-        }
-
-        .solution-steps {
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-        }
-
-        .solution-steps p {
-            margin: 8px 0;
-            font-size: 1em;
-        }
-
-        .solution-steps p:first-child {
-            font-weight: bold;
-            color: #333;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .completed {
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            margin: 30px;
-            border-radius: 15px;
-            border: 2px solid #28a745;
-            display: none;
-        }
-
-        .completed h3 {
-            color: #155724;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-        }
-    </style>
-
+		
     <section id="latihan">
         <h2><i class="fas fa-pencil-alt"></i> Latihan Soal SPLDV</h2>
         
