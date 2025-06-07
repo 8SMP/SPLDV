@@ -1300,12 +1300,246 @@ document.getElementById('solve-btn').addEventListener('click', function() {
     cursor: pointer;
 }
 </style>
-        
-        <section id="latihan">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        #latihan {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        #latihan h2 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 0;
+        }
+
+        .score-display {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .quiz-question {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .quiz-question:hover {
+            transform: translateY(-2px);
+        }
+
+        .quiz-question p {
+            font-size: 1.1em;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .equation-box {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+            border-radius: 12px;
+            border: 2px solid #e1bee7;
+        }
+
+        .equation-box p {
+            margin: 8px 0;
+            font-size: 1.1em;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .multiple-choice {
+            margin: 20px 0;
+        }
+
+        .multiple-choice label {
+            display: block;
+            margin: 12px 0;
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .multiple-choice label:hover {
+            background: #f5f5f5;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .multiple-choice input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        .essay-answer {
+            width: 100%;
+            min-height: 80px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .essay-answer:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .feedback.correct {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border: 2px solid #28a745;
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(135deg, #f8d7da, #f1b0b7);
+            border: 2px solid #dc3545;
+        }
+
+        .feedback h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feedback.correct h3 {
+            color: #155724;
+        }
+
+        .feedback.incorrect h3 {
+            color: #721c24;
+        }
+
+        .solution-steps {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+        }
+
+        .solution-steps p {
+            margin: 8px 0;
+            font-size: 1em;
+        }
+
+        .solution-steps p:first-child {
+            font-weight: bold;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .completed {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            margin: 30px;
+            border-radius: 15px;
+            border: 2px solid #28a745;
+            display: none;
+        }
+
+        .completed h3 {
+            color: #155724;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+    </style>
+
+    <section id="latihan">
         <h2><i class="fas fa-pencil-alt"></i> Latihan Soal SPLDV</h2>
         
         <div class="score-display">
-            Skor: <span id="score">0</span> / <span id="total">10</span>
+            Skor: <span id="score">0</span> / <span id="total">5</span>
         </div>
         
         <div class="progress-bar">
@@ -1314,25 +1548,25 @@ document.getElementById('solve-btn').addEventListener('click', function() {
         
         <div class="quiz-question">
             <p>1. Perhatikan persamaan-persamaan berikut!</p>
-            <div style="margin: 15px 0; padding: 15px; background: #f0f8ff; border-radius: 8px;">
+            <div class="equation-box">
                 <p>i) 3p + 5q = 10</p>
                 <p>ii) 2x² - 3y = 6</p>
                 <p>iii) 3y = 5x - 2</p>
                 <p>iv) 3x + 5 = 2x - 3y</p>
             </div>
             <p>Yang bukan merupakan persamaan linear dua variabel adalah...</p>
-            <div class="multiple-choice" style="margin: 15px 0;">
-                <label style="display: block; margin: 8px 0; cursor: pointer;">
-                    <input type="radio" name="q1" value="a" style="margin-right: 10px;"> a. i)
+            <div class="multiple-choice">
+                <label>
+                    <input type="radio" name="q1" value="a"> a. i)
                 </label>
-                <label style="display: block; margin: 8px 0; cursor: pointer;">
-                    <input type="radio" name="q1" value="b" style="margin-right: 10px;"> b. ii)
+                <label>
+                    <input type="radio" name="q1" value="b"> b. ii)
                 </label>
-                <label style="display: block; margin: 8px 0; cursor: pointer;">
-                    <input type="radio" name="q1" value="c" style="margin-right: 10px;"> c. iii)
+                <label>
+                    <input type="radio" name="q1" value="c"> c. iii)
                 </label>
-                <label style="display: block; margin: 8px 0; cursor: pointer;">
-                    <input type="radio" name="q1" value="d" style="margin-right: 10px;"> d. iv)
+                <label>
+                    <input type="radio" name="q1" value="d"> d. iv)
                 </label>
             </div>
             <button class="btn check-answer" onclick="checkAnswer(0)">Periksa Jawaban</button>
@@ -1430,68 +1664,111 @@ document.getElementById('solve-btn').addEventListener('click', function() {
             </div>
         </div>
 
-        <div class="quiz-question">
-            <p>6. Selesaikan: x/2 + y/3 = 4 dan x/4 - y = 1</p>
-            <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: x = 52/7, y = 6/7)"></textarea>
-            <button class="btn check-answer" onclick="checkAnswer(5)">Periksa Jawaban</button>
-            <div class="feedback">
-                <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
-                <p class="feedback-message"></p>
-                <div class="solution-steps">
-                    <p><strong>Pembahasan:</strong></p>
-                    <p>Persamaan 1: x/2 + y/3 = 4</p>
-                    <p>Persamaan 2: x/4 - y = 1</p>
-                    <p>Kalikan pers.1 dengan 6: 3x + 2y = 24</p>
-                    <p>Kalikan pers.2 dengan 4: x - 4y = 4</p>
-                    <p>Kalikan pers.2 hasil dengan 3: 3x - 12y = 12</p>
-                    <p>Kurangkan dari pers.1: 14y = 12 → y = 6/7</p>
-                    <p>Substitusi: x = 4 + 4(6/7) = 52/7</p>
-                    <p><strong>Solusi: x = 52/7, y = 6/7</strong></p>
-                </div>
-            </div>
+        <div class="completed">
+            <h3><i class="fas fa-trophy"></i> Selamat!</h3>
+            <p>Anda telah menyelesaikan semua soal latihan SPLDV!</p>
+            <p>Skor akhir Anda: <span id="finalScore">0</span>/5</p>
         </div>
+    </section>
 
-        <div class="quiz-question">
-            <p>7. Harga 5 buku dan 2 pensil adalah Rp 21.000. Harga 3 buku dan 4 pensil adalah Rp 16.000. Tentukan harga sebuah buku dan sebuah pensil.</p>
-            <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: Buku = Rp3.000, Pensil = Rp3.000)"></textarea>
-            <button class="btn check-answer" onclick="checkAnswer(6)">Periksa Jawaban</button>
-            <div class="feedback">
-                <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
-                <p class="feedback-message"></p>
-                <div class="solution-steps">
-                    <p><strong>Pembahasan:</strong></p>
-                    <p>Misal buku = b, pensil = p</p>
-                    <p>Persamaan 1: 5b + 2p = 21.000</p>
-                    <p>Persamaan 2: 3b + 4p = 16.000</p>
-                    <p>Kalikan pers.1 dengan 2: 10b + 4p = 42.000</p>
-                    <p>Kurangkan pers.2: 7b = 26.000 → b = 26.000/7 ≈ 3.714</p>
-                    <p>Substitusi: 5(26.000/7) + 2p = 21.000 → p = 1.750</p>
-                    <p><strong>Solusi: Buku ≈ Rp3.714, Pensil = Rp1.750</strong></p>
-                </div>
-            </div>
-        </div>
+    <script>
+        let score = 0;
+        let questionsAnswered = 0;
+        const correctAnswers = ['b', '7100', '32/13,-1/13', '12,8', '13,7'];
+        
+        function checkAnswer(questionIndex) {
+            const question = document.querySelectorAll('.quiz-question')[questionIndex];
+            const feedback = question.querySelector('.feedback');
+            const button = question.querySelector('.check-answer');
+            
+            let userAnswer = '';
+            let isCorrect = false;
+            
+            if (questionIndex === 0) {
+                // Multiple choice question
+                const selected = question.querySelector('input[name="q1"]:checked');
+                if (!selected) {
+                    alert('Silakan pilih jawaban terlebih dahulu!');
+                    return;
+                }
+                userAnswer = selected.value;
+                isCorrect = userAnswer === correctAnswers[questionIndex];
+            } else {
+                // Essay questions
+                const textarea = question.querySelector('.essay-answer');
+                userAnswer = textarea.value.trim().toLowerCase();
+                
+                if (!userAnswer) {
+                    alert('Silakan isi jawaban terlebih dahulu!');
+                    return;
+                }
+                
+                // Check answer based on question type
+                switch(questionIndex) {
+                    case 1: // Harga buku + pensil
+                        isCorrect = userAnswer.includes('7100') || userAnswer.includes('7.100');
+                        break;
+                    case 2: // x = 32/13, y = -1/13
+                        isCorrect = (userAnswer.includes('32/13') && userAnswer.includes('-1/13')) ||
+                                   (userAnswer.includes('32') && userAnswer.includes('13') && userAnswer.includes('-1'));
+                        break;
+                    case 3: // 12 dan 8
+                        isCorrect = (userAnswer.includes('12') && userAnswer.includes('8'));
+                        break;
+                    case 4: // Panjang = 13, Lebar = 7
+                        isCorrect = (userAnswer.includes('13') && userAnswer.includes('7'));
+                        break;
+                }
+            }
+            
+            // Show feedback
+            feedback.style.display = 'block';
+            feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+            
+            const title = feedback.querySelector('.feedback-title');
+            const message = feedback.querySelector('.feedback-message');
+            const icon = feedback.querySelector('i');
+            
+            if (isCorrect) {
+                title.textContent = 'Jawaban Benar!';
+                message.textContent = 'Selamat! Jawaban Anda tepat.';
+                icon.className = 'fas fa-check-circle';
+                if (button.textContent === 'Periksa Jawaban') {
+                    score++;
+                    updateScore();
+                }
+            } else {
+                title.textContent = 'Jawaban Salah';
+                message.textContent = 'Silakan pelajari pembahasan di bawah ini.';
+                icon.className = 'fas fa-times-circle';
+            }
+            
+            button.textContent = 'Sudah Diperiksa';
+            button.disabled = true;
+            button.style.opacity = '0.6';
+            
+            if (button.textContent !== 'Sudah Diperiksa' || questionsAnswered < 5) {
+                questionsAnswered++;
+            }
+            
+            // Show completion message when all questions are answered
+            if (questionsAnswered === 5) {
+                setTimeout(() => {
+                    document.querySelector('.completed').style.display = 'block';
+                    document.getElementById('finalScore').textContent = score;
+                }, 1000);
+            }
+        }
+        
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            const progressFill = document.getElementById('progressFill');
+            const percentage = (score / 5) * 100;
+            progressFill.style.width = percentage + '%';
+        }
+    </script>
 
-        <div class="quiz-question">
-            <p>8. Dua bilangan memiliki selisih 5. Jika bilangan yang lebih kecil dikalikan 3 dan bilangan yang lebih besar dikalikan 2, hasilnya sama. Tentukan kedua bilangan tersebut.</p>
-            <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: 15 dan 10)"></textarea>
-            <button class="btn check-answer" onclick="checkAnswer(7)">Periksa Jawaban</button>
-            <div class="feedback">
-                <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
-                <p class="feedback-message"></p>
-                <div class="solution-steps">
-                    <p><strong>Pembahasan:</strong></p>
-                    <p>Misal bilangan besar = a, bilangan kecil = b</p>
-                    <p>Persamaan 1: a - b = 5</p>
-                    <p>Persamaan 2: 2a = 3b</p>
-                    <p>Dari pers.1: a = b + 5</p>
-                    <p>Substitusi ke pers.2: 2(b + 5) = 3b</p>
-                    <p>2b + 10 = 3b → b = 10</p>
-                    <p>Substitusi: a = 10 + 5 = 15</p>
-                    <p><strong>Solusi: 15 dan 10</strong></p>
-                </div>
-            </div>
-        </div>
-
+		
         <div class="quiz-question">
             <p>9. Sebuah tempat parkir menampung motor dan mobil. Jumlah kendaraan adalah 60, dan jumlah roda seluruhnya adalah 160. Tentukan banyak motor dan mobil.</p>
             <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: Motor = 40, Mobil = 20)"></textarea>
