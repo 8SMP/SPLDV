@@ -1175,1927 +1175,328 @@ document.getElementById('solve-btn').addEventListener('click', function() {
 }
 </style>
         
-        <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Pembelajaran 8 SMP - SPLDV</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2980b9;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --success-color: #2ecc71;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        nav {
-            background-color: var(--dark-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            padding: 1rem 0;
-            flex-wrap: wrap;
-        }
-        
-        nav li {
-            margin: 0 1.5rem;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            display: block;
-        }
-        
-        nav a:hover {
-            color: var(--primary-color);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-        
-        section {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        h2 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--light-color);
-        }
-        
-        h3 {
-            color: var(--secondary-color);
-            margin: 1.5rem 0 1rem;
-        }
-        
-        .accordion {
-            margin-bottom: 1rem;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        
-        .accordion-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-        
-        .accordion-header:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        .accordion-content {
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-top: none;
-            display: none;
-            background-color: #f9f9f9;
-        }
-        
-        .accordion.active .accordion-content {
-            display: block;
-        }
-        
-        .accordion.active .accordion-header {
-            background-color: var(--secondary-color);
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            margin: 0.5rem 0;
-        }
-        
-        .btn:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-        
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .simulation-container {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            background-color: #f9f9f9;
-        }
-        
-        #graphCanvas {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: white;
-    margin-top: 15px;
-    max-width: 100%;
-}
-
-.equation-input {
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-        
-        .equation-input input {
-            width: 60px;
-            padding: 0.5rem;
-            margin: 0 0.5rem;
-            text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .equation-input span {
-            font-weight: bold;
-            margin: 0 0.5rem;
-        }
-        
-        .result {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background-color: #e8f4fc;
-            border-radius: 4px;
-            display: none;
-        }
-        
-        .example {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-        
-        .quiz-container {
-            margin: 1.5rem 0;
-        }
-        
-        .quiz-question {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px dashed #ddd;
-        }
-        
-        .options {
-            margin: 1rem 0;
-        }
-        
-        .option {
-            margin: 0.5rem 0;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .option:hover {
-            background-color: #f0f0f0;
-        }
-        
-        .option.selected {
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-        }
-        
-        .option.correct {
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-        }
-        
-        .option.incorrect {
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-        }
-        
-        .explanation {
-            margin-top: 1rem;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            display: none;
-        }
-        
-        .essay-question {
-            margin-bottom: 1.5rem;
-        }
-        
-        .essay-answer {
-            width: 100%;
-            min-height: 100px;
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin: 1rem 0;
-        }
-        
-        .feedback {
-            margin-top: 1rem;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            display: none;
-        }
-        
-        .interactive-element {
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background-color: #f0f8ff;
-            border-radius: 8px;
-            border-left: 5px solid var(--primary-color);
-        }
-        
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
-        }
-        /* PROFIL TIM */
-.profile-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2rem 0;
-}
-
-.tab-content {
-    display: none;
-}
-
-.profile-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 1rem;
-}
-
-.profile-card {
-    background: white;
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: transform 0.3s;
-}
-
-.profile-card:hover {
-    transform: translateY(-5px);
-}
-
-.profile-card img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.profile-card h3 {
-    color: var(--dark-color);
-    margin-bottom: 0.5rem;
-}
-
-.profile-card p {
-    margin: 0.3rem 0;
-    color: #555;
-}
-
-.profile-card .bio {
-    font-style: italic;
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px dashed #ddd;
-}
-
-.mhs {
-    background: #f9f9ff;
-}
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav li {
-                margin: 0.5rem 0;
-            }
-            
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            .equation-input {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .equation-input input {
-                margin: 0.5rem 0;
-            }
-            nav ul {
-    display: flex; /* Horizontal di desktop */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    justify-content: center; /* Tengahkan menu */
-}
-
-nav li {
-    margin: 0 1.5rem;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    display: block;
-    padding: 0.5rem 1rem;
-}
-
-.menu-toggle {
-    display: none; /* Sembunyikan di desktop */
-    background-color: var(--dark-color);
-    color: white;
-    padding: 0.7rem 1.5rem;
-    cursor: pointer;
-    text-align: center;
-}
-
-/* Gaya Mobile */
-@media (max-width: 768px) {
-    nav ul {
-        display: none; /* Sembunyikan default di mobile */
-        flex-direction: column; /* Vertikal di mobile */
-        align-items: flex-start;
-        width: 100%;
-        position: absolute;
-        top: 60px; /* Sesuaikan dengan tinggi nav */
-        left: 0;
-        background-color: var(--dark-color);
-        z-index: 1000; /* Pastikan di atas konten lain */
-    }
-
-    nav ul.mobile-active {
-        display: flex; /* Tampilkan saat class 'mobile-active' */
-    }
-
-    .menu-toggle {
-        display: block; /* Tampilkan di mobile */
-    }
-
-    nav li {
-        margin: 0;
-        width: 100%;
-    }
-
-    nav a {
-        padding: 1rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        text-align: left;
-    }
-}
-      
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Media Pembelajaran Matematika Kelas 8 SMP</h1>
-        <p>Sistem Persamaan Linear Dua Variabel (SPLDV)</p>
-    </header>
-    
-<nav>
-    <div class="menu-toggle">
-
-        <i class="fas fa-bars"></i> Menu
-    </div>
-    <ul class="nav-list">
-        <li><a href="#profil"><i class="fas fa-users"></i> Profil</a></li>
-        <li><a href="#tujuan"><i class="fas fa-bullseye"></i> Tujuan</a></li>
-        <li><a href="#materi"><i class="fas fa-book"></i> Materi</a></li>
-	<li><a href="#contoh"><i class="fas fa-chalkboard-teacher"></i> Contoh</a></li>
-        <li><a href="#simulasi"><i class="fas fa-laptop-code"></i> Simulasi</a></li>
-        <li><a href="#latihan"><i class="fas fa-pencil-alt"></i> Latihan</a></li>
-        <li><a href="#quiz"><i class="fas fa-question-circle"></i> Kuis</a></li>
-    </ul>
-</nav>
-    <div class="container">
-        <section id="tujuan">
-            <h2><i class="fas fa-bullseye"></i> Tujuan Pembelajaran</h2>
-		<div class="accordion-active">
-                <div class="accordion-header">
-                    <span>Tujuan Pembelajaran</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    
-            <p>Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
-            <ul>
-                <li>Memahami konsep sistem persamaan linear dua variabel (SPLDV)</li>
-                <li>Dapat menyelesaikan soal mengenai permasalahan dalam kehidupan sehari-hari menggunakan persamaan linear satu variabel.</li>
-                <li>Dapat menyelesaikan soal mengenai permasalahan dalam kehidupan sehari-hari menggunakan persamaan linear dua variabel.</li>
-                <li>Dapat menjelaskan prinsip-prinsip untuk menyelesaikan sistem persamaan, yaitu dari 2 buah persamaan linear 2 variabel mengarah 
-pada persamaan linear 1 variabel.</li>
-<li>Dapat menyelesaikan sistem persamaan 
-dengan menggunakan metode penambahan 
-dan pengurangan atau metode substitusi.</li>
-<li>Dapat menyelesaikan sistem persamaan yang 
-agak kompleks, misalnya yang  memuat 
-tanda kurung, pecahan,  koefisiennya berupa 
-pecahan, dan lain-lain.</li>
-                <li>Memahami cara-cara penyelesaian soal dalam 
-bentuk sistem persamaan.
-  </li>
-                <li>Mampu menyelesaikan soal dalam kehidupan 
-sehari-hari dengan menggunakan sistem 
-persamaan.</li>
-	    </div>
-            </div>
-            
-                
-            </ul>
-        </section>
-        
-        <section id="materi">
-            <h2><i class="fas fa-book"></i> Materi Ajar</h2>
-            
-            <div class="accordion">
-                <div class="accordion-header">
-                    <span>Konsep Dasar SPLDV</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <h3>Pengertian SPLDV</h3>
-                    <p>Sistem Persamaan Linear Dua Variabel (SPLDV) adalah sistem yang terdiri dari dua persamaan linear dengan dua variabel yang sama.</p>
-                    <p>Bentuk umum: a₁x + b₁y = c₁ dan a₂x + b₂y = c₂</p>
-                    <p>Tujuannya adalah menentukan nilai x dan y yang memenuhi kedua persamaan</p>
-
-                    <h3>Penyelesaian SLDV</h3>
-                    <p>Menjelaskan bahwa penyelesaian SPLDV adalah pasangan bilangan (x, y) yang membuat kedua persamaan benar secara bersamaan.
-                    <p>Terdapat contoh soal kontekstual seperti:</p>
-                    <p>3x=x+10.000→2x=10.000→x=5.000</p>
-                    <p>Siswa memahami bahwa menyusun dan menyelesaikan persamaan dapat mewakili hubungan antar kuantitas dalam kehidupan nyata.</p>
-
-                    <h3>Sifat-sifat Persamaan</h3>
-                    <p>SPLDV diselesaikan dengan memanfaatkan sifat-sifat dasar:</p>
-                    <p>• Menambah atau mengurangkan kedua ruas dengan bilangan yang sama.</p>
-                    <p>• Mengalikan atau membagi kedua ruas dengan bilangan yang sama (selain nol).</p>
-                    
-                    <h3>Contoh SPLDV</h3>
-                    <p>1. 2x + 3y = 7 dan x - y = 1</p>
-                    <p>2. 5x - 2y = 8 dan 3x + 4y = 10</p>
-                </div>
-            </div>
-            
-            <div class="accordion">
-                <div class="accordion-header">
-                    <span>Metode Penyelesaian</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <h3>1. Metode Grafik</h3>
-                    <p>Menggambar grafik dua persamaan pada bidang koordinat.
-                    <p>Titik potong grafik menunjukkan solusi SPLDV.</p>
-                    <p>Memberikan contoh gambar garis dari dua persamaan dan menunjukkan bahwa titik potongnya adalah solusi dari SPLDV.</p>
-                    
-                    <h3>2. Metode Substitusi</h3>
-                    <p>Salah satu variabel diubah ke bentuk ekspresi terhadap variabel lain, lalu disubstitusikan ke persamaan kedua.</p>
-                    <p>Contoh:</p>
-                    <p>x+y=10 </p>
-                    <p>x-y=2 </p>
-                    <p>Dari persamaan pertama: x=10-y</p>
-                    <p>Subtitusi ke persamaan kedua: (10-y)-y=2→10-2y=2→y=4 dan x=6</p>
-
-                    <h3>3. Metode Eliminasi</h3>
-                    <p>Menyamakan koefisien salah satu variabel agar bisa dieliminasi (dihilangkan).</p>
-                    <p>Contoh</p>
-                    <p>2x+y=7</p>
-                    <p>2x-3y=-5</p>
-                    <p>Kurangkan</p>
-                    <p>(2x+y)-(2x-3y)=7-(-5)</p>
-                    <p>4y=12→y=3 dan x=2</p>
-
-                    <h3>4. Metode Campuran</h3>
-                    <p>Kolaborasi antara metode substitusi dan eliminasi</p>
-                    <p>Contoh</p>
-                    <p>2x+y=13</p>
-                    <p>x-y=5</p>
-                    <p>Langkah:</p>
-	                <p>Tambahkan (1) dan (2)</p>
-                    <p>(2x+y)+(y-x)=13+5</p>
-                    <p>3x=18</p>
-                    <p>x=6</p>
-	                <p>Substitusikan persamaan ke (1)</p>
-                    <p>2x+y=13</P>
-                    <p>2(6)+y=13</p>
-                    <p>12+y=13</p>
-                    <p>y=1</p>
-                    <p>Jawabannya yaitu: x=6, y=1</p>
-  
-                </div>
-            </div>
-            
-            <div class="accordion">
-                <div class="accordion-header">
-                    <span>Contoh Penerapan</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <h3>Masalah Sehari-hari</h3>
-                    <p>Seperti menentukan harga dua jenis barang jika diketahui kombinasi harga pembeliannya.</p>
-                    
-                    <h3>Langkah Penyelesaian</h3>
-                    <ol>
-                        <li>Identifikasi variabel</li>
-                        <li>Buat model matematika</li>
-                        <li>Selesaikan SPLDV</li>
-                        <li>Interpretasikan solusi</li>
-                    </ol>
-		
-                    <h3>Contoh Soal</h3>
-                    <p> Harga total tiket masuk sebuah museum seni di Jepang adalah 1.550 yen untuk 1 dewasa dan 3 peserta didik SMP, serta 2.750 yen untuk 2 dewasa dan 5 peserta didik SMP. Carilah harga tiket masuk untuk masing-masing 1 dewasa dan 1 peserta didik SMP?
-                        Jika harga tiket masuk 1 orang dewasa adalah x yen, dan tiket masuk 1 orang peserta didik SMP adalah y yen, maka</p>
-                    <p> x + 3y = 1.550</p>
-                    <p> 2x + 5y = 2.750</p>
-                    <p> Penyelesaiannya:</p>
-		<p> Langkah eliminasi: </p>
-		<p> Kalikan persamaan pertama dengan 2: 2x + 6y = 3.100</p>
-		<p> Kurangkan dengan persamaan kedua: (2x + 6y) - (2x + 5y) = 3.100 - 2.750</p>
-		<p> y = 350</p>
-		<p> Substitusikan y ke x + 3y = 1.550:</p>
-		<p> x + 3(350) = 1.550</p>
-		<p> x = 500</p>
-		<p><strong>solusi</strong></p>
-		<p>Harga tiket masuk 1 orang dewasa adalah 500 yen. Harga tiket masuk 1 orang peserta didik SMP adalah 350 yen.</p>
-	
-                </div>
-            </div>
-        </section>
-
-	    <section id="contoh">
-            <h2><i class="fas fa-chalkboard-teacher"></i> Contoh Soal</h2>
-
-  <div class="accordion">
-                <div class="accordion-header">
-                    <span>Contoh Metode Substitusi</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-		    
-          <div class="accordion-content">
-    <h4>Contoh 1:</h4>
-    <p>Di suatu koperasi, terdapat dua siswa Bernama Andi dan Budi. Mereka membeli peralatan sekolah yang akan diperlukan untuk esok hari.  Andi membeli 2 buku tulis dan 1 pensil seharga Rp14.000. Budi membeli 1 buku tulis dan 2 pensil seharga Rp10.000. Berapakah harga satu buku tulis dan satu pensil?</p>
-    <button class="btn btn-outline show-solution">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p><strong>Penyelesaian:</strong></p>
-        <p><strong>Langkah 1: Misalkan:</strong></p>
-        <p>x = harga satu buku tulis (dalam rupiah)</p>
-        <p>y = harga satu pensil (dalam rupiah)</p>
-	<p>Maka sistem persamaannya adalah:</p>
-	<p>2x + y = 14000	(1)</p>
-	<p>x+2y=10000		(2)</p>
-	<p><strong>Langkah 2: Nyatakan salah satu variabel dari salah satu persamaan.</strong></p>
-	<p>Dari persamaan (2):</p>
-	<p>x+2y=10000</p>
-	<p>  x=10000-2y 	(3)</p>
-	<p><strong>Langkah 3: Substitusi persamaan (3) ke persamaan (1):</strong></p>
-     	<p>2x+y=14000</p>
-	<p>2(10000-2y)+y=14000</p>
-	<p>20000-4y+y=14000</p>
-	<p>20000-3y=14000</p>
-	<p>-3y=14000-20000</p>
-	<p>-3y=-6000</p>
-	<p>y=6000/3</p>
-	<p>y=2000</p>
-	<p><strong>Langkah 4: Substitusi nilai y = 2000 ke persamaan (3):</strong></p>
-	<p>x=10000-2×2000</p>
-	<p>x=10000-4000</p>
-	<p>x=6000</p>
-        <p><strong>Solusi: </strong></p>
-	<p>•	Harga satu buku tulis = Rp 6.000</p>
-	<p>•	Harga satu pensil = Rp 2.000</p>
-    </div>
-</div>
-  </div>
-
-
-		    
-  <div class="accordion">
-                <div class="accordion-header">
-                    <span>Contoh Metode Eliminasi</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-		    
-          <div class="accordion-content">
-    <h4>Contoh 1: </h4>
-    <p>Selesaikan: 2x-3y=-7 dan 3x+2y=-4</p>
-    <button class="btn btn-outline show-solution">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p><strong>Penyelesaian:</strong></p>
-	<p><strong>Eliminasi 1:</strong></p>
-        <p>1. Kalikan persamaan 1 dengan 3: 6x-9y=-7</p>
-	<p>2. Kalikan persamaan 2 dengan 2: 6x+4y=-8</p>
-	<p>Kedua persamaan itu dikurangi, sehingga</p>
-	<p>-13y=-13</p>
-	<p>y=1</p>
-	<p><strong>Eliminasi 2</strong></p>
-        <p><strong>Solusi: x = , y = </strong></p>
-    </div>
-</div>
-  </div>
-
-		    
-		    
-  <div class="accordion">
-                <div class="accordion-header">
-                    <span>Contoh Metode Campuran</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-		    
-          <div class="accordion-content">
-    <h4>Contoh 1: </h4>
-    <p>Selesaikan: 2x+y=13 dan x-y=5 </p>
-    <button class="btn btn-outline show-solution">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p><strong>Penyelesaian:</strong></p>
-        <p>Tambahkan persamaan 1 dan persammaan 2</p>
-        <p>(2x+y)+(y-x)=13+5</p>
-        <p>3x=18</p>
-	<p>x=6</p>
-	<p>Nilai x substitusikan pada persamaan 1</p>
-	<p>2x+y=13</p>
-	<p>2(6)+y=13</p>
-	<p>12+y=13</p>
-	<p>y=1</p>
-        <p><strong>Solusi: x = 6, y = 1</strong></p>
-    </div>
-</div>
-  </div>
-		
-        </section>
-        
-        
-        <section id="simulasi">
-
-        <div class="simulation-container" style="max-width:100%; padding:10px;">
-    <h3 style="text-align:center; margin-bottom:20px;">Simulator SPLDV</h3>
-    
-    <div style="margin: 15px 0; display:flex; flex-wrap:wrap; align-items:center; gap:5px; font-size:clamp(14px, 3vw, 16px);">
-        <span style="white-space:nowrap;">Persamaan 1:</span>
-        <input type="number" id="a1" value="2" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;"> 
-        <span>x +</span>
-        <input type="number" id="b1" value="3" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;"> 
-        <span>y =</span>
-        <input type="number" id="c1" value="7" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;">
-    </div>
-    
-    <div style="margin: 15px 0; display:flex; flex-wrap:wrap; align-items:center; gap:5px; font-size:clamp(14px, 3vw, 16px);">
-        <span style="white-space:nowrap;">Persamaan 2:</span>
-        <input type="number" id="a2" value="1" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;"> 
-        <span>x +</span>
-        <input type="number" id="b2" value="-1" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;"> 
-        <span>y =</span>
-        <input type="number" id="c2" value="1" style="width:clamp(40px, 12vw, 60px); padding:5px; font-size:14px; text-align:center;">
-    </div>
-    
-    <div style="text-align:center; margin:20px 0;">
-        <button 
-            onclick="drawKartesiusGraph()" 
-            style="padding:12px 20px; background:#3498db; color:white; border:none; cursor:pointer; border-radius:8px; font-size:16px; touch-action:manipulation;"
-        >
-            📊 Gambar Grafik
-        </button>
-    </div>
-    
-    <div style="text-align:center; margin:15px 0;">
-        <canvas id="kartesiusChart" style="border:2px solid #ddd; border-radius:8px; max-width:100%; height:auto; display:block; margin:0 auto;"></canvas>
-    </div>
-    
-    <div id="kartesiusResult" style="margin-top:15px; padding:15px; background:#f8f9fa; border-radius:8px; border-left:4px solid #3498db;">
-        <p id="kartesiusSolution" style="margin:0; font-size:clamp(14px, 3.5vw, 16px); line-height:1.4;">Klik tombol untuk melihat grafik</p>
-    </div>
-</div>
-
-<script>
-function drawKartesiusGraph() {
-    const canvas = document.getElementById('kartesiusChart');
-    const ctx = canvas.getContext('2d');
-    
-    // Responsive canvas size
-    const containerWidth = canvas.parentElement.clientWidth;
-    const canvasSize = Math.min(containerWidth - 20, 500, window.innerHeight * 0.6);
-    
-    canvas.width = canvasSize;
-    canvas.height = canvasSize;
-    
-    const width = canvas.width;
-    const height = canvas.height;
-    
-    // Ambil nilai input
-    const a1 = parseFloat(document.getElementById('a1').value) || 0;
-    const b1 = parseFloat(document.getElementById('b1').value) || 1;
-    const c1 = parseFloat(document.getElementById('c1').value) || 0;
-    const a2 = parseFloat(document.getElementById('a2').value) || 0;
-    const b2 = parseFloat(document.getElementById('b2').value) || 1;
-    const c2 = parseFloat(document.getElementById('c2').value) || 0;
-    
-    // Clear canvas
-    ctx.clearRect(0, 0, width, height);
-    
-    // Setup koordinat - responsive scale
-    const scale = Math.max(canvasSize / 25, 15); // Minimal 15px per unit
-    const centerX = width / 2;
-    const centerY = height / 2;
-    
-    // Gambar grid kecil
-    ctx.strokeStyle = '#e8e8e8';
-    ctx.lineWidth = 0.5;
-    for (let i = -12; i <= 12; i++) {
-        // Vertical lines
-        ctx.beginPath();
-        ctx.moveTo(centerX + i * scale, 0);
-        ctx.lineTo(centerX + i * scale, height);
-        ctx.stroke();
-        
-        // Horizontal lines
-        ctx.beginPath();
-        ctx.moveTo(0, centerY + i * scale);
-        ctx.lineTo(width, centerY + i * scale);
-        ctx.stroke();
-    }
-    
-    // Gambar sumbu X dan Y (TEBAL)
-    ctx.strokeStyle = '#333';
-    ctx.lineWidth = 3;
-    
-    // Sumbu X
-    ctx.beginPath();
-    ctx.moveTo(0, centerY);
-    ctx.lineTo(width, centerY);
-    ctx.stroke();
-    
-    // Sumbu Y
-    ctx.beginPath();
-    ctx.moveTo(centerX, 0);
-    ctx.lineTo(centerX, height);
-    ctx.stroke();
-    
-    // Label angka - responsive font size
-    ctx.fillStyle = '#555';
-    ctx.font = `${Math.max(canvasSize / 45, 10)}px Arial`;
-    ctx.textAlign = 'center';
-    
-    for (let i = -10; i <= 10; i++) {
-        if (i !== 0) {
-            // Label X
-            ctx.fillText(i.toString(), centerX + i * scale, centerY + 15);
-            // Label Y  
-            ctx.save();
-            ctx.textAlign = 'right';
-            ctx.fillText(i.toString(), centerX - 5, centerY - i * scale + 3);
-            ctx.restore();
-        }
-    }
-    
-    // Fungsi untuk menggambar garis
-    function drawLine(a, b, c, color, width = 2) {
-        if (b === 0) return; // Hindari pembagian nol
-        
-        ctx.strokeStyle = color;
-        ctx.lineWidth = width;
-        ctx.beginPath();
-        
-        // Hitung titik start dan end
-        const x1 = -12;
-        const y1 = (c - a * x1) / b;
-        const x2 = 12;
-        const y2 = (c - a * x2) / b;
-        
-        const canvasX1 = centerX + x1 * scale;
-        const canvasY1 = centerY - y1 * scale;
-        const canvasX2 = centerX + x2 * scale;
-        const canvasY2 = centerY - y2 * scale;
-        
-        ctx.moveTo(canvasX1, canvasY1);
-        ctx.lineTo(canvasX2, canvasY2);
-        ctx.stroke();
-    }
-    
-    // Gambar kedua garis
-    drawLine(a1, b1, c1, '#e74c3c', 2.5); // Merah
-    drawLine(a2, b2, c2, '#3498db', 2.5); // Biru
-    
-    // Hitung titik potong
-    const det = a1 * b2 - a2 * b1;
-    let solutionText;
-    
-    if (Math.abs(det) < 0.0001) {
-        solutionText = "🔴 Garis sejajar atau berimpit";
-    } else {
-        const x = (b2 * c1 - b1 * c2) / det;
-        const y = (a1 * c2 - a2 * c1) / det;
-        
-        // Gambar titik potong - responsive size
-        const pointX = centerX + x * scale;
-        const pointY = centerY - y * scale;
-        
-        if (pointX >= 0 && pointX <= width && pointY >= 0 && pointY <= height) {
-            const pointSize = Math.max(canvasSize / 80, 4);
-            ctx.fillStyle = '#27ae60';
-            ctx.beginPath();
-            ctx.arc(pointX, pointY, pointSize, 0, 2 * Math.PI);
-            ctx.fill();
-            
-            ctx.strokeStyle = '#fff';
-            ctx.lineWidth = Math.max(canvasSize / 250, 1);
-            ctx.stroke();
-        }
-        
-        solutionText = `✅ Titik potong: x = ${x.toFixed(2)}, y = ${y.toFixed(2)}`;
-    }
-    
-    // Tampilkan legend - responsive
-    const legendFontSize = Math.max(canvasSize / 40, 10);
-    const legendY = Math.max(canvasSize / 25, 15);
-    
-    ctx.fillStyle = '#e74c3c';
-    ctx.fillRect(10, legendY, Math.max(canvasSize / 33, 12), 3);
-    ctx.fillStyle = '#333';
-    ctx.font = `${legendFontSize}px Arial`;
-    ctx.textAlign = 'left';
-    ctx.fillText(`${a1}x + ${b1}y = ${c1}`, 10 + Math.max(canvasSize / 25, 20), legendY + legendFontSize);
-    
-    ctx.fillStyle = '#3498db';
-    ctx.fillRect(10, legendY + legendFontSize + 8, Math.max(canvasSize / 33, 12), 3);
-    ctx.fillStyle = '#333';
-    ctx.fillText(`${a2}x + ${b2}y = ${c2}`, 10 + Math.max(canvasSize / 25, 20), legendY + (legendFontSize * 2) + 8);
-    
-    document.getElementById('kartesiusSolution').textContent = solutionText;
-}
-
-// Auto-update dan resize handler
-['a1', 'b1', 'c1', 'a2', 'b2', 'c2'].forEach(id => {
-    document.getElementById(id).addEventListener('input', drawKartesiusGraph);
-});
-
-// Handle window resize
-window.addEventListener('resize', () => {
-    setTimeout(drawKartesiusGraph, 100);
-});
-
-// Gambar pertama kali
-setTimeout(drawKartesiusGraph, 100);
-</script>
-
-<div class="simulation-container" style="max-width:100%; padding:15px;">
-    <h3 style="text-align:center; margin-bottom:20px;">Kalkulator SPLDV</h3>
-    
-    <div style="text-align:center; margin-bottom:20px;">
-        <select id="method" style="padding:8px 15px; border:2px solid #ddd; border-radius:8px; font-size:16px; background:white;">
-            <option value="substitution">Substitusi</option>
-            <option value="elimination">Eliminasi</option>
-        </select>
-    </div>
-    
-    <div style="margin:15px 0; display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:clamp(14px, 3vw, 16px); justify-content:center;">
-        <input type="number" id="calc-a1" value="2" placeholder="a₁" style="width:clamp(50px, 15vw, 70px); padding:8px; text-align:center; border:2px solid #ddd; border-radius:6px;">
-        <span>x +</span>
-        <input type="number" id="calc-b1" value="3" placeholder="b₁" style="width:clamp(50px, 15vw, 70px); padding:8px; text-align:center; border:2px solid #ddd; border-radius:6px;">
-        <span>y =</span>
-        <input type="number" id="calc-c1" value="7" placeholder="c₁" style="width:clamp(50px, 15vw, 70px); padding:8px; text-align:center; border:2px solid #ddd; border-radius:6px;">
-    </div>
-    
-    <div style="margin:15px 0; display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:clamp(14px, 3vw, 16px); justify-content:center;">
-        <input type="number" id="calc-a2" value="1" placeholder="a₂" style="width:clamp(50px, 15vw, 70px); padding:8px; text-align:center; border:2px solid #ddd; border-radius:6px;">
-        <span>x +</span>
-        <input type="number" id="calc-b2" value="-1" placeholder="b₂" style="width:clamp(50px, 15vw, 70px); padding:8px; text-align:center; border:2px solid #ddd; border-radius:6px;">
-        <span>y =</span>
-        <input type="number" id="calc-c2" value="1" placeholder="c₂" style="width:clamp(50px, 15vw, 70px); padding:8px; text-align:center; border:2px solid #ddd; border-radius:6px;">
-    </div>
-    
-    <div style="text-align:center; margin:20px 0;">
-        <button id="solve-btn" style="padding:12px 25px; background:#2196F3; color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer; touch-action:manipulation;">
-            🧮 Hitung Solusi
-        </button>
-    </div>
-    
-    <div id="calculation-steps" style="margin-top:20px; padding:20px; background:#f8f9fa; border-radius:10px; border-left:4px solid #2196F3; display:none; line-height:1.6;"></div>
-</div>
-
-<script>
-// Fungsi untuk menyederhanakan pecahan
-function simplifyFraction(numerator, denominator) {
-    function gcd(a, b) {
-        return b === 0 ? a : gcd(b, a % b);
-    }
-    
-    const divisor = gcd(Math.abs(numerator), Math.abs(denominator));
-    const num = numerator / divisor;
-    const den = denominator / divisor;
-    
-    if (den === 1) return num.toString();
-    if (den === -1) return (-num).toString();
-    if (den < 0) return `${-num}/${-den}`;
-    return `${num}/${den}`;
-}
-
-// Fungsi untuk format angka (pecahan atau desimal)
-function formatNumber(num) {
-    if (Number.isInteger(num)) return num.toString();
-    
-    // Coba ubah ke pecahan
-    const tolerance = 1e-6;
-    for (let denominator = 1; denominator <= 100; denominator++) {
-        const numerator = Math.round(num * denominator);
-        if (Math.abs(num - numerator / denominator) < tolerance) {
-            return simplifyFraction(numerator, denominator);
-        }
-    }
-    
-    // Kalau gak bisa jadi pecahan sederhana, pakai desimal
-    return num.toFixed(3).replace(/\.?0+$/, '');
-}
-
-document.getElementById('solve-btn').addEventListener('click', function() {
-    const method = document.getElementById('method').value;
-    const a1 = parseFloat(document.getElementById('calc-a1').value) || 0;
-    const b1 = parseFloat(document.getElementById('calc-b1').value) || 0;
-    const c1 = parseFloat(document.getElementById('calc-c1').value) || 0;
-    const a2 = parseFloat(document.getElementById('calc-a2').value) || 0;
-    const b2 = parseFloat(document.getElementById('calc-b2').value) || 0;
-    const c2 = parseFloat(document.getElementById('calc-c2').value) || 0;
-    
-    const stepsDiv = document.getElementById('calculation-steps');
-    stepsDiv.innerHTML = '';
-    
-    // Hitung determinan
-    const det = a1 * b2 - a2 * b1;
-    
-    if (Math.abs(det) < 1e-10) {
-        // Cek apakah sistem konsisten
-        const ratio1 = a1 !== 0 ? c1/a1 : (b1 !== 0 ? c1/b1 : 0);
-        const ratio2 = a2 !== 0 ? c2/a2 : (b2 !== 0 ? c2/b2 : 0);
-        
-        if (Math.abs(ratio1 - ratio2) < 1e-6) {
-            stepsDiv.innerHTML = "<p style='color:#f39c12; font-weight:bold;'>🟡 Sistem memiliki tak hingga solusi (garis berimpit)</p>";
-        } else {
-            stepsDiv.innerHTML = "<p style='color:#e74c3c; font-weight:bold;'>🔴 Sistem tidak memiliki solusi (garis sejajar)</p>";
-        }
-    } else {
-        const x = (b2 * c1 - b1 * c2) / det;
-        const y = (a1 * c2 - a2 * c1) / det;
-        
-        let steps = `<h4 style="color:#2c3e50; margin-bottom:15px;">Penyelesaian dengan Metode ${method === 'substitution' ? 'Substitusi' : 'Eliminasi'}</h4>`;
-        
-        if (method === 'substitution') {
-            // Pilih persamaan yang lebih mudah untuk disubstitusi
-            if (Math.abs(a2) === 1) {
-                steps += `
-                    <p><strong>Langkah 1:</strong> Dari persamaan 2, nyatakan x dalam y</p>
-                    <p style="margin-left:20px;">${a2}x + ${b2}y = ${c2}</p>
-                    <p style="margin-left:20px;">x = ${formatNumber((c2 - b2) / a2)} + ${formatNumber(-b2 / a2)}y</p>
-                    
-                    <p><strong>Langkah 2:</strong> Substitusi ke persamaan 1</p>
-                    <p style="margin-left:20px;">${a1}(${formatNumber((c2 - b2) / a2)} + ${formatNumber(-b2 / a2)}y) + ${b1}y = ${c1}</p>
-                    
-                    <p><strong>Langkah 3:</strong> Selesaikan untuk y</p>
-                    <p style="margin-left:20px;">y = ${formatNumber(y)}</p>
-                    
-                    <p><strong>Langkah 4:</strong> Substitusi y untuk mendapat x</p>
-                    <p style="margin-left:20px;">x = ${formatNumber(x)}</p>
-                `;
-            } else if (Math.abs(b1) === 1) {
-                steps += `
-                    <p><strong>Langkah 1:</strong> Dari persamaan 1, nyatakan y dalam x</p>
-                    <p style="margin-left:20px;">${a1}x + ${b1}y = ${c1}</p>
-                    <p style="margin-left:20px;">y = ${formatNumber((c1 - a1) / b1)} + ${formatNumber(-a1 / b1)}x</p>
-                    
-                    <p><strong>Langkah 2:</strong> Substitusi ke persamaan 2</p>
-                    <p style="margin-left:20px;">${a2}x + ${b2}(${formatNumber((c1 - a1) / b1)} + ${formatNumber(-a1 / b1)}x) = ${c2}</p>
-                    
-                    <p><strong>Langkah 3:</strong> Selesaikan untuk x</p>
-                    <p style="margin-left:20px;">x = ${formatNumber(x)}</p>
-                    
-                    <p><strong>Langkah 4:</strong> Substitusi x untuk mendapat y</p>
-                    <p style="margin-left:20px;">y = ${formatNumber(y)}</p>
-                `;
-            } else {
-                steps += `
-                    <p><strong>Langkah 1:</strong> Dari persamaan 2, nyatakan x dalam y</p>
-                    <p style="margin-left:20px;">x = (${c2} - ${b2}y)/${a2}</p>
-                    
-                    <p><strong>Langkah 2:</strong> Substitusi ke persamaan 1</p>
-                    <p style="margin-left:20px;">${a1}((${c2} - ${b2}y)/${a2}) + ${b1}y = ${c1}</p>
-                    
-                    <p><strong>Langkah 3:</strong> Selesaikan untuk y</p>
-                    <p style="margin-left:20px;">y = ${formatNumber(y)}</p>
-                    
-                    <p><strong>Langkah 4:</strong> Substitusi y untuk mendapat x</p>
-                    <p style="margin-left:20px;">x = ${formatNumber(x)}</p>
-                `;
-            }
-        } else {
-            // Metode Eliminasi Pure (tanpa substitusi)
-            steps += `
-                <p><strong>Langkah 1:</strong> Eliminasi variabel x</p>
-                <p style="margin-left:20px;">Kalikan persamaan 1 dengan ${a2}: ${a2 * a1}x + ${a2 * b1}y = ${a2 * c1}</p>
-                <p style="margin-left:20px;">Kalikan persamaan 2 dengan ${a1}: ${a1 * a2}x + ${a1 * b2}y = ${a1 * c2}</p>
-                <p style="margin-left:20px;">Kurangkan: (${a2 * b1} - ${a1 * b2})y = ${a2 * c1} - ${a1 * c2}</p>
-                <p style="margin-left:20px;">${a2 * b1 - a1 * b2}y = ${a2 * c1 - a1 * c2}</p>
-                <p style="margin-left:20px; color:#2196F3;"><strong>y = ${formatNumber(y)}</strong></p>
-                
-                <p><strong>Langkah 2:</strong> Eliminasi variabel y</p>
-                <p style="margin-left:20px;">Kalikan persamaan 1 dengan ${b2}: ${b2 * a1}x + ${b2 * b1}y = ${b2 * c1}</p>
-                <p style="margin-left:20px;">Kalikan persamaan 2 dengan ${b1}: ${b1 * a2}x + ${b1 * b2}y = ${b1 * c2}</p>
-                <p style="margin-left:20px;">Kurangkan: (${b2 * a1} - ${b1 * a2})x = ${b2 * c1} - ${b1 * c2}</p>
-                <p style="margin-left:20px;">${b2 * a1 - b1 * a2}x = ${b2 * c1 - b1 * c2}</p>
-                <p style="margin-left:20px; color:#2196F3;"><strong>x = ${formatNumber(x)}</strong></p>
-            `;
-        }
-        
-        steps += `
-            <div style="background:#2196F3; color:white; padding:15px; border-radius:8px; margin-top:20px; text-align:center;">
-                <h4 style="margin:0;">✅ Solusi Akhir</h4>
-                <p style="margin:10px 0; font-size:18px;"><strong>x = ${formatNumber(x)}, y = ${formatNumber(y)}</strong></p>
-            </div>
-        `;
-        
-        stepsDiv.innerHTML = steps;
-    }
-    
-    stepsDiv.style.display = 'block';
-});
-
-// Auto-calculate saat input berubah
-['calc-a1', 'calc-b1', 'calc-c1', 'calc-a2', 'calc-b2', 'calc-c2', 'method'].forEach(id => {
-    document.getElementById(id).addEventListener('input', function() {
-        document.getElementById('solve-btn').click();
-    });
-});
-</script>
-
-    
 <style>
-.simulation-container {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
-    background: #f9f9f9;
-}
-.equation-input {
-    margin: 15px 0;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.equation-input input {
-    width: 60px;
-    padding: 8px;
-    margin: 0 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-align: center;
-}
-.result {
-    margin-top: 20px;
-    padding: 15px;
-    background: #e8f4fc;
-    border-radius: 5px;
+/* Tambahan CSS untuk pembahasan tersembunyi */
+.solution-steps {
     display: none;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 1px solid #dee2e6;
 }
-.btn {
-    padding: 8px 16px;
-    background: #3498db;
-    color: white;
+
+.solution-steps.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.show-solution-btn {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    color: #8b4513;
+    margin-top: 10px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.show-solution-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(252, 182, 159, 0.4);
+}
+
+.solution-steps p {
+    margin: 8px 0;
+}
+
+.solution-steps strong {
+    color: #2c3e50;
 }
 </style>
-        
-        
-        <section id="latihan">
-            <h2><i class="fas fa-pencil-alt"></i> Latihan Soal</h2>
-            
-            <div class="quiz-question">
-    <p>1. Selesaikan: x + y = 5 dan 2x - y = 4</p>
-    <textarea class="essay-answer" placeholder="Tulis jawabanmu..."></textarea>
-    <button class="btn btn-outline check-answer">Periksa Jawaban</button>
-    <div class="feedback">
-        <p><strong>Pembahasan:</strong></p>
-        <p>Tambahkan kedua persamaan: 3x = 9 → x = 3</p>
-        <p>Substitusi x ke pers.1: 3 + y = 5 → y = 2</p>
-        <p><strong>Solusi: x=3, y=2</strong></p>
-    </div>
-</div>
 
-<div class="quiz-question">
-    <p>2. Harga 3 buku dan 2 pensil Rp19.500. Harga 2 buku dan 3 pensil Rp16.000. Berapa harga 1 buku dan 1 pensil?</p>
-    <textarea class="essay-answer" placeholder="Tulis jawabanmu..."></textarea>
-    <button class="btn btn-outline check-answer">Periksa Jawaban</button>
-    <div class="feedback">
-        <p><strong>Pembahasan:</strong></p>
-        <p>Misal: buku = x, pensil = y</p>
-        <p>3x + 2y = 19.500</p>
-        <p>2x + 3y = 16.000</p>
-        <p>Solusi: x=5.300, y=1.800</p>
-        <p>Harga 1 buku + 1 pensil = Rp7.100</p>
+<section id="latihan">
+    <h2><i class="fas fa-pencil-alt"></i> Latihan Soal SPLDV</h2>
+    
+    <div class="score-display">
+        Skor: <span id="score">0</span> / <span id="total">5</span>
     </div>
-</div>
+    
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    
+    <div class="quiz-question">
+        <p>1. Perhatikan persamaan-persamaan berikut!</p>
+        <div class="equation-box">
+            <p>i) 3p + 5q = 10</p>
+            <p>ii) 2x² - 3y = 6</p>
+            <p>iii) 3y = 5x - 2</p>
+            <p>iv) 3x + 5 = 2x - 3y</p>
+        </div>
+        <p>Yang bukan merupakan persamaan linear dua variabel adalah...</p>
+        <div class="multiple-choice">
+            <label>
+                <input type="radio" name="q1" value="a"> a. i)
+            </label>
+            <label>
+                <input type="radio" name="q1" value="b"> b. ii)
+            </label>
+            <label>
+                <input type="radio" name="q1" value="c"> c. iii)
+            </label>
+            <label>
+                <input type="radio" name="q1" value="d"> d. iv)
+            </label>
+        </div>
+        <button class="btn check-answer" onclick="checkAnswer(0)">Periksa Jawaban</button>
+        <div class="feedback">
+            <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
+            <p class="feedback-message"></p>
+            <button class="btn show-solution-btn" onclick="showSolution(0)" style="display: none;">
+                <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+            </button>
+            <div class="solution-steps">
+                <p><strong>Pembahasan:</strong></p>
+                <p>i) 3p + 5q = 10 → merupakan persamaan linear dua variabel, karena terdapat variabel p dan q</p>
+                <p>ii) 2x² - 3y = 6 → <strong>bukan</strong> merupakan persamaan linear dua variabel, karena x² merupakan bagian kuadrat dari persamaan</p>
+                <p>iii) 3y = 5x - 2 → merupakan persamaan linear dua variabel, karena terdapat variabel x dan y</p>
+                <p>iv) 3x + 5 = 2x - 3y → merupakan persamaan linear dua variabel, karena terdapat variabel x dan y</p>
+                <p><strong>Jawaban: b. ii)</strong></p>
+            </div>
+        </div>
+    </div>
 
-<div class="quiz-question">
-    <p>3. Selesaikan sistem persamaan berikut: 4x - 2y = 10 dan 3x + 5y = 7</p>
-    <textarea class="essay-answer" placeholder="Tulis jawabanmu..."></textarea>
-    <button class="btn btn-outline check-answer">Periksa Jawaban</button>
-    <div class="feedback">
-        <p><strong>Pembahasan:</strong></p>
-        <p>Kalikan pers. 1 dengan 5, pers. 2 dengan 2:</p>
-        <p>20x - 10y = 50 dan 6x + 10y = 14</p>
-        <p>Jumlahkan: 26x = 64 → x = 32/13</p>
-        <p>Substitusi: y = -1/13</p>
-        <p><strong>Solusi: x = 32/13, y = -1/13</strong></p>
+    <div class="quiz-question">
+        <p>2. Harga 3 buku dan 2 pensil Rp19.500. Harga 2 buku dan 3 pensil Rp16.000. Berapa harga 1 buku dan 1 pensil?</p>
+        <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: Rp7.100)"></textarea>
+        <button class="btn check-answer" onclick="checkAnswer(1)">Periksa Jawaban</button>
+        <div class="feedback">
+            <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
+            <p class="feedback-message"></p>
+            <button class="btn show-solution-btn" onclick="showSolution(1)" style="display: none;">
+                <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+            </button>
+            <div class="solution-steps">
+                <p><strong>Pembahasan:</strong></p>
+                <p>Misal: buku = x, pensil = y</p>
+                <p>Persamaan 1: 3x + 2y = 19.500</p>
+                <p>Persamaan 2: 2x + 3y = 16.000</p>
+                <p>Kalikan pers.1 dengan 3: 9x + 6y = 58.500</p>
+                <p>Kalikan pers.2 dengan 2: 4x + 6y = 32.000</p>
+                <p>Kurangkan: 5x = 26.500 → x = 5.300</p>
+                <p>Substitusi: 3(5.300) + 2y = 19.500 → y = 1.800</p>
+                <p><strong>Harga 1 buku + 1 pensil = Rp7.100</strong></p>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="quiz-question">
-    <p>4. Jumlah dua bilangan adalah 20 dan selisihnya adalah 4. Tentukan kedua bilangan tersebut.</p>
-    <textarea class="essay-answer" placeholder="Tulis jawabanmu..."></textarea>
-    <button class="btn btn-outline check-answer">Periksa Jawaban</button>
-    <div class="feedback">
-        <p><strong>Pembahasan:</strong></p>
-        <p>Misal bilangan pertama = a, bilangan kedua = b</p>
-        <p>a + b = 20 dan a - b = 4</p>
-        <p>Jumlahkan: 2a = 24 → a = 12</p>
-        <p>Substitusi: b = 8</p>
-        <p><strong>Solusi: 12 dan 8</strong></p>
+    <div class="quiz-question">
+        <p>3. Selesaikan sistem persamaan berikut: 4x - 2y = 10 dan 3x + 5y = 7</p>
+        <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: x = 32/13, y = -1/13)"></textarea>
+        <button class="btn check-answer" onclick="checkAnswer(2)">Periksa Jawaban</button>
+        <div class="feedback">
+            <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
+            <p class="feedback-message"></p>
+            <button class="btn show-solution-btn" onclick="showSolution(2)" style="display: none;">
+                <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+            </button>
+            <div class="solution-steps">
+                <p><strong>Pembahasan:</strong></p>
+                <p>Persamaan 1: 4x - 2y = 10</p>
+                <p>Persamaan 2: 3x + 5y = 7</p>
+                <p>Kalikan pers.1 dengan 5: 20x - 10y = 50</p>
+                <p>Kalikan pers.2 dengan 2: 6x + 10y = 14</p>
+                <p>Jumlahkan: 26x = 64 → x = 32/13</p>
+                <p>Substitusi: 4(32/13) - 2y = 10 → y = -1/13</p>
+                <p><strong>Solusi: x = 32/13, y = -1/13</strong></p>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="quiz-question">
-    <p>5. Keliling sebuah persegi panjang adalah 40 cm. Jika panjangnya 6 cm lebih dari lebarnya, tentukan ukuran panjang dan lebar persegi panjang tersebut.</p>
-    <textarea class="essay-answer" placeholder="Tulis jawabanmu..."></textarea>
-    <button class="btn btn-outline check-answer">Periksa Jawaban</button>
-    <div class="feedback">
-        <p><strong>Pembahasan:</strong></p>
-        <p>Misal panjang = p, lebar = l</p>
-        <p>2p + 2l = 40 dan p = l + 6</p>
-        <p>Substitusi: 2(l + 6) + 2l = 40</p>
-        <p>4l + 12 = 40 → l = 7</p>
-        <p>Substitusi: p = 13</p>
-        <p><strong>Solusi: Panjang = 13 cm, Lebar = 7 cm</strong></p>
+    <div class="quiz-question">
+        <p>4. Jumlah dua bilangan adalah 20 dan selisihnya adalah 4. Tentukan kedua bilangan tersebut.</p>
+        <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: 12 dan 8)"></textarea>
+        <button class="btn check-answer" onclick="checkAnswer(3)">Periksa Jawaban</button>
+        <div class="feedback">
+            <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
+            <p class="feedback-message"></p>
+            <button class="btn show-solution-btn" onclick="showSolution(3)" style="display: none;">
+                <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+            </button>
+            <div class="solution-steps">
+                <p><strong>Pembahasan:</strong></p>
+                <p>Misal bilangan pertama = a, bilangan kedua = b</p>
+                <p>Persamaan 1: a + b = 20</p>
+                <p>Persamaan 2: a - b = 4</p>
+                <p>Jumlahkan kedua persamaan: 2a = 24 → a = 12</p>
+                <p>Substitusi: 12 + b = 20 → b = 8</p>
+                <p><strong>Solusi: 12 dan 8</strong></p>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="quiz-question">
-    <p>6. Selesaikan: x/2 + y/3 = 4 dan x/4 - y = 1</p>
-    <textarea class="essay-answer" placeholder="Tulis jawabanmu..."></textarea>
-    <button class="btn btn-outline check-answer">Periksa Jawaban</button>
-    <div class="feedback">
-        <p><strong>Pembahasan:</strong></p>
-        <p>Kalikan pers. 1 dengan 6, pers. 2 dengan 4:</p>
-        <p>3x + 2y = 24 dan x - 4y = 4</p>
-        <p>Kalikan pers. 2 dengan 3: 3x - 12y = 12</p>
-        <p>Kurangkan: 14y = 12 → y = 6/7</p>
-        <p>Substitusi: x = 52/7</p>
-        <p><strong>Solusi: x = 52/7, y = 6/7</strong></p>
+    <div class="quiz-question">
+        <p>5. Keliling sebuah persegi panjang adalah 40 cm. Jika panjangnya 6 cm lebih dari lebarnya, tentukan ukuran panjang dan lebar persegi panjang tersebut.</p>
+        <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: Panjang = 13 cm, Lebar = 7 cm)"></textarea>
+        <button class="btn check-answer" onclick="checkAnswer(4)">Periksa Jawaban</button>
+        <div class="feedback">
+            <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
+            <p class="feedback-message"></p>
+            <button class="btn show-solution-btn" onclick="showSolution(4)" style="display: none;">
+                <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+            </button>
+            <div class="solution-steps">
+                <p><strong>Pembahasan:</strong></p>
+                <p>Misal panjang = p, lebar = l</p>
+                <p>Persamaan 1: 2p + 2l = 40 → p + l = 20</p>
+                <p>Persamaan 2: p = l + 6</p>
+                <p>Substitusi pers.2 ke pers.1: (l + 6) + l = 20</p>
+                <p>2l + 6 = 20 → 2l = 14 → l = 7</p>
+                <p>Substitusi: p = 7 + 6 = 13</p>
+                <p><strong>Solusi: Panjang = 13 cm, Lebar = 7 cm</strong></p>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="quiz-question">
-    <p>7. Harga 5 buku dan 2 pensil adalah Rp 21.000. Harga 3 buku dan 4 pensil adalah Rp 16.000. Tentukan harga sebuah buku dan sebuah pensil.</p>
-    <textarea class="essay-answer" placeholder="Tulis jawabanmu..."></textarea>
-    <button class="btn btn-outline check-answer">Periksa Jawaban</button>
-    <div class="feedback">
-        <p><strong>Pembahasan:</strong></p>
-        <p>Misal buku = b, pensil = p</p>
-        <p>5b + 2p = 21.000 dan 3b + 4p = 16.000</p>
-        <p>Kalikan pers. 1 dengan 2: 10b + 4p = 42.000</p>
-        <p>Kurangkan: 7b = 26.000 → b = 26.000/7</p>
-        <p>Substitusi: p = 4.000</p>
-        <p><strong>Solusi: Buku = Rp 2.600, Pensil = Rp 4.000</strong></p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>8. Dua bilangan memiliki selisih 5. Jika bilangan yang lebih kecil dikalikan 3 dan bilangan yang lebih besar dikalikan 2, hasilnya sama. Tentukan kedua bilangan tersebut.</p>
-    <textarea class="essay-answer" placeholder="Tulis jawabanmu..."></textarea>
-    <button class="btn btn-outline check-answer">Periksa Jawaban</button>
-    <div class="feedback">
-        <p><strong>Pembahasan:</strong></p>
-        <p>Misal bilangan besar = a, bilangan kecil = b</p>
-        <p>a - b = 5 dan 2a = 3b</p>
-        <p>Substitusi: 2(b + 5) = 3b</p>
-        <p>2b + 10 = 3b → b = 10</p>
-        <p>Substitusi: a = 15</p>
-        <p><strong>Solusi: 15 dan 10</strong></p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>9. Sebuah tempat parkir menampung motor dan mobil. Jumlah kendaraan adalah 60, dan jumlah roda seluruhnya adalah 160. Tentukan banyak motor dan mobil.</p>
-    <textarea class="essay-answer" placeholder="Tulis jawabanmu..."></textarea>
-    <button class="btn btn-outline check-answer">Periksa Jawaban</button>
-    <div class="feedback">
-        <p><strong>Pembahasan:</strong></p>
-        <p>Misal motor = x, mobil = y</p>
-        <p>x + y = 60 dan 2x + 4y = 160</p>
-        <p>Kalikan pers. 1 dengan 2: 2x + 2y = 120</p>
-        <p>Kurangkan: 2y = 40 → y = 20</p>
-        <p>Substitusi: x = 40</p>
-        <p><strong>Solusi: Motor = 40, Mobil = 20</strong></p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>10. Umur seorang ayah 28 tahun lebih tua dari umur anaknya. Jika umur ayah 4 kali umur anaknya, tentukan umur masing-masing.</p>
-    <textarea class="essay-answer" placeholder="Tulis jawabanmu..."></textarea>
-    <button class="btn btn-outline check-answer">Periksa Jawaban</button>
-    <div class="feedback">
-        <p><strong>Pembahasan:</strong></p>
-        <p>Misal umur ayah = a, umur anak = k</p>
-        <p>a = k + 28 dan a = 4k</p>
-        <p>Substitusi: k + 28 = 4k</p>
-        <p>3k = 28 → k = 28/3</p>
-        <p>Substitusi: a = 112/3</p>
-        <p><strong>Solusi: Ayah = 37 1/3 tahun, Anak = 9 1/3 tahun</strong></p>
-    </div>
+    <div class="completed">
+        <h3><i class="fas fa-trophy"></i> Selamat!</h3>
+        <p>Anda telah menyelesaikan semua soal latihan SPLDV!</p>
+        <p>Skor akhir Anda: <span id="finalScore">0</span>/5</p>
     </div>
 </section>
-        </section>
+
+<script>
+    let score = 0;
+    let questionsAnswered = 0;
+    const correctAnswers = ['b', '7100', '32/13,-1/13', '12,8', '13,7'];
+    
+    function checkAnswer(questionIndex) {
+        const question = document.querySelectorAll('.quiz-question')[questionIndex];
+        const feedback = question.querySelector('.feedback');
+        const button = question.querySelector('.check-answer');
+        const showSolutionBtn = question.querySelector('.show-solution-btn');
         
-        <section id="quiz">
-            <h2><i class="fas fa-question-circle"></i> Kuis Interaktif</h2>
+        let userAnswer = '';
+        let isCorrect = false;
+        
+        if (questionIndex === 0) {
+            // Multiple choice question
+            const selected = question.querySelector('input[name="q1"]:checked');
+            if (!selected) {
+                alert('Silakan pilih jawaban terlebih dahulu!');
+                return;
+            }
+            userAnswer = selected.value;
+            isCorrect = userAnswer === correctAnswers[questionIndex];
+        } else {
+            // Essay questions
+            const textarea = question.querySelector('.essay-answer');
+            userAnswer = textarea.value.trim().toLowerCase();
             
-        <div class="quiz-question">
-    <p>1. Manakah yang merupakan SPLDV?</p>
-    <div class="options">
-        <div class="option" data-correct>A. 2x + y = 5 dan x - y = 1</div>
-        <div class="option">B. x² + y = 3 dan x - y = 2</div>
-        <div class="option">C. 3x = 6 dan 2y = 4</div>
-    </div>
-    <button class="btn btn-outline show-explanation">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p>Jawaban benar: <strong>A</strong></p>
-        <p>SPLDV harus memiliki dua persamaan linear dengan dua variabel yang sama.</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>2. Himpunan penyelesaian dari x + y = 7 dan x - y = 3 adalah...</p>
-    <div class="options">
-        <div class="option">A. (2, 5)</div>
-        <div class="option" data-correct>B. (5, 2)</div>
-        <div class="option">C. (3, 4)</div>
-    </div>
-    <button class="btn btn-outline show-explanation">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p>Jawaban benar: <strong>B</strong></p>
-        <p>Tambahkan kedua persamaan: 2x = 10 → x = 5. Substitusi: 5 + y = 7 → y = 2</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>3. Harga 2 kg apel dan 1 kg jeruk adalah Rp 34.000. Jika harga 1 kg apel adalah Rp 12.000, maka harga 1 kg jeruk adalah...</p>
-    <div class="options">
-        <div class="option">A. Rp 8.000</div>
-        <div class="option" data-correct>B. Rp 10.000</div>
-        <div class="option">C. Rp 12.000</div>
-    </div>
-    <button class="btn btn-outline show-explanation">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p>Jawaban benar: <strong>B</strong></p>
-        <p>Misal apel = a, jeruk = j. 2a + j = 34.000. Jika a = 12.000, maka 2(12.000) + j = 34.000 → j = 10.000</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>4. Persamaan berikut yang memiliki solusi unik adalah...</p>
-    <div class="options">
-        <div class="option" data-correct>A. x + y = 4 dan x - y = 2</div>
-        <div class="option">B. 2x + 2y = 8 dan x + y = 4</div>
-        <div class="option">C. x + y = 5 dan 2x + 2y = 10</div>
-    </div>
-    <button class="btn btn-outline show-explanation">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p>Jawaban benar: <strong>A</strong></p>
-        <p>Persamaan A memiliki gradien yang berbeda sehingga berpotongan di satu titik.</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>5. Jika 3x + y = 11 dan x - y = 1, maka nilai x adalah...</p>
-    <div class="options">
-        <div class="option">A. 2</div>
-        <div class="option" data-correct>B. 3</div>
-        <div class="option">C. 4</div>
-    </div>
-    <button class="btn btn-outline show-explanation">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p>Jawaban benar: <strong>B</strong></p>
-        <p>Tambahkan kedua persamaan: 4x = 12 → x = 3</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>6. Manakah yang bukan merupakan contoh SPLDV dalam kehidupan sehari-hari?</p>
-    <div class="options">
-        <div class="option">A. Menentukan harga barang di toko</div>
-        <div class="option">B. Menghitung umur ayah dan anak</div>
-        <div class="option" data-correct>C. Menentukan luas lingkaran</div>
-    </div>
-    <button class="btn btn-outline show-explanation">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p>Jawaban benar: <strong>C</strong></p>
-        <p>Menentukan luas lingkaran hanya melibatkan satu variabel (jari-jari).</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>7. Jika x = 2 dan y = -1, maka persamaan yang benar adalah...</p>
-    <div class="options">
-        <div class="option">A. x + y = 3</div>
-        <div class="option" data-correct>B. 2x + y = 3</div>
-        <div class="option">C. x - 2y = 0</div>
-    </div>
-    <button class="btn btn-outline show-explanation">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p>Jawaban benar: <strong>B</strong></p>
-        <p>Substitusi x dan y ke setiap persamaan.</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>8. SPLDV memiliki solusi tak hingga jika...</p>
-    <div class="options">
-        <div class="option">A. Gradien kedua garis berbeda</div>
-        <div class="option" data-correct>B. Kedua garis berimpit</div>
-        <div class="option">C. Kedua garis sejajar</div>
-    </div>
-    <button class="btn btn-outline show-explanation">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p>Jawaban benar: <strong>B</strong></p>
-        <p>Garis berimpit memiliki gradien dan titik potong yang sama.</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>9. Metode yang digunakan untuk menyelesaikan SPLDV adalah...</p>
-    <div class="options">
-        <div class="option">A. Substitusi</div>
-        <div class="option">B. Eliminasi</div>
-        <div class="option" data-correct>C. Keduanya benar</div>
-    </div>
-    <button class="btn btn-outline show-explanation">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p>Jawaban benar: <strong>C</strong></p>
-        <p>Substitusi dan eliminasi adalah metode umum untuk menyelesaikan SPLDV.</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-    <p>10. Jika x - 2y = 4 dan 2x + y = 3, maka nilai y adalah...</p>
-    <div class="options">
-        <div class="option" data-correct>A. -1</div>
-        <div class="option">B. 1</div>
-        <div class="option">C. 2</div>
-    </div>
-    <button class="btn btn-outline show-explanation">Tampilkan Pembahasan</button>
-    <div class="explanation">
-        <p>Jawaban benar: <strong>A</strong></p>
-        <p>Kalikan pers.2 dengan 2: 4x + 2y = 6. Tambahkan ke pers.1: 5x = 10 → x = 2. Substitusi: 2 - 2y = 4 → y = -1</p>
-    </div>
-</div>
+            if (!userAnswer) {
+                alert('Silakan isi jawaban terlebih dahulu!');
+                return;
+            }
             
-            <button class="btn" id="check-quiz">Periksa Kuis</button>
-            <div id="quiz-result" class="result"></div>
-        </section>
-
-
-<section id="profil">
-    <h2><i class="fas fa-users"></i> Profil Tim</h2>
-    
-    <div class="profile-tabs">
-        <button class="btn active" onclick="openTab('dosen')">Dosen</button>
-        <button class="btn" onclick="openTab('mahasiswa')">Mahasiswa</button>
-    </div>
-    
-    <!-- DOSEN -->
-    <div id="dosen" class="tab-content" style="display: block;">
-        <div class="profile-grid">
-            <!-- Dosen 1 -->
-            <div class="profile-card">
-                <img src="foto pak edy.jpg" alt="Dosen 1">
-                <h3>Edy Wihardjo, S.Pd., M.Pd., M.C.E.</h3>
-                <p>NIP: 197001081999031001</p>
-                <p>Email : edy.fkip@unej.ac.id</p>
-                <p>Alamat : Jl. Nias Cluster A9 Jember</p>
-            </div>
-            
-            <!-- Dosen 2 -->
-            <div class="profile-card">
-                <img src="foto pak erfan.jpg" alt="Dosen 2">
-                <h3>Dr. Erfan Yudianto, S.Pd., M.Pd.</h3>
-                <p>NIP: 198503162015041001</p>
-                <p>Email : erfanyudi@unej.ac.id</p>
-                <p>Alamat : Perum Istana Tegal Besar X-1</p>
-            </div>
-            
-            <!-- Dosen 3 -->
-            <div class="profile-card">
-                <img src="foto bu lela.jpg" alt="Dosen 3">
-                <h3>Lela Nur Safrida, M.Pd.</h3>
-                <p>NIP: 199205122022032009</p>
-                <p>Email : lelanurs@unej.ac.id</p>
-                <p>Alamat : Jl. Manggar Gang Leci No. 51 Jember</p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- MAHASISWA -->
-    <div id="mahasiswa" class="tab-content" style="display: none;">
-        <div class="profile-grid">
-            <!-- Mahasiswa 1 -->
-            <div class="profile-card mhs">
-                <img src="foto indy.jpg" alt="Mahasiswa 1">
-                <h3>Indy Harum Adibah</h3>
-                <p>NIM: 240210101113</p>
-                <p><i class="fas fa-birthday-cake"></i> 21 September 2005</p>
-                <p class="bio">Hidupmu adalah cerita, jadilah penulisnya</p>
-            </div>
-            
-            <!-- Mahasiswa 2-->
-            <div class="profile-card mhs">
-                <img src="foto silvi.jpg" alt="Mahasiswa 2">
-                <h3>Silvi Eka Adelia</h3>
-                <p>NIM: 240210101120</p>
-                <p><i class="fas fa-birthday-cake"></i> 02 Desember 2006</p>
-                <p class="bio">Senang belajar hal baru</p>
-            </div>
-            
-            <!-- Mahasiswa 3-->
-            <div class="profile-card mhs">
-                <img src="foto najwa.jpg" alt="Mahasiswa 2">
-                <h3>Najwa Fidela Norine Pujiningtyas</h3>
-                <p>NIM: 240210101115</p>
-                <p><i class="fas fa-birthday-cake"></i> 21 Agustus 2006</p>
-                <p class="bio">I Can Do It</p>
-            </div>
-
-            <!-- Mahasiswa 4-->
-            <div class="profile-card mhs">
-                <img src="foto rahayu.jpg" alt="Mahasiswa 2">
-                <h3>Rahayu Intan Anggraini</h3>
-                <p>NIM: 240210101111</p>
-                <p><i class="fas fa-birthday-cake"></i> 09 April 2006</p>
-                <p class="bio">Opportunity comes, try it!</p>
-            </div>
-
-            <!-- Mahasiswa 5-->
-            <div class="profile-card mhs">
-                <img src="foto riska.jpg" alt="Mahasiswa 2">
-                <h3>Riska Adeliya Ramadhani</h3>
-                <p>NIM: 240210101116</p>
-                <p><i class="fas fa-birthday-cake"></i> 04 November 2004</p>
-                <p class="bio">keep spirit</p>
-            </div>
-
-            <!-- Mahasiswa 6-->
-            <div class="profile-card mhs">
-                <img src="foto novita.jpg" alt="Mahasiswa 2">
-                <h3>Novita Wahyuni</h3>
-                <p>NIM: 240210101123</p>
-                <p><i class="fas fa-birthday-cake"></i> 15 November 2005</p>
-                <p class="bio">Jangan menyerah pada impianmu, karena setiap langkah kecil menuju kesuksesan</p>
-            </div>
-
-            <!-- Mahasiswa 7-->
-            <div class="profile-card mhs">
-                <img src="foto anissa.jpg" alt="Mahasiswa 2">
-                <h3>Anissatus Sholekha</h3>
-                <p>NIM: 240210101082</p>
-                <p><i class="fas fa-birthday-cake"></i> 15 Juli 2005</p>
-                <p class="bio">Kegagalan adalah pelajaran, bukan akhir dari segalanya.</p>
-            </div>
-
-            <!-- Mahasiswa 8-->
-            <div class="profile-card mhs">
-                <img src="foto silvia.jpg" alt="Mahasiswa 2">
-                <h3>Silvia Putri Abdillah</h3>
-                <p>NIM: 240210101108</p>
-                <p><i class="fas fa-birthday-cake"></i> 12 Juni 2005</p>
-                <p class="bio">Percayalah pada kemampuanmu, karena kamu lebih kuat dari yang kamu bayangkan.</p>
-            </div>
-        </div>
-    </div>
-</section>
-    
-    </div>
-    
-    <footer>
-
-        <footer style="
-    background-color: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 2rem 0;
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-">
-    <!-- Logo Universitas Jember -->
-    <div style="
-        position: absolute;
-        left: 20px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-    ">
-        <img src="logo unej.png" 
-             alt="Logo Universitas Jember" 
-             style="
-                 height: 100px;
-                 max-width: 100px;
-                 object-fit: contain;
-             ">
-    </div>
-    <div>
-        <p>@2025 Media Pembelajaran Matematika Kelas 8 SMP</p>
-        <p>Sistem Persamaan Linear Dua Variabel (SPLDV)</p>
-        <p>Program Studi Pendidikan Matematika</p>
-        <p>Fakultas Keguruan dan Ilmu Pendidikan</p>
-        <p>Universitas Jember</p>
-
-        </div>
-    </footer>
-
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-const navList = document.querySelector('.nav-list');
-
-menuToggle.addEventListener('click', () => {
-    navList.classList.toggle('mobile-active');
-});
-        //Accordion Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const accordion = header.parentElement;
-                    const content = header.nextElementSibling;
-                    
-                    // Toggle current accordion
-                    accordion.classList.toggle('active');
-                    content.style.display = accordion.classList.contains('active') ? 'block' : 'none';
-                    
-                    // Rotate icon
-                    const icon = header.querySelector('i');
-                    icon.style.transform = accordion.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
-                });
-            });
-            
-            // Show/hide explanations
-            document.querySelectorAll('.show-solution').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const explanation = this.nextElementSibling;
-                    explanation.style.display = explanation.style.display === 'block' ? 'none' : 'block';
-                });
-            });
-            
-            // Check answers
-            document.querySelectorAll('.check-answer').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const feedback = this.nextElementSibling;
-                    feedback.style.display = feedback.style.display === 'block' ? 'none' : 'block';
-                });
-            });
-            
-            // Quiz functionality
-            let selectedOptions = [];
-            
-            document.querySelectorAll('.option').forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove selection from other options in same question
-                    const question = this.closest('.quiz-question');
-                    question.querySelectorAll('.option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
-                    
-                    // Select current option
-                    this.classList.add('selected');
-                });
-            });
-            
-            document.querySelectorAll('.show-explanation').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const explanation = this.nextElementSibling;
-                    explanation.style.display = explanation.style.display === 'block' ? 'none' : 'block';
-                });
-            });
-            
-            document.getElementById('check-quiz').addEventListener('click', function() {
-                let score = 0;
-                const questions = document.querySelectorAll('.quiz-question');
-                
-                questions.forEach(question => {
-                    const selected = question.querySelector('.option.selected');
-                    if (selected && selected.hasAttribute('data-correct')) {
-                        score++;
-                        selected.classList.add('correct');
-                    } else if (selected) {
-                        selected.classList.add('incorrect');
-                        // Highlight correct answer
-                        question.querySelector('.option[data-correct]').classList.add('correct');
-                    }
-                });
-                
-                const resultDiv = document.getElementById('quiz-result');
-                resultDiv.innerHTML = `<h4>Hasil Kuis: ${score} dari ${questions.length} benar</h4>`;
-                resultDiv.style.display = 'block';
-            });
-            
-            // Graph Simulation
-            let chart = null;
-
-            document.getElementById('draw-graph').addEventListener('click', function() {
-    // Ambil nilai input dengan default value
-    const a1 = parseFloat(document.getElementById('a1').value) || 0;
-    const b1 = parseFloat(document.getElementById('b1').value) || 1; // Default 1 agar tidak division by zero
-    const c1 = parseFloat(document.getElementById('c1').value) || 0;
-    const a2 = parseFloat(document.getElementById('a2').value) || 0;
-    const b2 = parseFloat(document.getElementById('b2').value) || 1;
-    const c2 = parseFloat(document.getElementById('c2').value) || 0;
-
-    const canvas = document.getElementById('graphCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Hancurkan chart sebelumnya jika ada
-    if (window.myChart) {
-        window.myChart.destroy();
-    }
-
-    // Buat data untuk grafik
-    const labels = Array.from({length: 21}, (_, i) => i - 10); // x dari -10 sampai 10
-    
-    window.myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: `${a1}x + ${b1}y = ${c1}`,
-                    data: labels.map(x => (c1 - a1*x)/b1),
-                    borderColor: '#3498db',
-                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.1
-                },
-                {
-                    label: `${a2}x + ${b2}y = ${c2}`,
-                    data: labels.map(x => (c2 - a2*x)/b2),
-                    borderColor: '#e74c3c',
-                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    type: 'linear',
-                    position: 'center',
-                    grid: {
-                        color: '#ddd',
-                        lineWidth: 1
-                    },
-                    ticks: {
-                        font: {
-                            weight: 'bold'
-                        }
-                    }
-                },
-                y: {
-                    type: 'linear',
-                    position: 'center',
-                    grid: {
-                        color: '#ddd',
-                        lineWidth: 1
-                    },
-                    ticks: {
-                        font: {
-                            weight: 'bold'
-                        }
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    labels: {
-                        font: {
-                            weight: 'bold'
-                        }
-                    }
-                }
+            // Check answer based on question type
+            switch(questionIndex) {
+                case 1: // Harga buku + pensil
+                    isCorrect = userAnswer.includes('7100') || userAnswer.includes('7.100');
+                    break;
+                case 2: // x = 32/13, y = -1/13
+                    isCorrect = (userAnswer.includes('32/13') && userAnswer.includes('-1/13')) ||
+                               (userAnswer.includes('32') && userAnswer.includes('13') && userAnswer.includes('-1'));
+                    break;
+                case 3: // 12 dan 8
+                    isCorrect = (userAnswer.includes('12') && userAnswer.includes('8'));
+                    break;
+                case 4: // Panjang = 13, Lebar = 7
+                    isCorrect = (userAnswer.includes('13') && userAnswer.includes('7'));
+                    break;
             }
         }
-    });
+        
+        // Show feedback
+        feedback.style.display = 'block';
+        feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+        
+        const title = feedback.querySelector('.feedback-title');
+        const message = feedback.querySelector('.feedback-message');
+        const icon = feedback.querySelector('i');
+        
+        if (isCorrect) {
+            title.textContent = 'Jawaban Benar!';
+            message.textContent = 'Selamat! Jawaban Anda tepat.';
+            icon.className = 'fas fa-check-circle';
+            if (button.textContent === 'Periksa Jawaban') {
+                score++;
+                updateScore();
+            }
+        } else {
+            title.textContent = 'Jawaban Salah';
+            message.textContent = 'Silakan pelajari pembahasan di bawah ini.';
+            icon.className = 'fas fa-times-circle';
+        }
+        
+        // Show solution button
+        showSolutionBtn.style.display = 'inline-block';
+        
+        button.textContent = 'Sudah Diperiksa';
+        button.disabled = true;
+        button.style.opacity = '0.6';
+        
+        if (button.textContent !== 'Sudah Diperiksa' || questionsAnswered < 5) {
+            questionsAnswered++;
+        }
+        
+        // Show completion message when all questions are answered
+        if (questionsAnswered === 5) {
+            setTimeout(() => {
+                document.querySelector('.completed').style.display = 'block';
+                document.getElementById('finalScore').textContent = score;
+            }, 1000);
+        }
 
-    // Hitung solusi
-    const det = a1*b2 - a2*b1;
-    const solutionType = document.getElementById('solution-type');
-    const solutionPoint = document.getElementById('solution-point');
-    
-    if (det === 0) {
-        solutionType.textContent = a1/a2 === b1/b2 && a1/a2 === c1/c2 ? 
-            "Sistem memiliki tak hingga solusi (garis berhimpit)" : 
-            "Sistem tidak memiliki solusi (garis sejajar)";
-        solutionPoint.textContent = "";
-    } else {
-        const x = (b2*c1 - b1*c2)/det;
-        const y = (a1*c2 - a2*c1)/det;
-        solutionType.textContent = "Sistem memiliki satu solusi";
-        solutionPoint.textContent = `Titik potong: (${x.toFixed(2)}, ${y.toFixed(2)})`;
+        // Scroll to feedback smoothly
+        feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showSolution(questionIndex) {
+        const question = document.querySelectorAll('.quiz-question')[questionIndex];
+        const solutionSteps = question.querySelector('.solution-steps');
+        const showButton = question.querySelector('.show-solution-btn');
+        
+        // Toggle solution visibility
+        if (solutionSteps.classList.contains('show')) {
+            solutionSteps.classList.remove('show');
+            showButton.innerHTML = '<i class="fas fa-lightbulb"></i> Lihat Pembahasan';
+        } else {
+            solutionSteps.classList.add('show');
+            showButton.innerHTML = '<i class="fas fa-eye-slash"></i> Sembunyikan Pembahasan';
+            
+            // Scroll to solution
+            setTimeout(() => {
+                solutionSteps.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
     }
     
-    document.getElementById('graph-result').style.display = 'block';
-});
-            
-            // Equation Solver
-            document.getElementById('solve-btn').addEventListener('click', function() {
-                const method = document.getElementById('method').value;
-                const a1 = parseFloat(document.getElementById('calc-a1').value);
-                const b1 = parseFloat(document.getElementById('calc-b1').value);
-                const c1 = parseFloat(document.getElementById('calc-c1').value);
-                
-                const a2 = parseFloat(document.getElementById('calc-a2').value);
-                const b2 = parseFloat(document.getElementById('calc-b2').value);
-                const c2 = parseFloat(document.getElementById('calc-c2').value);
-                
-                const stepsDiv = document.getElementById('calculation-steps');
-                stepsDiv.innerHTML = '';
-                
-                // Calculate determinant
-                const det = a1 * b2 - a2 * b1;
-                
-                if (det === 0) {
-                    if (a1/a2 === b1/b2 && a1/a2 === c1/c2) {
-                        stepsDiv.innerHTML = "<p>Sistem memiliki tak hingga solusi</p>";
-                    } else {
-                        stepsDiv.innerHTML = "<p>Sistem tidak memiliki solusi</p>";
-                    }
-                } else {
-                    const x = (b2 * c1 - b1 * c2) / det;
-                    const y = (a1 * c2 - a2 * c1) / det;
-                    
-                    stepsDiv.innerHTML += `<h4>Penyelesaian dengan Metode ${method === 'substitution' ? 'Substitusi' : 'Eliminasi'}</h4>`;
-                    stepsDiv.innerHTML += `<p>1. Determinan = (${a1} × ${b2}) - (${a2} × ${b1}) = ${det}</p>`;
-                    stepsDiv.innerHTML += `<p>2. Nilai x = (${b2} × ${c1} - ${b1} × ${c2}) / ${det} = ${x.toFixed(2)}</p>`;
-                    stepsDiv.innerHTML += `<p>3. Nilai y = (${a1} × ${c2} - ${a2} × ${c1}) / ${det} = ${y.toFixed(2)}</p>`;
-                    stepsDiv.innerHTML += `<p><strong>Solusi: x = ${x.toFixed(2)}, y = ${y.toFixed(2)}</strong></p>`;
-                }
-                
-                stepsDiv.style.display = 'block';
-            });
-            // Fungsi untuk tab profil
-function openTab(tabName) {
-    // Sembunyikan semua tab konten
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.style.display = 'none';
-    });
-    
-    // Hapus class active dari semua tombol
-    document.querySelectorAll('.profile-tabs button').forEach(button => {
-        button.classList.remove('active');
-    });
-    
-    // Tampilkan tab yang dipilih dan aktifkan tombolnya
-    document.getElementById(tabName).style.display = 'block';
-    event.currentTarget.classList.add('active');
-}
-        });
-    </script>
-    <script>
-
-// Fungsi untuk tab profil
-function openTab(tabName) {
-    // Sembunyikan semua tab content
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => {
-        tab.style.display = 'none';
-    });
-    
-    // Hapus class active dari semua tombol
-    const buttons = document.querySelectorAll('.profile-tabs button');
-    buttons.forEach(button => {
-        button.classList.remove('active');
-    });
-    
-    // Tampilkan tab yang dipilih dan aktifkan tombolnya
-    document.getElementById(tabName).style.display = 'block';
-    event.currentTarget.classList.add('active');
-}
-
-// Aktifkan tab dosen secara default saat halaman dimuat
-document.addEventListener('DOMContentLoaded', function() {
-    // Sembunyikan semua tab kecuali dosen
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        if (tab.id !== 'dosen') {
-            tab.style.display = 'none';
-        }
-    });
-    
-    // Aktifkan tombol dosen
-    document.querySelector('.profile-tabs button:first-child').classList.add('active');
-});
-        
+    function updateScore() {
+        document.getElementById('score').textContent = score;
+        const progressFill = document.getElementById('progressFill');
+        const percentage = (score / 5) * 100;
+        progressFill.style.width = percentage + '%';
+    }
 </script>
-    </script>
-</body>
-                        </html>
 
 		
         <section id="quiz">
