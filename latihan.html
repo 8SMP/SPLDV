@@ -37,7 +37,7 @@
         }
 
         .timer-display {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            background: linear-gradient(45deg, #3498db, #2980b9);
             color: white;
             padding: 15px;
             border-radius: 10px;
@@ -45,11 +45,18 @@
             font-size: 1.5rem;
             margin-bottom: 20px;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s;
         }
 
         .timer-display.warning {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
             animation: pulse 1s infinite;
+        }
+
+        .timer-display.danger {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            animation: pulse 0.5s infinite;
         }
 
         @keyframes pulse {
@@ -59,7 +66,7 @@
         }
 
         .score-display {
-            background: linear-gradient(45deg, #3498db, #2980b9);
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
             color: white;
             padding: 15px;
             border-radius: 10px;
@@ -333,19 +340,24 @@
             background: linear-gradient(45deg, #95a5a6, #7f8c8d);
             color: white;
             border: none;
-            padding: 15px 25px;
+            padding: 12px 25px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
             transition: all 0.3s;
-            margin-top: 30px;
-            width: 100%;
+            margin-top: 20px;
             text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
         }
 
         .back-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(149, 165, 166, 0.4);
+            background: linear-gradient(45deg, #7f8c8d, #95a5a6);
         }
         
         @keyframes fadeIn {
@@ -367,6 +379,16 @@
             h2 {
                 font-size: 1.5rem;
             }
+            
+            .timer-display {
+                font-size: 1.2rem;
+                padding: 12px;
+            }
+            
+            .back-button {
+                width: 100%;
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -386,7 +408,6 @@
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
-
 
             <!-- Soal 1 -->
             <div class="quiz-question" data-question="0">
@@ -550,29 +571,91 @@
                         <i class="fas fa-redo"></i> Coba Lagi
                     </button>
                 </div>
-                
-</div>
             </div>
         </section>
-    </div>
 
-<div style="text-align: center; margin-top: 30px;">
-    <a href="index.html" class="back-button">
-    <i class="fas fa-arrow-left"></i> Kembali ke Halaman Sebelumnya
-</a>
-</div>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Kembali ke Halaman Sebelumnya
+            </a>
+        </div>
+    </div>
     
     <script>
         let score = 0;
         let questionsAnswered = 0;
         const correctAnswers = ['b', '7100', '32/13,-1/13', '12,8', '13,7'];
         const userAnswers = [];
+        let timeLeft = 40 * 60; // 40 menit dalam detik
+        let timerInterval;
 
-        function checkAnswer(questionIndex) {
+        // Fungsi untuk memulai timer
+        function startTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timeUp();
+                }
+            }, 1000);
+        }
+
+        // Fungsi untuk update tampilan timer
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            const timerDisplay = document.getElementById('timeRemaining');
+            const timerContainer = document.getElementById('timerDisplay');
+            
+            timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            
+            // Update warna timer berdasarkan waktu tersisa
+            timerContainer.classList.remove('warning', 'danger');
+            if (timeLeft <= 10 * 60 && timeLeft > 5 * 60) { // 10-5 menit tersisa
+                timerContainer.classList.add('warning');
+            } else if (timeLeft <= 5 * 60) { // Kurang dari 5 menit
+                timerContainer.classList.add('danger');
+            }
+        }
+
+        // Fungsi ketika waktu habis
+        function timeUp() {
+            // Nonaktifkan semua soal
+            document.querySelectorAll('.quiz-question').forEach(question => {
+                question.classList.add('disabled');
+            });
+            
+            // Tampilkan pesan waktu habis
+            const completedSection = document.querySelector('.completed');
+            completedSection.classList.add('time-up');
+            completedSection.querySelector('i').className = 'fas fa-hourglass-end';
+            completedSection.querySelector('h3').textContent = 'Waktu Habis!';
+            completedSection.querySelector('p').textContent = 'Waktu pengerjaan telah habis. Berikut hasil pekerjaan Anda:';
+            
+            // Periksa semua jawaban yang belum diperiksa
+            document.querySelectorAll('.quiz-question').forEach((question, index) => {
+                if (!userAnswers[index]) {
+                    checkAnswer(index, true); // Force check
+                }
+            });
+            
+            showCompletion();
+        }
+
+        // Fungsi untuk memeriksa jawaban
+        function checkAnswer(questionIndex, forceCheck = false) {
             const question = document.querySelectorAll('.quiz-question')[questionIndex];
             const feedback = question.querySelector('.feedback');
             const button = question.querySelector('.check-answer');
             const showSolutionBtn = question.querySelector('.show-solution-btn');
+            
+            // Jika sudah diperiksa dan bukan force check, tidak perlu lakukan apa-apa
+            if (button.textContent === 'Sudah Diperiksa' && !forceCheck) {
+                return;
+            }
             
             let userAnswer = '';
             let isCorrect = false;
@@ -580,18 +663,18 @@
             if (questionIndex === 0) {
                 // Multiple choice question
                 const selected = question.querySelector('input[name="q1"]:checked');
-                if (!selected) {
+                if (!selected && !forceCheck) {
                     alert('Silakan pilih jawaban terlebih dahulu!');
                     return;
                 }
-                userAnswer = selected.value;
+                userAnswer = selected ? selected.value : '';
                 isCorrect = userAnswer === correctAnswers[questionIndex];
             } else {
                 // Essay questions
                 const textarea = question.querySelector('.essay-answer');
                 userAnswer = textarea.value.trim();
                 
-                if (!userAnswer) {
+                if (!userAnswer && !forceCheck) {
                     alert('Silakan isi jawaban terlebih dahulu!');
                     return;
                 }
@@ -658,6 +741,7 @@
             
             // Show completion when all answered
             if (questionsAnswered === 5) {
+                clearInterval(timerInterval); // Hentikan timer jika semua soal terjawab
                 setTimeout(() => {
                     showCompletion();
                 }, 1000);
@@ -724,6 +808,8 @@
         }
 
         function formatAnswer(answer, index) {
+            if (!answer) return '<i>Tidak dijawab</i>';
+            
             switch(index) {
                 case 0: return answer.toUpperCase() + ')';
                 case 1: return answer.includes('Rp') ? answer : 'Rp' + answer;
@@ -745,12 +831,10 @@
             return answers[index];
         }
 
-        function goBack() {
-    
-    // Method 2: Redirect ke halaman tertentu (jauh lebih direkomendasikan)
-    // window.location.href = "index.html"; // Ganti dengan halaman tujuan
-}
-        
+        // Mulai timer ketika halaman dimuat
+        window.onload = function() {
+            startTimer();
+        };
     </script>
 </body>
 </html>
