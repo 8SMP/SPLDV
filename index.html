@@ -1223,6 +1223,55 @@ document.getElementById('solve-btn').addEventListener('click', function() {
 }
 </style>
 
+
+<style>
+/* Tambahan CSS untuk pembahasan tersembunyi */
+.solution-steps {
+    display: none;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 1px solid #dee2e6;
+}
+
+.solution-steps.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.show-solution-btn {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    color: #8b4513;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.show-solution-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(252, 182, 159, 0.4);
+}
+
+.solution-steps p {
+    margin: 8px 0;
+}
+
+.solution-steps strong {
+    color: #2c3e50;
+}
+</style>
+
 <section id="latihan">
     <h2><i class="fas fa-pencil-alt"></i> Latihan Soal SPLDV</h2>
     
@@ -1497,7 +1546,6 @@ document.getElementById('solve-btn').addEventListener('click', function() {
         progressFill.style.width = percentage + '%';
     }
 </script>
-
 		
         <section id="quiz">
             <h2><i class="fas fa-question-circle"></i> Kuis Interaktif</h2>
