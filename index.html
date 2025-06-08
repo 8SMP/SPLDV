@@ -1512,6 +1512,24 @@ document.getElementById('solve-btn').addEventListener('click', function() {
         </div>
     </div>
 
+<div class="completed">
+        <h3><i class="fas fa-trophy"></i> Selamat!</h3>
+        <p>Anda telah menyelesaikan semua soal latihan SPLDV!</p>
+        <p>Skor akhir Anda: <span id="finalScore">0</span>/5</p>
+<!-- Tambahkan bagian review di sini -->
+        <div class="review-section" style="margin-top: 30px; display: none;">
+            <h4><i class="fas fa-clipboard-check"></i> Review Jawaban Anda</h4>
+            <div id="answer-review" class="answer-review">
+                <!-- Review jawaban akan muncul di sini -->
+            </div>
+            <button class="btn" onclick="location.reload()" style="margin-top: 20px;">
+                <i class="fas fa-redo"></i> Coba Lagi
+            </button>
+        </div>
+    </div>
+</section>
+	
+
     <div class="completed">
         <h3><i class="fas fa-trophy"></i> Selamat!</h3>
         <p>Anda telah menyelesaikan semua soal latihan SPLDV!</p>
@@ -1519,6 +1537,229 @@ document.getElementById('solve-btn').addEventListener('click', function() {
     </div>
 </section>
 
+<style>
+    /* Tambahkan CSS ini */
+    .answer-review {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 15px;
+    }
+    
+    .review-item {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .review-item:last-child {
+        border-bottom: none;
+    }
+    
+    .review-question {
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    
+    .user-answer {
+        color: #e74c3c;
+        margin: 5px 0;
+    }
+    
+    .correct-answer {
+        color: #27ae60;
+        margin: 5px 0;
+    }
+    .answer-status {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+    
+    .correct-status {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    
+    .incorrect-status {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+	</style>
+
+	    <script>
+    let score = 0;
+    let questionsAnswered = 0;
+    const correctAnswers = ['b', '7100', '32/13,-1/13', '12,8', '13,7'];
+    const userAnswers = []; // Untuk menyimpan jawaban siswa
+    
+    function checkAnswer(questionIndex) {
+        const question = document.querySelectorAll('.quiz-question')[questionIndex];
+        const feedback = question.querySelector('.feedback');
+        const button = question.querySelector('.check-answer');
+        const showSolutionBtn = question.querySelector('.show-solution-btn');
+        
+        let userAnswer = '';
+        let isCorrect = false;
+        
+        if (questionIndex === 0) {
+            // Multiple choice question
+            const selected = question.querySelector('input[name="q1"]:checked');
+            if (!selected) {
+                alert('Silakan pilih jawaban terlebih dahulu!');
+                return;
+            }
+            userAnswer = selected.value;
+            isCorrect = userAnswer === correctAnswers[questionIndex];
+        } else {
+            // Essay questions
+            const textarea = question.querySelector('.essay-answer');
+            userAnswer = textarea.value.trim().toLowerCase();
+            
+            if (!userAnswer) {
+                alert('Silakan isi jawaban terlebih dahulu!');
+                return;
+            }
+
+		    // Check answer based on question type
+            switch(questionIndex) {
+                case 1: // Harga buku + pensil
+                    isCorrect = userAnswer.includes('7100') || userAnswer.includes('7.100');
+                    break;
+                case 2: // x = 32/13, y = -1/13
+                    isCorrect = (userAnswer.includes('32/13') && userAnswer.includes('-1/13')) ||
+                               (userAnswer.includes('32') && userAnswer.includes('13') && userAnswer.includes('-1'));
+                    break;
+                case 3: // 12 dan 8
+                    isCorrect = (userAnswer.includes('12') && userAnswer.includes('8'));
+                    break;
+                case 4: // Panjang = 13, Lebar = 7
+                    isCorrect = (userAnswer.includes('13') && userAnswer.includes('7'));
+                    break;
+            }
+        }
+        
+        // Simpan jawaban siswa
+        userAnswers[questionIndex] = {
+            answer: userAnswer,
+            isCorrect: isCorrect,
+            questionText: question.querySelector('p:first-child').textContent
+        };
+        
+        // Show feedback
+        feedback.style.display = 'block';
+        feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+        
+        const title = feedback.querySelector('.feedback-title');
+        const message = feedback.querySelector('.feedback-message');
+        const icon = feedback.querySelector('i');
+        
+        if (isCorrect) {
+            title.textContent = 'Jawaban Benar!';
+            message.textContent = 'Selamat! Jawaban Anda tepat.';
+            icon.className = 'fas fa-check-circle';
+            if (button.textContent === 'Periksa Jawaban') {
+                score++;
+		     updateScore();
+            }
+        } else {
+            title.textContent = 'Jawaban Salah';
+            message.textContent = 'Silakan pelajari pembahasan di bawah ini.';
+            icon.className = 'fas fa-times-circle';
+        }
+        
+        // Show solution button
+        showSolutionBtn.style.display = 'inline-block';
+        
+        button.textContent = 'Sudah Diperiksa';
+        button.disabled = true;
+        button.style.opacity = '0.6';
+        
+        if (button.textContent !== 'Sudah Diperiksa' || questionsAnswered < 5) {
+            questionsAnswered++;
+        }
+        // Show completion message when all questions are answered
+        if (questionsAnswered === 5) {
+            setTimeout(() => {
+                document.querySelector('.completed').style.display = 'block';
+                document.getElementById('finalScore').textContent = score;
+                document.querySelector('.review-section').style.display = 'block';
+                showAnswerReview();
+            }, 1000);
+        }
+
+        // Scroll to feedback smoothly
+        feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showAnswerReview() {
+        const reviewContainer = document.getElementById('answer-review');
+        reviewContainer.innerHTML = '';
+        
+        userAnswers.forEach((answer, index) => {
+            const reviewItem = document.createElement('div');
+            reviewItem.className = 'review-item';
+            
+            const questionText = document.createElement('div');
+            questionText.className = 'review-question';
+            questionText.innerHTML = `<strong>Soal ${index + 1}:</strong> ${answer.questionText}`;
+            
+            const userAnswerDiv = document.createElement('div');
+            userAnswerDiv.className = 'user-answer';
+            userAnswerDiv.innerHTML = `<strong>Jawaban Anda:</strong> ${formatAnswer(answer.answer, index)}`;
+
+		 const correctAnswerDiv = document.createElement('div');
+            correctAnswerDiv.className = 'correct-answer';
+            correctAnswerDiv.innerHTML = `<strong>Jawaban Benar:</strong> ${formatCorrectAnswer(index)}`;
+            
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `answer-status ${answer.isCorrect ? 'correct-status' : 'incorrect-status'}`;
+            statusDiv.textContent = answer.isCorrect ? 'Benar' : 'Salah';
+            
+            reviewItem.appendChild(questionText);
+            reviewItem.appendChild(userAnswerDiv);
+            reviewItem.appendChild(correctAnswerDiv);
+            reviewItem.appendChild(statusDiv);
+            
+            reviewContainer.appendChild(reviewItem);
+        });
+    }
+    
+    function formatAnswer(answer, index) {
+        // Format khusus untuk jawaban tertentu
+        switch(index) {
+            case 0: // Pilihan ganda
+                return answer.toUpperCase() + ')';
+            case 1: // Harga
+                return 'Rp' + (answer.includes('7.100') ? '7.100' : answer;
+            case 2: // Persamaan
+                return answer.replace(',', ', ');
+            case 3: // Bilangan
+                return answer.replace(',', ' dan ');
+            case 4: // Panjang lebar
+                return answer.replace('13', 'Panjang = 13 cm').replace('7', 'Lebar = 7 cm');
+            default:
+                return answer;
+        }
+    }
+
+		     function formatCorrectAnswer(index) {
+        // Format jawaban yang benar
+        const answers = [
+            'b)',
+            'Rp7.100',
+            'x = 32/13, y = -1/13',
+            '12 dan 8',
+            'Panjang = 13 cm, Lebar = 7 cm'
+        ];
+        return answers[index];
+    }
+
+    // Fungsi lainnya tetap sama...
+</script>
+	    
 <script>
     let score = 0;
     let questionsAnswered = 0;
