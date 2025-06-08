@@ -87,11 +87,6 @@
             margin: 2rem auto;
             padding: 0 2rem;
         }
-	    @media (max-width: 768px) {
-    .quiz-question, .profile-card {
-        width: 100%;
-        margin: 10px 0;
-        padding: 15px;
         
         section {
             background-color: white;
@@ -118,15 +113,6 @@
             border-radius: 4px;
             overflow: hidden;
         }
-
-	    .quiz-question, .profile-grid {
-    max-width: 100%;
-    overflow: hidden;
-}
-
-.container {
-    overflow: hidden; /* Mencegah konten meluber */
-}
         
         .accordion-header {
             background-color: var(--primary-color);
@@ -471,33 +457,6 @@ nav a {
         text-align: left;
     }
 }
-		.quiz-container {
-            max-width: 100%;
-            overflow: hidden;
-        }
-        
-        .quiz-question {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        
-        @media (min-width: 992px) {
-            .quiz-question {
-                width: 90%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-        
-        /* Pastikan container memiliki batas lebar */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-            overflow: hidden;
-        }
       
     </style>
 </head>
@@ -1476,8 +1435,7 @@ document.getElementById('solve-btn').addEventListener('click', function() {
         display: none;
     }
 </style>
- </section>
-	    
+
 		
     <section id="latihan">
         <h2><i class="fas fa-pencil-alt"></i> Latihan Soal SPLDV</h2>
@@ -1712,6 +1670,7 @@ document.getElementById('solve-btn').addEventListener('click', function() {
         }
     </script>
     </div>
+    </section>
 
     <script>
         let score = 0;
@@ -1934,11 +1893,10 @@ document.getElementById('solve-btn').addEventListener('click', function() {
         updateScoreDisplay();
     </script>
 
-
-       <section id="quiz">
+        <section id="quiz">
             <h2><i class="fas fa-question-circle"></i> Kuis Interaktif</h2>
-            <div class="quiz-container">
-        
+            
+        <div class="quiz-question">
     <p>1. Manakah yang merupakan SPLDV?</p>
     <div class="options">
         <div class="option" data-correct>A. 2x + y = 5 dan x - y = 1</div>
