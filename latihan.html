@@ -400,6 +400,13 @@
             h2 {
                 font-size: 1.5rem;
             }
+
+            .check-answer:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
             
             .timer-display {
                 font-size: 1.2rem;
@@ -1123,6 +1130,81 @@
             startTimer();
             updateScore();
         };
+
+        // Fungsi untuk memeriksa apakah jawaban sudah diisi
+function isAnswerFilled(questionNumber) {
+    if (questionNumber === 2 || questionNumber === 5 || questionNumber === 6 || questionNumber === 7 || questionNumber === 8) {
+        // Pertanyaan esai
+        const answer = document.querySelector(`.quiz-question[data-question="${questionNumber}"] .essay-answer`).value.trim();
+        return answer !== "";
+    } 
+    else if (questionNumber === 3) {
+        // Pertanyaan tabel
+        const equation = document.getElementById("eq4").value.trim();
+        const tableInputs = document.querySelectorAll(`.quiz-question[data-question="${questionNumber}"] table input`);
+        const tableFilled = Array.from(tableInputs).every(input => input.value.trim() !== "");
+        return equation !== "" && tableFilled;
+    }
+    else if (questionNumber === 4) {
+        // Pertanyaan checkbox
+        const checkedBoxes = document.querySelectorAll(`.quiz-question[data-question="${questionNumber}"] input[type="checkbox"]:checked`);
+        return checkedBoxes.length > 0;
+    }
+    else {
+        // Pertanyaan pilihan ganda
+        const selectedOption = document.querySelector(`.quiz-question[data-question="${questionNumber}"] input[name="q${questionNumber+1}"]:checked`);
+        return selectedOption !== null;
+    }
+}
+
+// Fungsi untuk mengupdate status tombol periksa jawaban
+function updateCheckButtonState(questionNumber) {
+    const checkButton = document.querySelector(`.quiz-question[data-question="${questionNumber}"] .check-answer`);
+    checkButton.disabled = !isAnswerFilled(questionNumber);
+}
+
+// Tambahkan event listener untuk semua input jawaban
+function setupAnswerListeners() {
+    for (let i = 0; i < totalQuestions; i++) {
+        if (i === 2 || i === 5 || i === 6 || i === 7 || i === 8) {
+            // Esai
+            document.querySelector(`.quiz-question[data-question="${i}"] .essay-answer`).addEventListener('input', () => updateCheckButtonState(i));
+        } 
+        else if (i === 3) {
+            // Tabel
+            document.getElementById("eq4").addEventListener('input', () => updateCheckButtonState(i));
+            const tableInputs = document.querySelectorAll(`.quiz-question[data-question="${i}"] table input`);
+            tableInputs.forEach(input => {
+                input.addEventListener('input', () => updateCheckButtonState(i));
+            });
+        }
+        else if (i === 4) {
+            // Checkbox
+            const checkboxes = document.querySelectorAll(`.quiz-question[data-question="${i}"] input[type="checkbox"]`);
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => updateCheckButtonState(i));
+            });
+        }
+        else {
+            // Radio
+            const radios = document.querySelectorAll(`.quiz-question[data-question="${i}"] input[type="radio"]`);
+            radios.forEach(radio => {
+                radio.addEventListener('change', () => updateCheckButtonState(i));
+            });
+        }
+        
+        // Nonaktifkan tombol periksa jawaban secara default
+        document.querySelector(`.quiz-question[data-question="${i}"] .check-answer`).disabled = true;
+    }
+}
+
+// Panggil setupAnswerListeners saat halaman dimuat
+window.onload = function() {
+    startTimer();
+    updateScore();
+    setupAnswerListeners();
+};
+        
     </script>
 </body>
 </html>
