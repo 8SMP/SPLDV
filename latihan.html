@@ -989,6 +989,78 @@
             document.getElementById("progressFill").style.width = `${progress}%`;
         }
 
+         // Simpan jawaban user
+            userAnswers[questionIndex] = {
+                answer: userAnswer,
+                isCorrect: isCorrect,
+                questionText: question.querySelector('p strong').textContent
+            };
+            
+            // Show feedback
+            feedback.style.display = 'block';
+            feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+            
+            const title = feedback.querySelector('.feedback-title');
+            const message = feedback.querySelector('.feedback-message');
+            const icon = feedback.querySelector('i');
+            
+            if (isCorrect) {
+                title.textContent = 'Jawaban Benar!';
+                message.textContent = 'Selamat! Jawaban Anda tepat.';
+                icon.className = 'fas fa-check-circle';
+                if (button.textContent === 'Periksa Jawaban') {
+                    score++;
+                    updateScore();
+                }
+            } else {
+                title.textContent = 'Jawaban Salah';
+                message.textContent = 'Silakan pelajari pembahasan di bawah ini.';
+                icon.className = 'fas fa-times-circle';
+            }
+            
+            // Show solution button
+            showSolutionBtn.style.display = 'inline-block';
+            
+            // Disable button
+            button.textContent = 'Sudah Diperiksa';
+            button.disabled = true;
+            
+            // Count answered questions
+            if (userAnswers.filter(answer => answer !== undefined).length > questionsAnswered) {
+                questionsAnswered++;
+            }
+            
+            // Show completion when all answered
+            if (questionsAnswered === 5) {
+                clearInterval(timerInterval); // Hentikan timer jika semua soal terjawab
+                setTimeout(() => {
+                    showCompletion();
+                }, 1000);
+            }
+
+            // Scroll to feedback
+            feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function toggleSolution(questionIndex) {
+            const question = document.querySelectorAll('.quiz-question')[questionIndex];
+            const solutionSteps = question.querySelector('.solution-steps');
+            const showButton = question.querySelector('.show-solution-btn');
+            
+            if (solutionSteps.classList.contains('show')) {
+                solutionSteps.classList.remove('show');
+                showButton.innerHTML = '<i class="fas fa-lightbulb"></i> Lihat Pembahasan';
+            } else {
+                solutionSteps.classList.add('show');
+                showButton.innerHTML = '<i class="fas fa-eye-slash"></i> Sembunyikan Pembahasan';
+                
+                setTimeout(() => {
+                    solutionSteps.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+            }
+        }
+
+        
         // Fungsi untuk menampilkan/sembunyikan solusi
         function toggleSolution(questionNumber) {
             const solutionElement = document.querySelector(`.quiz-question[data-question="${questionNumber}"] .solution-steps`);
