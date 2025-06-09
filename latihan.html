@@ -27,6 +27,8 @@
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 80px; /* Ruang untuk tombol kembali */
         }
 
         h2 {
@@ -360,6 +362,19 @@
             background: linear-gradient(45deg, #7f8c8d, #95a5a6);
         }
         
+        .back-to-home {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+        }
+        
+        .back-to-home:hover {
+            background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -385,9 +400,12 @@
                 padding: 12px;
             }
             
-            .back-button {
+            .back-button, .back-to-home {
                 width: 100%;
                 padding: 15px;
+                position: static;
+                transform: none;
+                margin-top: 15px;
             }
         }
     </style>
@@ -437,7 +455,7 @@
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
                     <p class="feedback-message"></p>
-                    <button class="btn show-solution-btn" onclick="toggleSolution(0)" style="display: none;">
+                    <button class="btn show-solution-btn" onclick="toggleSolution(0)">
                         <i class="fas fa-lightbulb"></i> Lihat Pembahasan
                     </button>
                     <div class="solution-steps">
@@ -472,7 +490,7 @@
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
                     <p class="feedback-message"></p>
-                    <button class="btn show-solution-btn" onclick="toggleSolution(1)" style="display: none;">
+                    <button class="btn show-solution-btn" onclick="toggleSolution(1)">
                         <i class="fas fa-lightbulb"></i> Lihat Pembahasan
                     </button>
                     <div class="solution-steps">
@@ -496,7 +514,7 @@
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
                     <p class="feedback-message"></p>
-                    <button class="btn show-solution-btn" onclick="toggleSolution(2)" style="display: none;">
+                    <button class="btn show-solution-btn" onclick="toggleSolution(2)">
                         <i class="fas fa-lightbulb"></i> Lihat Pembahasan
                     </button>
                     <div class="solution-steps">
@@ -539,7 +557,7 @@
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
                     <p class="feedback-message"></p>
-                    <button class="btn show-solution-btn" onclick="toggleSolution(3)" style="display: none;">
+                    <button class="btn show-solution-btn" onclick="toggleSolution(3)">
                         <i class="fas fa-lightbulb"></i> Lihat Pembahasan
                     </button>
                     <div class="solution-steps">
@@ -578,7 +596,7 @@
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
                     <p class="feedback-message"></p>
-                    <button class="btn show-solution-btn" onclick="toggleSolution(4)" style="display: none;">
+                    <button class="btn show-solution-btn" onclick="toggleSolution(4)">
                         <i class="fas fa-lightbulb"></i> Lihat Pembahasan
                     </button>
                     <div class="solution-steps">
@@ -605,7 +623,7 @@
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
                     <p class="feedback-message"></p>
-                    <button class="btn show-solution-btn" onclick="toggleSolution(5)" style="display: none;">
+                    <button class="btn show-solution-btn" onclick="toggleSolution(5)">
                         <i class="fas fa-lightbulb"></i> Lihat Pembahasan
                     </button>
                     <div class="solution-steps">
@@ -633,7 +651,7 @@
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
                     <p class="feedback-message"></p>
-                    <button class="btn show-solution-btn" onclick="toggleSolution(6)" style="display: none;">
+                    <button class="btn show-solution-btn" onclick="toggleSolution(6)">
                         <i class="fas fa-lightbulb"></i> Lihat Pembahasan
                     </button>
                     <div class="solution-steps">
@@ -655,7 +673,7 @@
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
                     <p class="feedback-message"></p>
-                    <button class="btn show-solution-btn" onclick="toggleSolution(7)" style="display: none;">
+                    <button class="btn show-solution-btn" onclick="toggleSolution(7)">
                         <i class="fas fa-lightbulb"></i> Lihat Pembahasan
                     </button>
                     <div class="solution-steps">
@@ -683,7 +701,7 @@
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
                     <p class="feedback-message"></p>
-                    <button class="btn show-solution-btn" onclick="toggleSolution(8)" style="display: none;">
+                    <button class="btn show-solution-btn" onclick="toggleSolution(8)">
                         <i class="fas fa-lightbulb"></i> Lihat Pembahasan
                     </button>
                     <div class="solution-steps">
@@ -719,28 +737,29 @@
                         <input type="radio" name="q10" value="d"> d. Rp1.100,00 dan Rp450,00
                     </label>
                 </div>
-                <button class="btn check-answer" onclick="checkAnswer(9)">Periksa Jawaban</button>
+                                <button class="btn check-answer" onclick="checkAnswer(9)">Periksa Jawaban</button>
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
                     <p class="feedback-message"></p>
-                    <button class="btn show-solution-btn" onclick="toggleSolution(9)" style="display: none;">
+                    <button class="btn show-solution-btn" onclick="toggleSolution(9)">
                         <i class="fas fa-lightbulb"></i> Lihat Pembahasan
                     </button>
                     <div class="solution-steps">
                         <p><strong>Pembahasan:</strong></p>
-                        <p>Misal: donat = x, roti kukus = y</p>
-                        <p>Sistem persamaan:</p>
-                        <p>4x + 5y = 4.550</p>
-                        <p>2x + 3y = 2.550</p>
-                        <p>Eliminasi x:</p>
-                        <p>Persamaan 1 ×1: 4x + 5y = 4.550</p>
-                        <p>Persamaan 2 ×2: 4x + 6y = 5.100</p>
-                        <p>Kurangkan: -y = -550 → y = 550</p>
-                        <p>Substitusi y=550 ke persamaan 2:</p>
-                        <p>2x + 3(550) = 2.550 → 2x + 1.650 = 2.550 → 2x = 900 → x = 450</p>
-                        <p>Harga 1 donat = Rp450,00</p>
-                        <p>Harga 2 roti kukus = 2 × 550 = Rp1.100,00</p>
-                        <p><strong>Jawaban: a. Rp450,00 dan Rp1.100,00</strong></p>
+                        <p>Misal:</p>
+                        <p>d = harga donat</p>
+                        <p>r = harga roti kukus</p>
+                        <p>Dari soal diperoleh sistem persamaan:</p>
+                        <p>4d + 5r = 4550 ...(1)</p>
+                        <p>2d + 3r = 2550 ...(2)</p>
+                        <p>Eliminasi d:</p>
+                        <p>Persamaan (2) ×2: 4d + 6r = 5100</p>
+                        <p>Persamaan (1): 4d + 5r = 4550</p>
+                        <p>Kurangi: r = 550</p>
+                        <p>Substitusi r=550 ke persamaan (2):</p>
+                        <p>2d + 3(550) = 2550 → 2d + 1650 = 2550 → 2d = 900 → d = 450</p>
+                        <p>Jadi harga 1 donat = Rp450,00 dan 1 roti kukus = Rp550,00</p>
+                        <p><strong>Jawaban: c. Rp450,00 dan Rp550,00</strong></p>
                     </div>
                 </div>
             </div>
@@ -749,321 +768,353 @@
             <div class="completed" id="completed">
                 <i class="fas fa-check-circle"></i>
                 <h3>Latihan Selesai!</h3>
-                <p>Skor akhir Anda: <span id="finalScore">0</span>/10</p>
-                <button class="btn back-button" onclick="showReview()">
-                    <i class="fas fa-list-ol"></i> Lihat Hasil Detail
-                </button>
-                <button class="btn back-button" onclick="resetQuiz()">
-                    <i class="fas fa-redo"></i> Ulangi Latihan
+                <p id="finalScore">Skor akhir Anda: 0/10</p>
+                <p id="timeTaken">Waktu yang digunakan: 00:00</p>
+                <button class="btn" id="reviewBtn" onclick="showReview()">
+                    <i class="fas fa-list-ol"></i> Lihat Ulasan Jawaban
                 </button>
             </div>
 
             <!-- Bagian Review -->
             <div class="review-section" id="reviewSection">
-                <h3><i class="fas fa-clipboard-list"></i> Hasil Detail</h3>
+                <h3><i class="fas fa-list-ol"></i> Ulasan Jawaban</h3>
                 <div class="answer-review" id="answerReview">
-                    <!-- Review akan diisi oleh JavaScript -->
+                    <!-- Review jawaban akan ditampilkan di sini -->
                 </div>
-                <button class="btn back-button" onclick="hideReview()">
-                    <i class="fas fa-arrow-left"></i> Kembali
-                </button>
             </div>
+
+            <!-- Tombol Kembali -->
+            <a href="javascript:history.back()" class="btn back-to-home">
+                <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+            </a>
         </section>
     </div>
 
     <script>
-        // Data jawaban benar
-        const correctAnswers = {
-            0: "b",  // Soal 1
-            1: "c",  // Soal 2
-            2: "4",  // Soal 3
-            3: { equation: "3x + 2y = 18", yValues: ["9", "6", "3", "0"] },  // Soal 4
-            4: ["a", "d"],  // Soal 5 (multiple correct)
-            5: { x: "-6", y: "-2" },  // Soal 6
-            6: { x: "4", y: "-1" },  // Soal 7
-            7: "-1",  // Soal 8
-            8: { x: "2", y: "-4" },  // Soal 9
-            9: "a"   // Soal 10
-        };
-
-        // Variabel state
-        let userAnswers = {};
+        // Variabel global
         let score = 0;
+        let totalQuestions = 10;
+        let answeredQuestions = 0;
         let timeLeft = 40 * 60; // 40 menit dalam detik
-        let timerInterval;
+        let timer;
         let quizCompleted = false;
+        let startTime;
+        let endTime;
+
+        // Jawaban yang benar
+        const correctAnswers = {
+            0: "b", // Soal 1
+            1: "c", // Soal 2
+            2: "4", // Soal 3
+            3: { // Soal 4
+                equation: "3x + 2y = 18",
+                table: ["9", "6", "3", "0"]
+            },
+            4: ["a", "d"], // Soal 5 (bisa lebih dari satu jawaban)
+            5: "x = -6, y = -2", // Soal 6
+            6: "x = 4, y = -1", // Soal 7
+            7: "-1", // Soal 8
+            8: "x = 2, y = -4", // Soal 9
+            9: "c" // Soal 10
+        };
 
         // Fungsi untuk memulai timer
         function startTimer() {
-            timerInterval = setInterval(updateTimer, 1000);
+            startTime = new Date();
+            timer = setInterval(updateTimer, 1000);
         }
 
-        // Fungsi untuk mengupdate timer
+        // Fungsi untuk memperbarui timer
         function updateTimer() {
             timeLeft--;
             
             if (timeLeft <= 0) {
-                clearInterval(timerInterval);
+                clearInterval(timer);
                 timeLeft = 0;
-                completeQuiz(true);
+                endQuiz(true);
             }
             
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
-            document.getElementById('timeRemaining').textContent = 
+            
+            document.getElementById("timeRemaining").textContent = 
                 `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
             // Ubah warna timer jika waktu hampir habis
-            const timerDisplay = document.getElementById('timerDisplay');
+            const timerDisplay = document.getElementById("timerDisplay");
+            timerDisplay.classList.remove("warning", "danger");
+            
             if (timeLeft <= 10 * 60) { // 10 menit tersisa
-                timerDisplay.classList.add('warning');
+                timerDisplay.classList.add("warning");
             }
             if (timeLeft <= 5 * 60) { // 5 menit tersisa
-                timerDisplay.classList.remove('warning');
-                timerDisplay.classList.add('danger');
+                timerDisplay.classList.remove("warning");
+                timerDisplay.classList.add("danger");
             }
         }
 
         // Fungsi untuk memeriksa jawaban
-        function checkAnswer(questionNum) {
+        function checkAnswer(questionNumber) {
             if (quizCompleted) return;
             
-            const questionElement = document.querySelector(`.quiz-question[data-question="${questionNum}"]`);
-            const feedbackElement = questionElement.querySelector('.feedback');
-            const feedbackTitle = feedbackElement.querySelector('.feedback-title');
-            const feedbackMessage = feedbackElement.querySelector('.feedback-message');
-            const solutionBtn = feedbackElement.querySelector('.show-solution-btn');
+            const questionElement = document.querySelector(`.quiz-question[data-question="${questionNumber}"]`);
+            const feedbackElement = questionElement.querySelector(".feedback");
+            const feedbackTitle = feedbackElement.querySelector(".feedback-title");
+            const feedbackMessage = feedbackElement.querySelector(".feedback-message");
             
             let isCorrect = false;
             let userAnswer;
             
-            // Handle different question types
-            if (questionNum === 2 || questionNum >= 5 && questionNum <= 8) {
-                // Essay questions (3, 6-9)
-                userAnswer = questionElement.querySelector('.essay-answer').value.trim();
+            // Periksa jenis pertanyaan
+            if (questionNumber === 2 || questionNumber === 5 || questionNumber === 6 || questionNumber === 7 || questionNumber === 8) {
+                // Pertanyaan esai
+                userAnswer = questionElement.querySelector(".essay-answer").value.trim();
+                isCorrect = checkEssayAnswer(questionNumber, userAnswer);
+            } 
+            else if (questionNumber === 3) {
+                // Pertanyaan tabel
+                userAnswer = {
+                    equation: document.getElementById("eq4").value.trim(),
+                    table: Array.from(questionElement.querySelectorAll("table input")).map(input => input.value.trim())
+                };
+                isCorrect = checkTableAnswer(questionNumber, userAnswer);
+            }
+            else if (questionNumber === 4) {
+                // Pertanyaan checkbox (bisa lebih dari satu jawaban)
+                const checkedBoxes = Array.from(questionElement.querySelectorAll("input[type='checkbox']:checked")).map(cb => cb.value);
+                userAnswer = checkedBoxes;
+                isCorrect = arraysEqual(checkedBoxes.sort(), correctAnswers[questionNumber].sort());
+            }
+            else {
+                // Pertanyaan pilihan ganda
+                const selectedOption = questionElement.querySelector(`input[name="q${questionNumber+1}"]:checked`);
+                if (!selectedOption) {
+                    alert("Silakan pilih jawaban terlebih dahulu!");
+                    return;
+                }
+                userAnswer = selectedOption.value;
+                isCorrect = userAnswer === correctAnswers[questionNumber];
+            }
+            
+            // Tampilkan feedback
+            if (isCorrect) {
+                score++;
+                feedbackTitle.textContent = "Jawaban Benar!";
+                feedbackMessage.textContent = "Anda telah menjawab dengan benar.";
+                feedbackElement.classList.remove("incorrect");
+                feedbackElement.classList.add("correct");
+            } else {
+                feedbackTitle.textContent = "Jawaban Salah";
+                feedbackMessage.textContent = "Jawaban Anda belum tepat. Silakan lihat pembahasan untuk memahami konsepnya.";
+                feedbackElement.classList.remove("correct");
+                feedbackElement.classList.add("incorrect");
+            }
+            
+            feedbackElement.style.display = "block";
+            questionElement.classList.add("disabled");
+            
+            // Perbarui skor dan progress
+            answeredQuestions++;
+            updateScore();
+            updateProgress();
+            
+            // Periksa apakah semua pertanyaan telah dijawab
+            if (answeredQuestions === totalQuestions) {
+                endQuiz(false);
+            }
+        }
+
+        // Fungsi untuk memeriksa jawaban esai
+        function checkEssayAnswer(questionNumber, userAnswer) {
+            const correct = correctAnswers[questionNumber].toString().toLowerCase();
+            userAnswer = userAnswer.toLowerCase();
+            
+            // Untuk jawaban yang lebih kompleks (seperti x=..., y=...)
+            if (questionNumber === 5 || questionNumber === 6 || questionNumber === 8) {
+                // Ekstrak nilai x dan y dari jawaban pengguna
+                const xMatch = userAnswer.match(/x\s*=\s*(-?\d+)/);
+                const yMatch = userAnswer.match(/y\s*=\s*(-?\d+)/);
                 
-                if (questionNum === 2) {
-                    // Soal 3 (single value)
-                    isCorrect = userAnswer === correctAnswers[2];
-                } else if (questionNum === 7 || questionNum === 8) {
-                    // Soal 8 dan 9 (single value)
-                    isCorrect = userAnswer === correctAnswers[questionNum];
-                } else {
-                    // Soal 6,7 (x,y pairs)
-                    const answerParts = userAnswer.split(',').map(part => part.trim());
-                    const xPart = answerParts.find(part => part.includes('x=') || part.includes('x ='));
-                    const yPart = answerParts.find(part => part.includes('y=') || part.includes('y ='));
-                    
-                    let userX = '', userY = '';
-                    if (xPart) userX = xPart.replace(/x\s*=\s*/, '').trim();
-                    if (yPart) userY = yPart.replace(/y\s*=\s*/, '').trim();
-                    
-                    isCorrect = userX === correctAnswers[questionNum].x && 
-                                userY === correctAnswers[questionNum].y;
+                if (!xMatch || !yMatch) return false;
+                
+                const userX = xMatch[1];
+                const userY = yMatch[1];
+                
+                // Ekstrak nilai x dan y dari jawaban benar
+                const correctXMatch = correct.match(/x\s*=\s*(-?\d+)/);
+                const correctYMatch = correct.match(/y\s*=\s*(-?\d+)/);
+                
+                return userX === correctXMatch[1] && userY === correctYMatch[1];
+            }
+            
+            // Untuk jawaban sederhana (angka saja)
+            return userAnswer === correct;
+        }
+
+        // Fungsi untuk memeriksa jawaban tabel
+        function checkTableAnswer(questionNumber, userAnswer) {
+            // Periksa persamaan
+            if (userAnswer.equation.toLowerCase() !== correctAnswers[questionNumber].equation.toLowerCase()) {
+                return false;
+            }
+            
+            // Periksa nilai tabel
+            for (let i = 0; i < correctAnswers[questionNumber].table.length; i++) {
+                if (userAnswer.table[i] !== correctAnswers[questionNumber].table[i]) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        // Fungsi untuk membandingkan dua array
+        function arraysEqual(arr1, arr2) {
+            if (arr1.length !== arr2.length) return false;
+            for (let i = 0; i < arr1.length; i++) {
+                if (arr1[i] !== arr2[i]) return false;
+            }
+            return true;
+        }
+
+        // Fungsi untuk memperbarui tampilan skor
+        function updateScore() {
+            document.getElementById("score").textContent = score;
+            document.getElementById("total").textContent = totalQuestions;
+        }
+
+        // Fungsi untuk memperbarui progress bar
+        function updateProgress() {
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById("progressFill").style.width = `${progress}%`;
+        }
+
+        // Fungsi untuk menampilkan/sembunyikan solusi
+        function toggleSolution(questionNumber) {
+            const solutionElement = document.querySelector(`.quiz-question[data-question="${questionNumber}"] .solution-steps`);
+            solutionElement.classList.toggle("show");
+        }
+
+        // Fungsi untuk mengakhiri kuis
+        function endQuiz(isTimeUp) {
+            if (quizCompleted) return;
+            
+            clearInterval(timer);
+            quizCompleted = true;
+            endTime = new Date();
+            
+            // Hitung waktu yang digunakan
+            const timeUsed = Math.floor((endTime - startTime) / 1000);
+            const minutes = Math.floor(timeUsed / 60);
+            const seconds = timeUsed % 60;
+            
+            // Tampilkan pesan selesai
+            const completedElement = document.getElementById("completed");
+            if (isTimeUp) {
+                completedElement.querySelector("h3").textContent = "Waktu Habis!";
+                completedElement.classList.add("time-up");
+                completedElement.querySelector("i").className = "fas fa-clock";
+            }
+            
+            completedElement.querySelector("#finalScore").textContent = `Skor akhir Anda: ${score}/${totalQuestions}`;
+            completedElement.querySelector("#timeTaken").textContent = `Waktu yang digunakan: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            completedElement.style.display = "block";
+            
+            // Nonaktifkan semua pertanyaan yang belum dijawab
+            document.querySelectorAll(".quiz-question").forEach(question => {
+                if (!question.classList.contains("disabled")) {
+                    question.classList.add("disabled");
+                }
+            });
+        }
+
+        // Fungsi untuk menampilkan review jawaban
+        function showReview() {
+            const reviewSection = document.getElementById("reviewSection");
+            const answerReview = document.getElementById("answerReview");
+            
+            // Kosongkan review sebelumnya
+            answerReview.innerHTML = "";
+            
+            // Tambahkan review untuk setiap pertanyaan
+            for (let i = 0; i < totalQuestions; i++) {
+                const questionElement = document.querySelector(`.quiz-question[data-question="${i}"]`);
+                const feedbackElement = questionElement.querySelector(".feedback");
+                
+                const reviewItem = document.createElement("div");
+                reviewItem.className = "review-item";
+                
+                // Tambahkan pertanyaan
+                const reviewQuestion = document.createElement("div");
+                reviewQuestion.className = "review-question";
+                reviewQuestion.textContent = `Soal ${i+1}: ${questionElement.querySelector("p:first-child").textContent.substring(0, 50)}...`;
+                reviewItem.appendChild(reviewQuestion);
+                
+                // Tambahkan jawaban pengguna dan jawaban benar
+                let userAnswerText = "Tidak dijawab";
+                
+                if (i === 2 || i === 5 || i === 6 || i === 7 || i === 8) {
+                    // Esai
+                    const answer = questionElement.querySelector(".essay-answer").value.trim();
+                    userAnswerText = answer || "Tidak dijawab";
+                } 
+                else if (i === 3) {
+                    // Tabel
+                    const equation = document.getElementById("eq4").value.trim();
+                    const tableValues = Array.from(questionElement.querySelectorAll("table input")).map(input => input.value.trim());
+                    userAnswerText = `Persamaan: ${equation || "Tidak diisi"}, Tabel: ${tableValues.join(", ")}`;
+                }
+                else if (i === 4) {
+                    // Checkbox
+                    const checkedBoxes = Array.from(questionElement.querySelectorAll("input[type='checkbox']:checked")).map(cb => cb.value);
+                    userAnswerText = checkedBoxes.length > 0 ? checkedBoxes.join(", ") : "Tidak dijawab";
+                }
+                else {
+                    // Radio
+                    const selectedOption = questionElement.querySelector(`input[name="q${i+1}"]:checked`);
+                    userAnswerText = selectedOption ? selectedOption.value : "Tidak dijawab";
                 }
                 
-            } else if (questionNum === 3) {
-                // Soal 4 (equation and table)
-                const equationInput = document.getElementById('eq4').value.trim();
-                const yInputs = questionElement.querySelectorAll('table input[type="text"]');
-                const yValues = Array.from(yInputs).map(input => input.value.trim());
+                const userAnswerDiv = document.createElement("div");
+                userAnswerDiv.className = "user-answer";
+                userAnswerDiv.innerHTML = `<strong>Jawaban Anda:</strong> ${userAnswerText}`;
+                reviewItem.appendChild(userAnswerDiv);
                 
-                isCorrect = equationInput === correctAnswers[3].equation && 
-                            yValues.every((val, i) => val === correctAnswers[3].yValues[i]);
-                
-                userAnswer = `Persamaan: ${equationInput}, Nilai y: ${yValues.join(', ')}`;
-            } else if (questionNum === 4) {
-                // Soal 5 (multiple checkboxes)
-                const checkboxes = questionElement.querySelectorAll('input[type="checkbox"]:checked');
-                userAnswer = Array.from(checkboxes).map(cb => cb.value).sort().join(',');
-                isCorrect = userAnswer === correctAnswers[4].sort().join(',');
-            } else {
-                // Multiple choice (1,2,10)
-                const selected = questionElement.querySelector('input[type="radio"]:checked');
-                userAnswer = selected ? selected.value : '';
-                isCorrect = userAnswer === correctAnswers[questionNum];
-            }
-            
-            // Simpan jawaban user
-            userAnswers[questionNum] = {
-                answer: userAnswer,
-                isCorrect: isCorrect
-            };
-            
-            // Update UI feedback
-            if (isCorrect) {
-                feedbackElement.classList.add('correct');
-                feedbackElement.classList.remove('incorrect');
-                feedbackTitle.textContent = 'Jawaban Benar!';
-                feedbackMessage.textContent = 'Selamat, jawaban Anda benar!';
-                score++;
-            } else {
-                feedbackElement.classList.add('incorrect');
-                feedbackElement.classList.remove('correct');
-                feedbackTitle.textContent = 'Jawaban Salah';
-                feedbackMessage.textContent = 'Jawaban Anda belum tepat. Silakan lihat pembahasan.';
-            }
-            
-            // Tampilkan feedback dan tombol pembahasan
-            feedbackElement.style.display = 'block';
-            solutionBtn.style.display = 'inline-block';
-            
-            // Nonaktifkan pertanyaan setelah dijawab
-            questionElement.classList.add('disabled');
-            
-            // Update skor dan progress
-            updateScore();
-            
-            // Cek jika semua soal sudah dijawab
-            checkCompletion();
-        }
-
-        // Fungsi untuk toggle pembahasan
-        function toggleSolution(questionNum) {
-            const solutionElement = document.querySelector(`.quiz-question[data-question="${questionNum}"] .solution-steps`);
-            solutionElement.classList.toggle('show');
-        }
-
-        // Fungsi untuk update skor
-        function updateScore() {
-            document.getElementById('score').textContent = score;
-            const progress = (Object.keys(userAnswers).length / 10) * 100;
-            document.getElementById('progressFill').style.width = `${progress}%`;
-        }
-
-        // Fungsi untuk cek apakah quiz selesai
-        function checkCompletion() {
-            if (Object.keys(userAnswers).length === 10) {
-                completeQuiz(false);
-            }
-        }
-
-        // Fungsi ketika quiz selesai
-        function completeQuiz(isTimeUp) {
-            quizCompleted = true;
-            clearInterval(timerInterval);
-            
-            const completedElement = document.getElementById('completed');
-            const finalScoreElement = document.getElementById('finalScore');
-            
-            finalScoreElement.textContent = score;
-            completedElement.style.display = 'block';
-            
-            if (isTimeUp) {
-                completedElement.classList.add('time-up');
-                completedElement.querySelector('h3').textContent = 'Waktu Habis!';
-                completedElement.querySelector('i').className = 'fas fa-clock';
-            }
-            
-            // Scroll ke bagian selesai
-            completedElement.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Fungsi untuk menampilkan review
-        function showReview() {
-            const reviewSection = document.getElementById('reviewSection');
-            const answerReview = document.getElementById('answerReview');
-            
-            // Isi review
-            answerReview.innerHTML = '';
-            
-            for (let i = 0; i < 10; i++) {
-                const reviewItem = document.createElement('div');
-                reviewItem.className = 'review-item';
-                
-                const questionNum = i + 1;
-                const userAnswer = userAnswers[i] ? userAnswers[i].answer : 'Tidak dijawab';
-                const isCorrect = userAnswers[i] ? userAnswers[i].isCorrect : false;
+                const correctAnswerDiv = document.createElement("div");
+                correctAnswerDiv.className = "correct-answer";
                 
                 let correctAnswerText;
-                if (i === 2) {
-                    correctAnswerText = correctAnswers[2];
-                } else if (i === 3) {
-                    correctAnswerText = `Persamaan: ${correctAnswers[3].equation}, Nilai y: ${correctAnswers[3].yValues.join(', ')}`;
+                if (i === 3) {
+                    correctAnswerText = `Persamaan: ${correctAnswers[i].equation}, Tabel: ${correctAnswers[i].table.join(", ")}`;
                 } else if (i === 4) {
-                    correctAnswerText = correctAnswers[4].join(' dan ');
-                } else if (i >= 5 && i <= 6) {
-                    correctAnswerText = `x = ${correctAnswers[i].x}, y = ${correctAnswers[i].y}`;
-                } else if (i === 7 || i === 8) {
-                    correctAnswerText = correctAnswers[i];
-                } else if (i === 9) {
-                    correctAnswerText = "a. Rp450,00 dan Rp1.100,00";
+                    correctAnswerText = correctAnswers[i].join(", ");
                 } else {
                     correctAnswerText = correctAnswers[i];
                 }
                 
-                reviewItem.innerHTML = `
-                    <div class="review-question">Soal ${questionNum}</div>
-                    <div class="user-answer">Jawaban Anda: ${userAnswer}</div>
-                    <div class="correct-answer">Jawaban Benar: ${correctAnswerText}</div>
-                    <div class="answer-status ${isCorrect ? 'correct-status' : 'incorrect-status'}">
-                        ${isCorrect ? 'Benar' : 'Salah'}
-                    </div>
-                `;
+                correctAnswerDiv.innerHTML = `<strong>Jawaban Benar:</strong> ${correctAnswerText}`;
+                reviewItem.appendChild(correctAnswerDiv);
+                
+                // Tambahkan status jawaban
+                const isCorrect = feedbackElement.classList.contains("correct");
+                const answerStatus = document.createElement("div");
+                answerStatus.className = `answer-status ${isCorrect ? "correct-status" : "incorrect-status"}`;
+                answerStatus.textContent = isCorrect ? "Benar" : "Salah";
+                reviewItem.appendChild(answerStatus);
                 
                 answerReview.appendChild(reviewItem);
             }
             
-            // Tampilkan review dan sembunyikan completed
-            document.getElementById('completed').style.display = 'none';
-            reviewSection.style.display = 'block';
-            
-            // Scroll ke review
-            reviewSection.scrollIntoView({ behavior: 'smooth' });
+            // Tampilkan review section
+            reviewSection.style.display = "block";
+            reviewSection.scrollIntoView({ behavior: "smooth" });
         }
 
-        // Fungsi untuk menyembunyikan review
-        function hideReview() {
-            document.getElementById('reviewSection').style.display = 'none';
-            document.getElementById('completed').style.display = 'block';
-        }
-
-        // Fungsi untuk reset quiz
-        function resetQuiz() {
-            // Reset state
-            userAnswers = {};
-            score = 0;
-            timeLeft = 40 * 60;
-            quizCompleted = false;
-            
-            // Reset UI
-            document.querySelectorAll('.quiz-question').forEach(q => {
-                q.classList.remove('disabled');
-                
-                // Reset input
-                const radios = q.querySelectorAll('input[type="radio"]');
-                radios.forEach(r => r.checked = false);
-                
-                const checkboxes = q.querySelectorAll('input[type="checkbox"]');
-                checkboxes.forEach(cb => cb.checked = false);
-                
-                const textInputs = q.querySelectorAll('input[type="text"], textarea');
-                textInputs.forEach(input => input.value = '');
-                
-                // Hide feedback
-                const feedback = q.querySelector('.feedback');
-                feedback.style.display = 'none';
-                feedback.querySelector('.solution-steps').classList.remove('show');
-            });
-            
-            // Reset score and progress
-            updateScore();
-            document.getElementById('completed').style.display = 'none';
-            document.getElementById('reviewSection').style.display = 'none';
-            
-            // Restart timer
-            clearInterval(timerInterval);
-            startTimer();
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-
-        // Inisialisasi
-        document.addEventListener('DOMContentLoaded', function() {
+        // Mulai kuis saat halaman dimuat
+        window.onload = function() {
             startTimer();
             updateScore();
-        });
+        };
     </script>
 </body>
 </html>
