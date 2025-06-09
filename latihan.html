@@ -402,7 +402,7 @@
             </div>
             
             <div class="score-display">
-                Skor: <span id="score">0</span> / <span id="total">5</span>
+                Skor: <span id="score">0</span> / <span id="total">10</span>
             </div>
             
             <div class="progress-bar">
@@ -453,8 +453,21 @@
 
             <!-- Soal 2 -->
             <div class="quiz-question" data-question="1">
-                <p><strong>2. Harga 3 buku dan 2 pensil Rp19.500. Harga 2 buku dan 3 pensil Rp16.000. Berapa harga 1 buku dan 1 pensil?</strong></p>
-                <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: Rp7.100)"></textarea>
+                <p><strong>2. Budi membeli 3 kg jeruk dan 2 kg apel. Uang yang harus dibayarkan adalah Rp65.000,00. Jika diubah menjadi persamaan linear dua variabel, maka pernyataan tersebut menjadi...</strong></p>
+                <div class="multiple-choice">
+                    <label>
+                        <input type="radio" name="q2" value="a"> a. 3x - 2y = 65
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="b"> b. 3x + 2y = 65
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="c"> c. 3x + 2y = 65.000
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="d"> d. 3x - 2y = 65.000
+                    </label>
+                </div>
                 <button class="btn check-answer" onclick="checkAnswer(1)">Periksa Jawaban</button>
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
@@ -464,24 +477,21 @@
                     </button>
                     <div class="solution-steps">
                         <p><strong>Pembahasan:</strong></p>
-                        <p>Misal: harga buku = x, harga pensil = y</p>
-                        <p><strong>Persamaan 1:</strong> 3x + 2y = 19.500</p>
-                        <p><strong>Persamaan 2:</strong> 2x + 3y = 16.000</p>
-                        <p>Eliminasi variabel x:</p>
-                        <p>Kalikan pers.1 dengan 2: 6x + 4y = 39.000</p>
-                        <p>Kalikan pers.2 dengan 3: 6x + 9y = 48.000</p>
-                        <p>Kurangkan: -5y = -9.000 → y = 1.800</p>
-                        <p>Substitusi ke pers.1: 3x + 2(1.800) = 19.500</p>
-                        <p>3x + 3.600 = 19.500 → 3x = 15.900 → x = 5.300</p>
-                        <p><strong>Harga 1 buku + 1 pensil = Rp5.300 + Rp1.800 = Rp7.100</strong></p>
+                        <p>Misal:</p>
+                        <p>x = harga jeruk per kg</p>
+                        <p>y = harga apel per kg</p>
+                        <p>Harga 3 kg jeruk dan 2 kg apel = Rp65.000</p>
+                        <p>Persamaan linear dua variabel yang sesuai adalah:</p>
+                        <p><strong>3x + 2y = 65.000</strong></p>
+                        <p>Jawaban: c. 3x + 2y = 65.000</p>
                     </div>
                 </div>
             </div>
 
             <!-- Soal 3 -->
             <div class="quiz-question" data-question="2">
-                <p><strong>3. Selesaikan sistem persamaan berikut: 4x - 2y = 10 dan 3x + 5y = 7</strong></p>
-                <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: x = 32/13, y = -1/13)"></textarea>
+                <p><strong>3. Diketahui persamaan linear dua variabel 6x - 5y = 10. Jika nilai x adalah 5, maka nilai y adalah...</strong></p>
+                <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: 4)"></textarea>
                 <button class="btn check-answer" onclick="checkAnswer(2)">Periksa Jawaban</button>
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
@@ -491,24 +501,40 @@
                     </button>
                     <div class="solution-steps">
                         <p><strong>Pembahasan:</strong></p>
-                        <p><strong>Persamaan 1:</strong> 4x - 2y = 10</p>
-                        <p><strong>Persamaan 2:</strong> 3x + 5y = 7</p>
-                        <p>Eliminasi variabel y:</p>
-                        <p>Kalikan pers.1 dengan 5: 20x - 10y = 50</p>
-                        <p>Kalikan pers.2 dengan 2: 6x + 10y = 14</p>
-                        <p>Jumlahkan: 26x = 64 → x = 64/26 = 32/13</p>
-                        <p>Substitusi ke pers.1: 4(32/13) - 2y = 10</p>
-                        <p>128/13 - 2y = 10 → -2y = 10 - 128/13 = (130-128)/13 = 2/13</p>
-                        <p>y = -1/13</p>
-                        <p><strong>Solusi: x = 32/13, y = -1/13</strong></p>
+                        <p>Substitusi nilai x = 5 ke persamaan:</p>
+                        <p>6x - 5y = 10</p>
+                        <p>6(5) - 5y = 10</p>
+                        <p>30 - 5y = 10</p>
+                        <p>-5y = 10 - 30</p>
+                        <p>-5y = -20</p>
+                        <p>y = (-20)/(-5)</p>
+                        <p><strong>y = 4</strong></p>
                     </div>
                 </div>
             </div>
 
             <!-- Soal 4 -->
             <div class="quiz-question" data-question="3">
-                <p><strong>4. Jumlah dua bilangan adalah 20 dan selisihnya adalah 4. Tentukan kedua bilangan tersebut.</strong></p>
-                <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: 12 dan 8)"></textarea>
+                <p><strong>4. Di sebuah pasar malam, seorang anak membeli mainan jenis X seharga 3 koin dan mainan jenis Y seharga 2 koin. Jika jumlah koin yang digunakan untuk membeli kedua mainan tersebut adalah 18 koin, nyatakan hubungan antara jumlah mainan X dan Y yang dibeli dalam bentuk persamaan. Kemudian isilah tabel berikut dengan nilai Y yang sesuai agar persamaan menjadi benar.</strong></p>
+                <div class="equation-box">
+                    <p>Persamaan: <input type="text" id="eq4" placeholder="3x + 2y = 18"></p>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                        <tr>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">x</th>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">2</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">4</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">6</td>
+                        </tr>
+                        <tr>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">y</th>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="text" style="width: 50px; text-align: center;" placeholder="..."></td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="text" style="width: 50px; text-align: center;" placeholder="..."></td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="text" style="width: 50px; text-align: center;" placeholder="..."></td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="text" style="width: 50px; text-align: center;" placeholder="..."></td>
+                        </tr>
+                    </table>
+                </div>
                 <button class="btn check-answer" onclick="checkAnswer(3)">Periksa Jawaban</button>
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
@@ -518,22 +544,36 @@
                     </button>
                     <div class="solution-steps">
                         <p><strong>Pembahasan:</strong></p>
-                        <p>Misal bilangan pertama = a, bilangan kedua = b</p>
-                        <p><strong>Persamaan 1:</strong> a + b = 20 (jumlah)</p>
-                        <p><strong>Persamaan 2:</strong> a - b = 4 (selisih)</p>
-                        <p>Jumlahkan kedua persamaan:</p>
-                        <p>(a + b) + (a - b) = 20 + 4</p>
-                        <p>2a = 24 → a = 12</p>
-                        <p>Substitusi ke pers.1: 12 + b = 20 → b = 8</p>
-                        <p><strong>Kedua bilangan tersebut adalah 12 dan 8</strong></p>
+                        <p>Persamaan: <strong>3x + 2y = 18</strong></p>
+                        <p>Nilai y untuk setiap x:</p>
+                        <p><strong>x = 0:</strong> 3(0) + 2y = 18 → 2y = 18 → y = 9</p>
+                        <p><strong>x = 2:</strong> 3(2) + 2y = 18 → 6 + 2y = 18 → 2y = 12 → y = 6</p>
+                        <p><strong>x = 4:</strong> 3(4) + 2y = 18 → 12 + 2y = 18 → 2y = 6 → y = 3</p>
+                        <p><strong>x = 6:</strong> 3(6) + 2y = 18 → 18 + 2y = 18 → 2y = 0 → y = 0</p>
+                        <p>Jadi tabel yang benar:</p>
+                        <p>x | 0 | 2 | 4 | 6</p>
+                        <p>y | 9 | 6 | 3 | 0</p>
                     </div>
                 </div>
             </div>
 
             <!-- Soal 5 -->
             <div class="quiz-question" data-question="4">
-                <p><strong>5. Keliling sebuah persegi panjang adalah 40 cm. Jika panjangnya 6 cm lebih dari lebarnya, tentukan ukuran panjang dan lebar persegi panjang tersebut.</strong></p>
-                <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: Panjang = 13 cm, Lebar = 7 cm)"></textarea>
+                <p><strong>5. Dari persamaan linear berikut ini, yang mana yang jawabannya adalah x = 3, y = 1?</strong></p>
+                <div class="multiple-choice">
+                    <label>
+                        <input type="checkbox" name="q5" value="a"> a) 3x + y = 10 dan x - 4y = -1
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q5" value="b"> b) x + y = 4 dan x - y = 0
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q5" value="c"> c) -x + y = 2 dan 3x - 2y = 7
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q5" value="d"> d) 2x - y = 5 dan x + 2y = 5
+                    </label>
+                </div>
                 <button class="btn check-answer" onclick="checkAnswer(4)">Periksa Jawaban</button>
                 <div class="feedback">
                     <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
@@ -543,298 +583,487 @@
                     </button>
                     <div class="solution-steps">
                         <p><strong>Pembahasan:</strong></p>
-                        <p>Misal panjang = p, lebar = l</p>
-                        <p><strong>Persamaan 1:</strong> 2p + 2l = 40 → p + l = 20 (dari rumus keliling)</p>
-                        <p><strong>Persamaan 2:</strong> p = l + 6 (panjang 6 cm lebih dari lebar)</p>
-                        <p>Substitusi pers.2 ke pers.1:</p>
-                        <p>(l + 6) + l = 20</p>
-                        <p>2l + 6 = 20</p>
-                        <p>2l = 14 → l = 7</p>
-                        <p>Substitusi: p = 7 + 6 = 13</p>
-                        <p><strong>Panjang = 13 cm, Lebar = 7 cm</strong></p>
+                        <p>Kita substitusi x=3 dan y=1 ke setiap sistem persamaan:</p>
+                        <p><strong>a)</strong> 3(3) + 1 = 10 → 10=10 (benar) dan 3 - 4(1) = -1 → -1=-1 (benar)</p>
+                        <p><strong>b)</strong> 3 + 1 = 4 → 4=4 (benar) tapi 3 - 1 = 0 → 2≠0 (salah)</p>
+                        <p><strong>c)</strong> -3 + 1 = 2 → -2≠2 (salah)</p>
+                        <p><strong>d)</strong> 2(3) - 1 = 5 → 5=5 (benar) dan 3 + 2(1) = 5 → 5=5 (benar)</p>
+                        <p>Jawaban yang benar adalah <strong>a dan d</strong></p>
                     </div>
                 </div>
             </div>
 
-            <div class="completed">
-                <i class="fas fa-trophy"></i>
-                <h3>Selamat!</h3>
-                <p>Anda telah menyelesaikan semua soal latihan SPLDV!</p>
-                <p>Skor akhir Anda: <span id="finalScore">0</span>/5</p>
-                
-                <div class="review-section">
-                    <h4><i class="fas fa-clipboard-check"></i> Review Jawaban Anda</h4>
-                    <div id="answer-review" class="answer-review">
-                        <!-- Review jawaban akan muncul di sini -->
-                    </div>
-                    <button class="btn" onclick="location.reload()" style="margin-top: 20px;">
-                        <i class="fas fa-redo"></i> Coba Lagi
-                    </button>
+            <!-- Soal 6 -->
+            <div class="quiz-question" data-question="5">
+                <p><strong>6. Selesaikanlah sistem persamaan linear dua variabel berikut dengan menggunakan metode eliminasi:</strong></p>
+                <div class="equation-box">
+                    <p>5x - 7y = -16</p>
+                    <p>-4x - 3y = 30</p>
                 </div>
+                <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: x = -6, y = -2)"></textarea>
+                <button class="btn check-answer" onclick="checkAnswer(5)">Periksa Jawaban</button>
+                <div class="feedback">
+                    <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
+                    <p class="feedback-message"></p>
+                    <button class="btn show-solution-btn" onclick="toggleSolution(5)" style="display: none;">
+                        <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+                    </button>
+                    <div class="solution-steps">
+                        <p><strong>Pembahasan:</strong></p>
+                        <p>Eliminasi x:</p>
+                        <p>Persamaan 1 ×4: 20x - 28y = -64</p>
+                        <p>Persamaan 2 ×5: -20x - 15y = 150</p>
+                        <p>Jumlahkan: -43y = 86 → y = -2</p>
+                        <p>Substitusi y=-2 ke persamaan 1:</p>
+                        <p>5x - 7(-2) = -16 → 5x + 14 = -16 → 5x = -30 → x = -6</p>
+                        <p><strong>Solusi: x = -6, y = -2</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal 7 -->
+            <div class="quiz-question" data-question="6">
+                <p><strong>7. Selesaikanlah sistem persamaan linear dua variabel berikut dengan menggunakan metode substitusi:</strong></p>
+                <div class="equation-box">
+                    <p>x = 2y + 6</p>
+                    <p>2x + 3y = 5</p>
+                </div>
+                <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: x = 4, y = -1)"></textarea>
+                <button class="btn check-answer" onclick="checkAnswer(6)">Periksa Jawaban</button>
+                <div class="feedback">
+                    <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
+                    <p class="feedback-message"></p>
+                    <button class="btn show-solution-btn" onclick="toggleSolution(6)" style="display: none;">
+                        <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+                    </button>
+                    <div class="solution-steps">
+                        <p><strong>Pembahasan:</strong></p>
+                        <p>Substitusi x = 2y + 6 ke persamaan kedua:</p>
+                        <p>2(2y + 6) + 3y = 5 → 4y + 12 + 3y = 5 → 7y = -7 → y = -1</p>
+                        <p>Substitusi y=-1 ke x = 2y + 6:</p>
+                        <p>x = 2(-1) + 6 = -2 + 6 = 4</p>
+                        <p><strong>Solusi: x = 4, y = -1</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal 8 -->
+            <div class="quiz-question" data-question="7">
+                <p><strong>8. Jika penyelesaian dari 5x - y = 8 dan 2x + 3y = 27 adalah (p,q), maka nilai dari 2p - q adalah...</strong></p>
+                <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: -1)"></textarea>
+                <button class="btn check-answer" onclick="checkAnswer(7)">Periksa Jawaban</button>
+                <div class="feedback">
+                    <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
+                    <p class="feedback-message"></p>
+                    <button class="btn show-solution-btn" onclick="toggleSolution(7)" style="display: none;">
+                        <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+                    </button>
+                    <div class="solution-steps">
+                        <p><strong>Pembahasan:</strong></p>
+                        <p>Eliminasi y:</p>
+                        <p>Persamaan 1 ×3: 15x - 3y = 24</p>
+                        <p>Persamaan 2 ×1: 2x + 3y = 27</p>
+                        <p>Jumlahkan: 17x = 51 → x = 3 (p=3)</p>
+                        <p>Substitusi x=3 ke persamaan 1:</p>
+                        <p>5(3) - y = 8 → 15 - y = 8 → y = 7 (q=7)</p>
+                        <p>Hitung 2p - q = 2(3) - 7 = 6 - 7 = <strong>-1</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal 9 -->
+            <div class="quiz-question" data-question="8">
+                <p><strong>9. Selesaikan sistem persamaan berikut:</strong></p>
+                <div class="equation-box">
+                    <p>3(2x + 1) + 5y = -5</p>
+                    <p>-7x - 4(y + 3) = -10</p>
+                </div>
+                <textarea class="essay-answer" placeholder="Tulis jawabanmu... (contoh: x = 2, y = -4)"></textarea>
+                <button class="btn check-answer" onclick="checkAnswer(8)">Periksa Jawaban</button>
+                <div class="feedback">
+                    <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
+                    <p class="feedback-message"></p>
+                    <button class="btn show-solution-btn" onclick="toggleSolution(8)" style="display: none;">
+                        <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+                    </button>
+                    <div class="solution-steps">
+                        <p><strong>Pembahasan:</strong></p>
+                        <p>Sederhanakan persamaan:</p>
+                        <p>1) 6x + 3 + 5y = -5 → 6x + 5y = -8</p>
+                        <p>2) -7x - 4y - 12 = -10 → -7x - 4y = 2</p>
+                        <p>Eliminasi y:</p>
+                        <p>Persamaan 1 ×4: 24x + 20y = -32</p>
+                        <p>Persamaan 2 ×5: -35x - 20y = 10</p>
+                        <p>Jumlahkan: -11x = -22 → x = 2</p>
+                        <p>Substitusi x=2 ke persamaan 1:</p>
+                        <p>6(2) + 5y = -8 → 12 + 5y = -8 → 5y = -20 → y = -4</p>
+                        <p><strong>Solusi: x = 2, y = -4</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal 10 -->
+            <div class="quiz-question" data-question="9">
+                <p><strong>10. Harga 4 buah donat dan 5 buah roti kukus adalah Rp4.550,00. Sedangkan harga 2 buah donat dan 3 buah roti kukus adalah Rp2.550,00. Harga 1 buah donat dan 2 buah roti kukus adalah...</strong></p>
+                <div class="multiple-choice">
+                    <label>
+                        <input type="radio" name="q10" value="a"> a. Rp450,00 dan Rp1.100,00
+                    </label>
+                    <label>
+                        <input type="radio" name="q10" value="b"> b. Rp550,00 dan Rp450,00
+                    </label>
+                    <label>
+                        <input type="radio" name="q10" value="c"> c. Rp450,00 dan Rp550,00
+                    </label>
+                    <label>
+                        <input type="radio" name="q10" value="d"> d. Rp1.100,00 dan Rp450,00
+                    </label>
+                </div>
+                <button class="btn check-answer" onclick="checkAnswer(9)">Periksa Jawaban</button>
+                <div class="feedback">
+                    <h3><i class="fas fa-check-circle"></i> <span class="feedback-title"></span></h3>
+                    <p class="feedback-message"></p>
+                    <button class="btn show-solution-btn" onclick="toggleSolution(9)" style="display: none;">
+                        <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+                    </button>
+                    <div class="solution-steps">
+                        <p><strong>Pembahasan:</strong></p>
+                        <p>Misal: donat = x, roti kukus = y</p>
+                        <p>Sistem persamaan:</p>
+                        <p>4x + 5y = 4.550</p>
+                        <p>2x + 3y = 2.550</p>
+                        <p>Eliminasi x:</p>
+                        <p>Persamaan 1 ×1: 4x + 5y = 4.550</p>
+                        <p>Persamaan 2 ×2: 4x + 6y = 5.100</p>
+                        <p>Kurangkan: -y = -550 → y = 550</p>
+                        <p>Substitusi y=550 ke persamaan 2:</p>
+                        <p>2x + 3(550) = 2.550 → 2x + 1.650 = 2.550 → 2x = 900 → x = 450</p>
+                        <p>Harga 1 donat = Rp450,00</p>
+                        <p>Harga 2 roti kukus = 2 × 550 = Rp1.100,00</p>
+                        <p><strong>Jawaban: a. Rp450,00 dan Rp1.100,00</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bagian Selesai -->
+            <div class="completed" id="completed">
+                <i class="fas fa-check-circle"></i>
+                <h3>Latihan Selesai!</h3>
+                <p>Skor akhir Anda: <span id="finalScore">0</span>/10</p>
+                <button class="btn back-button" onclick="showReview()">
+                    <i class="fas fa-list-ol"></i> Lihat Hasil Detail
+                </button>
+                <button class="btn back-button" onclick="resetQuiz()">
+                    <i class="fas fa-redo"></i> Ulangi Latihan
+                </button>
+            </div>
+
+            <!-- Bagian Review -->
+            <div class="review-section" id="reviewSection">
+                <h3><i class="fas fa-clipboard-list"></i> Hasil Detail</h3>
+                <div class="answer-review" id="answerReview">
+                    <!-- Review akan diisi oleh JavaScript -->
+                </div>
+                <button class="btn back-button" onclick="hideReview()">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
             </div>
         </section>
-
-        <div style="text-align: center; margin-top: 30px;">
-            <a href="index.html" class="back-button">
-                <i class="fas fa-arrow-left"></i> Kembali ke Halaman Sebelumnya
-            </a>
-        </div>
     </div>
-    
+
     <script>
+        // Data jawaban benar
+        const correctAnswers = {
+            0: "b",  // Soal 1
+            1: "c",  // Soal 2
+            2: "4",  // Soal 3
+            3: { equation: "3x + 2y = 18", yValues: ["9", "6", "3", "0"] },  // Soal 4
+            4: ["a", "d"],  // Soal 5 (multiple correct)
+            5: { x: "-6", y: "-2" },  // Soal 6
+            6: { x: "4", y: "-1" },  // Soal 7
+            7: "-1",  // Soal 8
+            8: { x: "2", y: "-4" },  // Soal 9
+            9: "a"   // Soal 10
+        };
+
+        // Variabel state
+        let userAnswers = {};
         let score = 0;
-        let questionsAnswered = 0;
-        const correctAnswers = ['b', '7100', '32/13,-1/13', '12,8', '13,7'];
-        const userAnswers = [];
         let timeLeft = 40 * 60; // 40 menit dalam detik
         let timerInterval;
+        let quizCompleted = false;
 
         // Fungsi untuk memulai timer
         function startTimer() {
-            updateTimerDisplay();
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay();
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    timeUp();
-                }
-            }, 1000);
+            timerInterval = setInterval(updateTimer, 1000);
         }
 
-        // Fungsi untuk update tampilan timer
-        function updateTimerDisplay() {
+        // Fungsi untuk mengupdate timer
+        function updateTimer() {
+            timeLeft--;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timeLeft = 0;
+                completeQuiz(true);
+            }
+            
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
-            const timerDisplay = document.getElementById('timeRemaining');
-            const timerContainer = document.getElementById('timerDisplay');
+            document.getElementById('timeRemaining').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            
-            // Update warna timer berdasarkan waktu tersisa
-            timerContainer.classList.remove('warning', 'danger');
-            if (timeLeft <= 10 * 60 && timeLeft > 5 * 60) { // 10-5 menit tersisa
-                timerContainer.classList.add('warning');
-            } else if (timeLeft <= 5 * 60) { // Kurang dari 5 menit
-                timerContainer.classList.add('danger');
+            // Ubah warna timer jika waktu hampir habis
+            const timerDisplay = document.getElementById('timerDisplay');
+            if (timeLeft <= 10 * 60) { // 10 menit tersisa
+                timerDisplay.classList.add('warning');
             }
-        }
-
-        // Fungsi ketika waktu habis
-        function timeUp() {
-            // Nonaktifkan semua soal
-            document.querySelectorAll('.quiz-question').forEach(question => {
-                question.classList.add('disabled');
-            });
-            
-            // Tampilkan pesan waktu habis
-            const completedSection = document.querySelector('.completed');
-            completedSection.classList.add('time-up');
-            completedSection.querySelector('i').className = 'fas fa-hourglass-end';
-            completedSection.querySelector('h3').textContent = 'Waktu Habis!';
-            completedSection.querySelector('p').textContent = 'Waktu pengerjaan telah habis. Berikut hasil pekerjaan Anda:';
-            
-            // Periksa semua jawaban yang belum diperiksa
-            document.querySelectorAll('.quiz-question').forEach((question, index) => {
-                if (!userAnswers[index]) {
-                    checkAnswer(index, true); // Force check
-                }
-            });
-            
-            showCompletion();
+            if (timeLeft <= 5 * 60) { // 5 menit tersisa
+                timerDisplay.classList.remove('warning');
+                timerDisplay.classList.add('danger');
+            }
         }
 
         // Fungsi untuk memeriksa jawaban
-        function checkAnswer(questionIndex, forceCheck = false) {
-            const question = document.querySelectorAll('.quiz-question')[questionIndex];
-            const feedback = question.querySelector('.feedback');
-            const button = question.querySelector('.check-answer');
-            const showSolutionBtn = question.querySelector('.show-solution-btn');
+        function checkAnswer(questionNum) {
+            if (quizCompleted) return;
             
-            // Jika sudah diperiksa dan bukan force check, tidak perlu lakukan apa-apa
-            if (button.textContent === 'Sudah Diperiksa' && !forceCheck) {
-                return;
-            }
+            const questionElement = document.querySelector(`.quiz-question[data-question="${questionNum}"]`);
+            const feedbackElement = questionElement.querySelector('.feedback');
+            const feedbackTitle = feedbackElement.querySelector('.feedback-title');
+            const feedbackMessage = feedbackElement.querySelector('.feedback-message');
+            const solutionBtn = feedbackElement.querySelector('.show-solution-btn');
             
-            let userAnswer = '';
             let isCorrect = false;
+            let userAnswer;
             
-            if (questionIndex === 0) {
-                // Multiple choice question
-                const selected = question.querySelector('input[name="q1"]:checked');
-                if (!selected && !forceCheck) {
-                    alert('Silakan pilih jawaban terlebih dahulu!');
-                    return;
-                }
-                userAnswer = selected ? selected.value : '';
-                isCorrect = userAnswer === correctAnswers[questionIndex];
-            } else {
-                // Essay questions
-                const textarea = question.querySelector('.essay-answer');
-                userAnswer = textarea.value.trim();
+            // Handle different question types
+            if (questionNum === 2 || questionNum >= 5 && questionNum <= 8) {
+                // Essay questions (3, 6-9)
+                userAnswer = questionElement.querySelector('.essay-answer').value.trim();
                 
-                if (!userAnswer && !forceCheck) {
-                    alert('Silakan isi jawaban terlebih dahulu!');
-                    return;
+                if (questionNum === 2) {
+                    // Soal 3 (single value)
+                    isCorrect = userAnswer === correctAnswers[2];
+                } else if (questionNum === 7 || questionNum === 8) {
+                    // Soal 8 dan 9 (single value)
+                    isCorrect = userAnswer === correctAnswers[questionNum];
+                } else {
+                    // Soal 6,7 (x,y pairs)
+                    const answerParts = userAnswer.split(',').map(part => part.trim());
+                    const xPart = answerParts.find(part => part.includes('x=') || part.includes('x ='));
+                    const yPart = answerParts.find(part => part.includes('y=') || part.includes('y ='));
+                    
+                    let userX = '', userY = '';
+                    if (xPart) userX = xPart.replace(/x\s*=\s*/, '').trim();
+                    if (yPart) userY = yPart.replace(/y\s*=\s*/, '').trim();
+                    
+                    isCorrect = userX === correctAnswers[questionNum].x && 
+                                userY === correctAnswers[questionNum].y;
                 }
-
-                // Check answer based on question type
-                const cleanAnswer = userAnswer.toLowerCase().replace(/\s/g, '');
-                switch(questionIndex) {
-                    case 1: // Harga buku + pensil
-                        isCorrect = cleanAnswer.includes('7100') || cleanAnswer.includes('7.100');
-                        break;
-                    case 2: // x = 32/13, y = -1/13
-                        isCorrect = (cleanAnswer.includes('32/13') && cleanAnswer.includes('-1/13')) ||
-                                   (cleanAnswer.includes('32') && cleanAnswer.includes('13') && cleanAnswer.includes('-1'));
-                        break;
-                    case 3: // 12 dan 8
-                        isCorrect = (cleanAnswer.includes('12') && cleanAnswer.includes('8'));
-                        break;
-                    case 4: // Panjang = 13, Lebar = 7
-                        isCorrect = (cleanAnswer.includes('13') && cleanAnswer.includes('7'));
-                        break;
-                }
+                
+            } else if (questionNum === 3) {
+                // Soal 4 (equation and table)
+                const equationInput = document.getElementById('eq4').value.trim();
+                const yInputs = questionElement.querySelectorAll('table input[type="text"]');
+                const yValues = Array.from(yInputs).map(input => input.value.trim());
+                
+                isCorrect = equationInput === correctAnswers[3].equation && 
+                            yValues.every((val, i) => val === correctAnswers[3].yValues[i]);
+                
+                userAnswer = `Persamaan: ${equationInput}, Nilai y: ${yValues.join(', ')}`;
+            } else if (questionNum === 4) {
+                // Soal 5 (multiple checkboxes)
+                const checkboxes = questionElement.querySelectorAll('input[type="checkbox"]:checked');
+                userAnswer = Array.from(checkboxes).map(cb => cb.value).sort().join(',');
+                isCorrect = userAnswer === correctAnswers[4].sort().join(',');
+            } else {
+                // Multiple choice (1,2,10)
+                const selected = questionElement.querySelector('input[type="radio"]:checked');
+                userAnswer = selected ? selected.value : '';
+                isCorrect = userAnswer === correctAnswers[questionNum];
             }
             
             // Simpan jawaban user
-            userAnswers[questionIndex] = {
+            userAnswers[questionNum] = {
                 answer: userAnswer,
-                isCorrect: isCorrect,
-                questionText: question.querySelector('p strong').textContent
+                isCorrect: isCorrect
             };
             
-            // Show feedback
-            feedback.style.display = 'block';
-            feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
-            
-            const title = feedback.querySelector('.feedback-title');
-            const message = feedback.querySelector('.feedback-message');
-            const icon = feedback.querySelector('i');
-            
+            // Update UI feedback
             if (isCorrect) {
-                title.textContent = 'Jawaban Benar!';
-                message.textContent = 'Selamat! Jawaban Anda tepat.';
-                icon.className = 'fas fa-check-circle';
-                if (button.textContent === 'Periksa Jawaban') {
-                    score++;
-                    updateScore();
-                }
+                feedbackElement.classList.add('correct');
+                feedbackElement.classList.remove('incorrect');
+                feedbackTitle.textContent = 'Jawaban Benar!';
+                feedbackMessage.textContent = 'Selamat, jawaban Anda benar!';
+                score++;
             } else {
-                title.textContent = 'Jawaban Salah';
-                message.textContent = 'Silakan pelajari pembahasan di bawah ini.';
-                icon.className = 'fas fa-times-circle';
+                feedbackElement.classList.add('incorrect');
+                feedbackElement.classList.remove('correct');
+                feedbackTitle.textContent = 'Jawaban Salah';
+                feedbackMessage.textContent = 'Jawaban Anda belum tepat. Silakan lihat pembahasan.';
             }
             
-            // Show solution button
-            showSolutionBtn.style.display = 'inline-block';
+            // Tampilkan feedback dan tombol pembahasan
+            feedbackElement.style.display = 'block';
+            solutionBtn.style.display = 'inline-block';
             
-            // Disable button
-            button.textContent = 'Sudah Diperiksa';
-            button.disabled = true;
+            // Nonaktifkan pertanyaan setelah dijawab
+            questionElement.classList.add('disabled');
             
-            // Count answered questions
-            if (userAnswers.filter(answer => answer !== undefined).length > questionsAnswered) {
-                questionsAnswered++;
-            }
+            // Update skor dan progress
+            updateScore();
             
-            // Show completion when all answered
-            if (questionsAnswered === 5) {
-                clearInterval(timerInterval); // Hentikan timer jika semua soal terjawab
-                setTimeout(() => {
-                    showCompletion();
-                }, 1000);
-            }
-
-            // Scroll to feedback
-            feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Cek jika semua soal sudah dijawab
+            checkCompletion();
         }
 
-        function toggleSolution(questionIndex) {
-            const question = document.querySelectorAll('.quiz-question')[questionIndex];
-            const solutionSteps = question.querySelector('.solution-steps');
-            const showButton = question.querySelector('.show-solution-btn');
-            
-            if (solutionSteps.classList.contains('show')) {
-                solutionSteps.classList.remove('show');
-                showButton.innerHTML = '<i class="fas fa-lightbulb"></i> Lihat Pembahasan';
-            } else {
-                solutionSteps.classList.add('show');
-                showButton.innerHTML = '<i class="fas fa-eye-slash"></i> Sembunyikan Pembahasan';
-                
-                setTimeout(() => {
-                    solutionSteps.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 300);
-            }
+        // Fungsi untuk toggle pembahasan
+        function toggleSolution(questionNum) {
+            const solutionElement = document.querySelector(`.quiz-question[data-question="${questionNum}"] .solution-steps`);
+            solutionElement.classList.toggle('show');
         }
 
+        // Fungsi untuk update skor
         function updateScore() {
             document.getElementById('score').textContent = score;
-            const progressFill = document.getElementById('progressFill');
-            const percentage = (score / 5) * 100;
-            progressFill.style.width = percentage + '%';
+            const progress = (Object.keys(userAnswers).length / 10) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
         }
 
-        function showCompletion() {
-            document.querySelector('.completed').style.display = 'block';
-            document.getElementById('finalScore').textContent = score;
-            document.querySelector('.review-section').style.display = 'block';
-            showAnswerReview();
-            document.querySelector('.completed').scrollIntoView({ behavior: 'smooth' });
+        // Fungsi untuk cek apakah quiz selesai
+        function checkCompletion() {
+            if (Object.keys(userAnswers).length === 10) {
+                completeQuiz(false);
+            }
         }
 
-        function showAnswerReview() {
-            const reviewContainer = document.getElementById('answer-review');
-            reviewContainer.innerHTML = '';
+        // Fungsi ketika quiz selesai
+        function completeQuiz(isTimeUp) {
+            quizCompleted = true;
+            clearInterval(timerInterval);
             
-            userAnswers.forEach((answer, index) => {
-                if (!answer) return;
-                
+            const completedElement = document.getElementById('completed');
+            const finalScoreElement = document.getElementById('finalScore');
+            
+            finalScoreElement.textContent = score;
+            completedElement.style.display = 'block';
+            
+            if (isTimeUp) {
+                completedElement.classList.add('time-up');
+                completedElement.querySelector('h3').textContent = 'Waktu Habis!';
+                completedElement.querySelector('i').className = 'fas fa-clock';
+            }
+            
+            // Scroll ke bagian selesai
+            completedElement.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Fungsi untuk menampilkan review
+        function showReview() {
+            const reviewSection = document.getElementById('reviewSection');
+            const answerReview = document.getElementById('answerReview');
+            
+            // Isi review
+            answerReview.innerHTML = '';
+            
+            for (let i = 0; i < 10; i++) {
                 const reviewItem = document.createElement('div');
                 reviewItem.className = 'review-item';
                 
+                const questionNum = i + 1;
+                const userAnswer = userAnswers[i] ? userAnswers[i].answer : 'Tidak dijawab';
+                const isCorrect = userAnswers[i] ? userAnswers[i].isCorrect : false;
+                
+                let correctAnswerText;
+                if (i === 2) {
+                    correctAnswerText = correctAnswers[2];
+                } else if (i === 3) {
+                    correctAnswerText = `Persamaan: ${correctAnswers[3].equation}, Nilai y: ${correctAnswers[3].yValues.join(', ')}`;
+                } else if (i === 4) {
+                    correctAnswerText = correctAnswers[4].join(' dan ');
+                } else if (i >= 5 && i <= 6) {
+                    correctAnswerText = `x = ${correctAnswers[i].x}, y = ${correctAnswers[i].y}`;
+                } else if (i === 7 || i === 8) {
+                    correctAnswerText = correctAnswers[i];
+                } else if (i === 9) {
+                    correctAnswerText = "a. Rp450,00 dan Rp1.100,00";
+                } else {
+                    correctAnswerText = correctAnswers[i];
+                }
+                
                 reviewItem.innerHTML = `
-                    <div class="review-question">${answer.questionText}</div>
-                    <div class="user-answer"><strong>Jawaban Anda:</strong> ${formatAnswer(answer.answer, index)}</div>
-                    <div class="correct-answer"><strong>Jawaban Benar:</strong> ${formatCorrectAnswer(index)}</div>
-                    <div class="answer-status ${answer.isCorrect ? 'correct-status' : 'incorrect-status'}">
-                        ${answer.isCorrect ? '✓ Benar' : '✗ Salah'}
+                    <div class="review-question">Soal ${questionNum}</div>
+                    <div class="user-answer">Jawaban Anda: ${userAnswer}</div>
+                    <div class="correct-answer">Jawaban Benar: ${correctAnswerText}</div>
+                    <div class="answer-status ${isCorrect ? 'correct-status' : 'incorrect-status'}">
+                        ${isCorrect ? 'Benar' : 'Salah'}
                     </div>
                 `;
                 
-                reviewContainer.appendChild(reviewItem);
-            });
-        }
-
-        function formatAnswer(answer, index) {
-            if (!answer) return '<i>Tidak dijawab</i>';
-            
-            switch(index) {
-                case 0: return answer.toUpperCase() + ')';
-                case 1: return answer.includes('Rp') ? answer : 'Rp' + answer;
-                case 2: return answer;
-                case 3: return answer;
-                case 4: return answer;
-                default: return answer;
+                answerReview.appendChild(reviewItem);
             }
+            
+            // Tampilkan review dan sembunyikan completed
+            document.getElementById('completed').style.display = 'none';
+            reviewSection.style.display = 'block';
+            
+            // Scroll ke review
+            reviewSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function formatCorrectAnswer(index) {
-            const answers = [
-                'b)',
-                'Rp7.100',
-                'x = 32/13, y = -1/13',
-                '12 dan 8',
-                'Panjang = 13 cm, Lebar = 7 cm'
-            ];
-            return answers[index];
+        // Fungsi untuk menyembunyikan review
+        function hideReview() {
+            document.getElementById('reviewSection').style.display = 'none';
+            document.getElementById('completed').style.display = 'block';
         }
 
-        // Mulai timer ketika halaman dimuat
-        window.onload = function() {
+        // Fungsi untuk reset quiz
+        function resetQuiz() {
+            // Reset state
+            userAnswers = {};
+            score = 0;
+            timeLeft = 40 * 60;
+            quizCompleted = false;
+            
+            // Reset UI
+            document.querySelectorAll('.quiz-question').forEach(q => {
+                q.classList.remove('disabled');
+                
+                // Reset input
+                const radios = q.querySelectorAll('input[type="radio"]');
+                radios.forEach(r => r.checked = false);
+                
+                const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(cb => cb.checked = false);
+                
+                const textInputs = q.querySelectorAll('input[type="text"], textarea');
+                textInputs.forEach(input => input.value = '');
+                
+                // Hide feedback
+                const feedback = q.querySelector('.feedback');
+                feedback.style.display = 'none';
+                feedback.querySelector('.solution-steps').classList.remove('show');
+            });
+            
+            // Reset score and progress
+            updateScore();
+            document.getElementById('completed').style.display = 'none';
+            document.getElementById('reviewSection').style.display = 'none';
+            
+            // Restart timer
+            clearInterval(timerInterval);
             startTimer();
-        };
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Inisialisasi
+        document.addEventListener('DOMContentLoaded', function() {
+            startTimer();
+            updateScore();
+        });
     </script>
 </body>
 </html>
